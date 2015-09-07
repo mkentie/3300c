@@ -27,7 +27,7 @@
 #include <errno.h>              /* better error reports */
 #include <string.h>             /* better error reports */
 
-#include "niash_winusb.h"
+#include "niash_usb.h"
 #include "niash_xfer.h"
 
 /* list of supported models */

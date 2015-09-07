@@ -85,10 +85,14 @@
     <ClCompile Include="getopt\getopt.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="niash_core.c" />
-    <ClCompile Include="niash_usbscan.cpp" />
+    <ClCompile Include="niash_usbscan.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="niash_winusb.cpp">
       <ShowIncludes Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ShowIncludes>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="testtool_xfer.c" />
   </ItemGroup>

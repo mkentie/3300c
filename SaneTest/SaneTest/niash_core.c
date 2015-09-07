@@ -31,7 +31,7 @@
 
 #include "niash_xfer.h"
 #include "niash_core.h"
-#include "niash_winusb.h"
+#include "niash_usb.h"
 
 #ifndef MIN
 #define MIN(a,b) (((a) < (b)) ? (a) : (b))

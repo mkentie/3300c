@@ -1,4 +1,4 @@
-#include "niash_winusb.h"
+#include "niash_usb.h"
 
 //Windows
 #include <windows.h>

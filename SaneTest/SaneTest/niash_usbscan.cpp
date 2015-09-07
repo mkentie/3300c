@@ -1,4 +1,4 @@
-#include "niash_winusb.h"
+#include "niash_usb.h"
 
 //Windows
 #include <windows.h>
@@ -24,7 +24,6 @@ static struct
 
 void NiashLibUsbInit(TFnReportDevice* const pfnReportDevice)
 {
-	TScannerModel Model;
 	pfnReportDevice(nullptr, pszName);
 }
 
@@ -41,7 +40,7 @@ int NiashLibUsbOpen(char const * const pszName, EScannerModel* const peModel)
 
 	DEVICE_DESCRIPTOR dd;
 	DWORD dwBytesReturned;
-	if(!DeviceIoControl(s_hDevice,IOCTL_GET_DEVICE_DESCRIPTOR,nullptr,0,&dd,sizeof(dd),&dwBytesReturned,nullptr))
+	if(!DeviceIoControl(s_hDevice,static_cast<DWORD>(IOCTL_GET_DEVICE_DESCRIPTOR),nullptr,0,&dd,sizeof(dd),&dwBytesReturned,nullptr))
 	{
 		wprintf_s(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());
 		return -1;
@@ -88,7 +87,6 @@ void NiashLibUsbReadReg(const int iHandle, const SANE_Byte bReg, SANE_Byte* cons
 	IoBlock.uLength = 0x01;
 	IoBlock.pbyData = nullptr;
 
-	OVERLAPPED Overlapped = {};
 	if(!DeviceIoControl(s_hDevice,static_cast<DWORD>(IOCTL_READ_REGISTERS),&IoBlock,sizeof(IoBlock),pbData,1,nullptr,nullptr) && GetLastError() != ERROR_IO_PENDING)
 	{
 		wprintf_s(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());		
