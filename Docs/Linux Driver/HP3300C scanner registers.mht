@@ -1,0 +1,538 @@
+Content-Type: multipart/related; start=<op.mhtml.1374610684333.bf96ce4a2e4e34de@192.168.220.1>; boundary=----------3szg95D1ayux3zdUsle1k3
+Content-Location: http://bertrik.sikken.nl/hp3300c/scanner.html
+Subject: =?utf-8?Q?HP3300C=20scanner=20registers?=
+MIME-Version: 1.0
+
+------------3szg95D1ayux3zdUsle1k3
+Content-Disposition: inline; filename=scanner.html
+Content-Type: text/html; name=scanner.html
+Content-ID: <op.mhtml.1374610684333.bf96ce4a2e4e34de@192.168.220.1>
+Content-Location: http://bertrik.sikken.nl/hp3300c/scanner.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+	<TITLE>HP3300C scanner registers</TITLE>
+	<LINK REL="stylesheet" HREF="stylesheet.css" STYLE="text/css">
+</HEAD>
+
+<BODY>
+(<A HREF="hp3300c.html">main page</A>)
+<I>Last update Saturday, January 11, 2003
+<A HREF="mailto:bertrik@sikken.nl">Bertrik Sikken</A></I>
+(Updated info for registers 0x27-0x2a)
+
+<H1>Contents</H1>
+<UL>
+<LI><A HREF="#introduction">Introduction</A>
+<LI><A HREF="#init">Scanner initialisation</A>
+<LI><A HREF="#calibration">Calibration</A>
+<LI><A HREF="#gamma">Gamma, gain, offset tables</A>
+<LI><A HREF="#summary">Scanner register summary</A>
+<LI><A HREF="#image">Reading image data</A>
+<li><a href="#niash00012">NIASH00012 chip specifics</a>
+<li><a href="#niash00013">NIASH00013 chip specifics</a>
+<LI><A HREF="#niash00019">NIASH00019 chip specifics</A>
+<LI><A HREF="#niash00033">NIASH00033 chip specifics (HP5400/HP5470 scanners)</A>
+<LI><A HREF="#logs">Some HP3300c USB snoopy logs</A>
+</UL>
+
+
+<A NAME="introduction"></A>
+<H1>Introduction</H1>
+This page describes the internal registers of the HP3300C USB color scanner.<BR>
+The information presented here might not necessarily be completely correct,
+but merely represents my interpretation of it.<BR>
+<BR>
+A scan generally seems to consist of the following steps:
+<UL>
+<LI>Initialisation.
+<LI>A two-pass calibration.
+<LI>Writing the gamma/gain/offset table (calculated from the calibration data)
+<LI>Writing configuration (DPI, scan area etc.) and doing the actual scan.
+</UL>
+When the windows scanning software has just been started,
+the scanner waits for the lamp to 'warm up' and it does a more elaborate
+three-pass calibration.
+
+
+<A NAME="init"></A>
+<H1>Scanner initialisation</H1>
+The following things occur every time before a scan:
+<UL>
+<LI>A button poll (reading register 0x2E).
+<LI>A wakeup sequence sent to the SPP data port to activate the scanner
+	(0xA0, 0xA8, 0x50, 0x58, 0x90, 0x98, 0xC0, 0xC8, 0x90, 0x98, 0xE0, 0xE8).
+<LI>A write of 0x04 to register 0x00.
+	Strangely enough the EPP handshake that normally occurs in hardware,
+	is simulated in software by writing the SPP control port.
+<LI>A read of register 0x03.
+<LI>A write of register 0x03, using the previously read data OR'ed with 2.
+<LI>Another read of register 0x03, to see if the bit just written sticks.
+<LI>Another write of register 0x03 with the original value.
+</UL>
+The information about bit 1 in register 0x03 is later used to determine
+if the gamma table should be expanded to 16 bits or not.
+
+
+<A NAME="calibration"></A>
+<H1>Calibration</H1>
+
+<H2>Simple calibration</H2>
+Just before every scan, a two-pass calibration is done, scanning a black and a
+white area inside the scanner to establish the white level and the black level for
+each pixel in the CCD.
+<A HREF="calstrip.png">This picture</A> shows a scan that includes the calibration area.
+The black horizontal strip and the light grey area around it, is the calibration area.
+(The orange line at the top and the pure white area below it are just software artifacts).
+Somehow the black strip does not completely extend to the left of the scanner bed,
+so I wonder how calibration is done for the extreme left of the scan.
+<BR>
+During the first calibration cycle, the scanner reads a 0.1 mm line in the white part of the
+calibration area.
+During the second calibration cycle, it reads a 0.1 mm line in the black part of the
+calibration area.
+
+<H2>Initial calibration</H2>
+When the windows scanning software has been freshly started, an additional
+three-pass calibration is done.
+The coarse brightness information written to registers 0x25 and 0x26 is
+determined in this initial calibration cycle.<BR>
+<BR>
+Another thing to note is that just before calibration, register 0x02 is written with
+value 0x88, while it is written with 0xA8 just before the actual scan.
+This suggests that bit 5 of register 2 controls whether pixel gain/offset
+control is used or not.
+
+
+<A NAME="gamma"></A>
+<H1>Gamma, gain, offset</H1>
+The gamma and gain/offset tables are written using an USB bulk transfer.<BR>
+Since these are written just after the simple two-pass calibration,
+but just before the actual scan,
+it is likely that the gain/offset table is calculated from the calibration data.
+
+<H2>Gamma table</H2>
+One of the sections in the DLL, the .data section, contains the
+gamma tables for red, green and blue.
+Each is 4096 bytes long (12 -> 8 bit gamma table apparently).
+The same section also contains the filenames C:\CCmpBG12.dat, C:\CCmpGG12.dat, C:\CCmpRG12.dat,
+and the texts 'USB Scanner V1.0' and 'Scanner Centaur'.<BR>
+Looking at the DLL, it seems that the software will try to read the gamma tables
+from the files given above (if present), otherwise it will use the built-in tables
+from the DLL.<BR>
+<BR>
+If bit 1 of register 3 sticks, the scanner is able to handle 16-bit gamma entries.
+In that case, the gamma table with 8-bit entries is converted to a gamma table with
+16-bit entries, resulting in a 8192 byte table for each of the three color components.
+
+<H2>Gain/offset table</H2>
+The gain/offset table contains a gain and offset coefficient for each color component
+(red, green and blue) of the 5300 pixels of the CCD
+(the HP3300c has an optical resolution of 600 DPI).
+Each coefficient entry is 16 bit, subdivided in a 6-bit part and a 10-bit part.
+The lower 6 bits contain the pixel offset and the higher 10 bits
+contain the pixel gain (as in the LM9830 chip).
+The offset coefficient specifies how much to subtract from raw sample value before
+further processing.
+A step of 4 units in the offset coefficient corresponds with 1 unit of intensity in
+the final image data.
+A gain coefficient of 256 corresponds to a gain of 1.
+<BR>
+The gain/offset table is appended to the gamma table and written using a single USB bulk transfer.
+
+
+<A NAME="summary"></A>
+<H1>Scanner register summary</H1>
+Most HP3300c have a NIASH00014 controller chip.
+The info given in the table below is applicable to this chip,
+specific properties of other controller chips are given separately.<br>
+<br>
+There seem to be 48 registers, some of which pair up in
+2-byte registers and some of which are not used.
+The HP3400/4300 have more registers than the HP3300C.
+Most of the registers are write-only.
+<BR>
+For the bit-oriented registers (0x01, 0x02, 0x03, 0x05, 0x06) a cached list of
+values written to these registers is kept in the DLL.
+<BR>
+In the table below, the cached values are shown for registers 0x00-0x07.
+The other registers show the value written during a preview scan.<BR>
+<BR>
+<TABLE BORDER="1">
+<TR><TH>Reg.</TH><TH>Data</TH><TH>Remark</TH></TR>
+<TR><TD>0x00</TD><TD>----</TD><TD>Write 0x04 to reset?</TD></TR>
+<TR><TD>0x01</TD><TD>0x03</TD><TD>Scan type register? bit-oriented, bits 2, 3 and 7 are used.
+	12 bit pixels are used if bit 2 is set</TD></TR>
+<TR><TD>0x02</TD><TD>0xA0</TD><TD>Scan type register? bit-oriented, bits 2, 3, 4, 5, and 7 are used.
+	Bit 2 is set when reading/writing gamma data,
+	bit 3 causes the carriage to move when reading USB bulk data,
+	bit 5 enables the gain/offset table?</TD></TR>
+<TR><TD>0x03</TD><TD>0x05</TD><TD>Status register? bit-oriented, bit 0, 1, 2, 3 and 4 are used.
+	bit 0 controls lamp status,
+	if bit 1 is writable the scanner supports gamma tables with 16-bit entries,
+	bit 3 is set when the carriage is in the home position.</TD></TR>
+<TR><TD>0x04</TD><TD>----</TD><TD>Not used, but register is readable and writeable</TD></TR>
+<TR><TD>0x05</TD><TD>0x01</TD><TD>Low nibble and high nibble have separate meanings.
+	When set incorrectly causes the carriage to move too far.
+	Bit 0 needs to be set and seems the only relevant bit</TD></TR>
+<TR><TD>0x06</TD><TD>0x00</TD><TD>bit-oriented.
+	When bit 0 is set, the carriage moves twice as far (used for low LPI?).
+	When bit 1 is set, the carriage does not move, but makes a buzzing sound.
+	Readable on a HP3400c.</TD></TR>
+<TR><TD>0x07</TD><TD>----</TD><TD>HP3400c specific. Writeable on a HP3400c. </TD></TR>
+<TR><TD>0x08</TD><TD>0x17</TD><TD ROWSPAN="2">5399. Exposure time?
+	The LPI (lines-per-inch) is determined by the ratio of this register and registers 0x0A/0x0B
+	times 1200 (which also happens to be the hardware resolution).
+	A higher number results in a brighter picture.
+</TD></TR>
+<TR><TD>0x09</TD><TD>0x15</TD><TD></TD></TR>
+<TR><TD>0x0A</TD><TD>0xA2</TD><TD ROWSPAN="2">Motor speed code (lower is faster).
+	Has a value of 674 for 150 lpi,	1349 for 300 lpi and 8099 for 600 lpi.
+	Appears to be related to register 0x1E.
+	I think this value should be an integer sub-multiple of register 0x08/0x09.</TD></TR>
+<TR><TD>0x0B</TD><TD>0x02</TD><TD></TD></TR>
+<TR><TD>0x0C</TD><TD>0x96</TD><TD ROWSPAN="2">150. DPI code (horizontal resolution)</TD></TR>
+<TR><TD>0x0D</TD><TD>0x00</TD><TD></TD></TR>
+<TR><TD>0x0E</TD><TD>0x4A</TD><TD ROWSPAN="2">330. Right coordinate of scan area, inches * 1800</TD></TR>
+<TR><TD>0x0F</TD><TD>0x01</TD><TD></TD></TR>
+<TR><TD>0x10</TD><TD>0xE9</TD><TD ROWSPAN="2">15593. Left coordinate of scan area, inches * 1800</TD></TR>
+<TR><TD>0x11</TD><TD>0x3C</TD><TD></TD></TR>
+<TR><TD>0x12</TD><TD>0xF7</TD><TD ROWSPAN="2">1271. Width of scan area - 1,
+	(number of pixels output)</TD></TR>
+<TR><TD>0x13</TD><TD>0x04</TD><TD></TD></TR>
+<TR><TD>0x14</TD><TD>0xF9</TD><TD>(x - 1). Maximum buffer level (as read from reg 0x20)
+	before backtracking occurs. Written with 0x24 (=36) when calibrating.
+	Some high values still give a lot of backtracking.</TD></TR>
+<TR><TD>0x15</TD><TD>----</TD><TD>0x90</TD></TR>
+<TR><TD>0x16</TD><TD>----</TD><TD>0x70</TD></TR>
+<TR><TD>0x17</TD><TD>0xC4</TD><TD ROWSPAN="2">452. Top of scan area, inches * 1200</TD></TR>
+<TR><TD>0x18</TD><TD>0x01</TD><TD></TD></TR>
+<TR><TD>0x19</TD><TD>0xC4</TD><TD ROWSPAN="2">452. Top of scan area</TD></TR>
+<TR><TD>0x1A</TD><TD>0x01</TD><TD></TD></TR>
+<TR><TD>0x1B</TD><TD>0x3C</TD><TD ROWSPAN="2">14652. Bottom of scan area.
+	(-> height = 14200 steps = 11.83 inch = 300.6 mm)<br>
+	This register does not seem to have an effect on the HP3300, it does on the HP3400/4300</TD></TR>
+<TR><TD>0x1C</TD><TD>0x39</TD><TD></TD></TR>
+<TR><TD>0x1D</TD><TD>0x60</TD><TD>Forward jogging speed. Agfa Touch writes 0x55 here.</TD></TR>
+<TR><TD>0x1E</TD><TD>0x15</TD><TD>Not written when calibrating.
+	Controls reversing speed when backtracking (lower is faster).
+	Value written to this register is value written to registers 0x0A/0x0B divided by 32.</TD></TR>
+<TR><TD>0x1F</TD><TD>0x30</TD><TD>Not written when calibrating. Value is either 0x18 or 0x30.
+	Sets the distance to move back when backtracking.</TD></TR>
+<TR><TD>0x20</TD><TD>----</TD><TD>Scanner buffer level.
+	As data is scanned in but not quickly enough read out, the internal scanner buffer fills up.
+	When the buffer level approaches the level given by register 0x14,
+	the scanner backtracks to rescan part of the image.</TD></TR>
+<TR><TD>0x21</TD><TD>----</TD><TD>HP3400/4300 specific. RAM data address, low 8 bits</TD></TR>
+<TR><TD>0x22</TD><TD>----</TD><TD>HP3400/4300 specific. RAM data address, mid 8 bits</TD></TR>
+<TR><TD>0x23</TD><TD>----</TD><TD>HP3400/4300 specific. RAM data address, high 8 bits</TD></TR>
+<TR><TD>0x24</TD><TD>----</TD><TD>Data transfer register.
+	This register is selected just before USB bulk transfer</TD></TR>
+<TR><TD>0x25</TD><TD>xxxx</TD><TD ROWSPAN="2">Analog front-end control.
+	See also the table below.</TD></TR>
+<TR><TD>0x26</TD><TD>xxxx</TD><TD></TD></TR>
+<TR><TD>0x27</TD><TD>0x62</TD><TD>0x62 or 0xD2. Readable on HP3400c.</TD></TR>
+<TR><TD>0x28</TD><TD>0xC8</TD><TD>0xC8 or 0x7F. Readable on HP3400c. Another gain register?<br>
+	On my niash00014 chip, bit7 should always be set, bit 4/5 set the gain, bit 6 set means max
+	gain.<br>
+	The low nibble represents a FIFO level? A value of 0 means no more garbage in the first
+	few lines.</TD></TR>
+<TR><TD>0x29</TD><TD>0x53</TD><TD rowspan="2">0xB853 or 0x6421. Readable on HP3400c.
+	Non-linearity compensation? Each nibble represents a factor, and should be smaller
+	than the preceding one.</TD></TR>
+<TR><TD>0x2A</TD><TD>0xB8</TD></TR>
+<TR><TD>0x2B</TD><TD>0x15</TD><TD>Not written when calibrating.
+	Value is always 0x15.
+	Controls backtracking reversing behaviour.</TD></TR>
+<TR><TD>0x2C</TD><TD>0xFF</TD><TD ROWSPAN="2">Lamp power control<br>
+	Value between 0 (lamp off) and 0x1FF (full on).
+	The relationship between value and brightness is strongly non-linear, e.g.
+	0x010 already results in half brightness.
+	See also <a href="lamp.png">this graph</a>, which shows the average intensity measured during
+	calibration vs. register value.</TD></TR>
+<TR><TD>0x2D</TD><TD>0x01</TD><TD></TD></TR>
+<TR><TD>0x2E</TD><TD>----</TD><TD>Button status. Bits  1-4 indicate buttons states.
+	On the HP3300c: bit 2 = left button (scan), bit 4 = right button (print).<br>
+	On the HP4300c: bit 1 = scan, bit 2 = mail, bit 4 = print
+	</TD></TR>
+<TR><TD>0x2F</TD><TD>----</TD><TD>Backward jogging speed. Agfa Touch writes 0x55 here.</TD></TR>
+<TR><TD>0x30</TD><TD>----</TD><TD>???. Agfa Touch writes 0x3F here.</TD></TR>
+<TR><TD>0x31</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x32</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x33</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x34</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x35</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x36</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x37</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x38</TD><TD>----</TD><TD>HP3400/4300 specific. Readable. Eeprom address?</TD></TR>
+<TR><TD>0x39</TD><TD>----</TD><TD ROWSPAN="2">HP3400/4300 specific. Readable. Eeprom data?</TD></TR>
+<TR><TD>0x3A</TD><TD>----</TD><TD></TD></TR>
+<TR><TD>0x3B</TD><TD>----</TD><TD>HP3400/4300 specific. Readable. Eeprom control?.
+	Bit 3 is status bit.</TD></TR>
+<TR><TD>0x3C</TD><TD>----</TD><TD>HP3400/4300 specific. Readable.
+	LCD data = Number to write to display (BCD coded).
+	Invalid BCD nibbles show up as 0x09 (0x0B displays 0x09 for example)</TD></TR>
+<TR><TD>0x3D</TD><TD>----</TD><TD>HP3400/4300 specific. Readable. LED and button control.
+	bit0 = ColorLED, bit1 = BWLED, bit2 = UpDown?, bit3 = button1?, bit5 = (+) button,
+	bit6 = button3?, bit7 = (-) button</TD></TR>
+<TR><TD>0x3E</TD><TD>----</TD><TD>Readable</TD></TR>
+<TR><TD>0x3F</TD><TD>----</TD><TD></TD></TR>
+</TABLE>
+<BR>
+
+<H2>Analog front-end</H2>
+Data written to registers 0x25 and 0x26 controls the analog front-end (AFE) which determines,
+among other things, the overall brightness (offset) and contrast (gain).
+Register 0x25 is the index register, register 0x26 is the data register.<BR>
+The default values used during initial calibration are shown below:<BR>
+<BR>
+<TABLE BORDER="1">
+<TR><TH>Reg. 0x25</TH><TH>Reg 0x26</TH><TH>Description</TH></TR>
+<TR><TD>0x04</TD><TD>0x00</TD><TD>Reset the AFE</TD></TR>
+<TR><TD>0x03</TD><TD>0x12</TD><TD>
+	CDS Mode Reset Timing = normal<BR>
+	Reset Level Clamp Voltage = 3.5V
+</TD></TR>
+<TR><TD>0x02</TD><TD>0x04</TD><TD>
+	ADC output = inverting<BR>
+	MUX output mode = 12 bit
+</TD></TR>
+<TR><TD>0x05</TD><TD>0x10</TD><TD>
+	ADC output = 12 bit<BR>
+	Offset DAC output range = +/- 1.25V
+</TD></TR>
+<TR><TD>0x01</TD><TD>0x03</TD><TD>
+	Mode 4 = off<BR>
+	Mono/colour select = colour<BR>
+	Sampling mode = CDS<BR>
+	ADC standby control = active
+</TD></TR>
+<TR><TD>0x20</TD><TD>0xC0</TD><TD>Red offset</TD></TR>
+<TR><TD>0x21</TD><TD>0xC0</TD><TD>Green offset</TD></TR>
+<TR><TD>0x22</TD><TD>0xC0</TD><TD>Blue offset</TD></TR>
+<TR><TD>0x28</TD><TD>0x02</TD><TD>Red gain</TD></TR>
+<TR><TD>0x29</TD><TD>0x02</TD><TD>Green gain</TD></TR>
+<TR><TD>0x2A</TD><TD>0x02</TD><TD>Blue gain</TD></TR>
+</TABLE>
+<BR>
+16 units of offset coefficient roughly correspond to 10 unit of brightness in the final image.<BR>
+The gain (G) can be calculated from the gain coefficient (Cg) by the simple formula:<BR>
+<B>G = (Cg + 2) / 4</B>, or inversely <B>Cg = 4G - 2</B><BR> .
+<BR>
+My HP3300c contains an ESIC ES8100QA chip for the analog front-end,
+while other HP3300/HP3400 scanners contain a WM8143, so those two chips are probably compatible.
+Fortunately, a datasheet of the WM8143 can be downloaded
+<a href="http://www.wolfsonmicro.com/product.asp?pid=35">here</a>.
+<br>
+
+<A NAME="image"></A>
+<H1>Image data</H1>
+Once the scanner has been set up, simply reading the scanner by means of USB bulk reads
+causes the carriage to move to the starting position of the scan and to start the
+actual scan.
+When data is not read out quickly enough, the carriage automatically backtracks
+and restarts the missing part without software intervention.<BR>
+Image data is delivered on a line basis, first the red component of the line, then green, then blue.
+The color components are out of alignment by 1/150 inch.
+For a resolution of 150 dpi the red frame needs to be shifted up one line
+and to the blue frame needs to be shifted down one line relative to the green frame.
+(For a resolution of 300 dpi, the alignment error is two lines, etc.)
+The first couple of lines (about 14) contain garbage, mostly white pixels.
+Image data is also delivered mirrored left-to-right.
+
+
+<a name="niash00012"></a>
+<h1>NIASH00012 chip specifics</h1>
+Some HP3300c scanners contain a niash00012 chip.<br>
+The USB logs suggest the following:<br>
+<ul>
+<li>The gamma-table has 8-bit entries instead of 16-bit entries.
+<li>The internal scanner buffer is probably smaller,
+	because register 0x14 is written with 0x43 instead of 0xF9.
+<li>Registers 0x27, 0x28, 0x29, 0x2A are written with a different set of values.
+<li>It looks like this chip steps the stepper motor twice as fast.
+	Therefore the software needs to slow it down by pretending to scan at 300 dpi
+	and skipping every other line (using bit 0 of register 0x06 for that).
+</ul>
+
+<a name="niash00013"></a>
+<h1>NIASH00013 chip specifics</h1>
+Some HP3300c scanners contain a niash00013 chip.
+Obviously a chip version between 00012 and 00014.
+No logs from a scan using this chip have been analysed.
+
+<A NAME="niash00019"></A>
+<H1>NIASH00019 chip specifics</H1>
+The HP3400 has a newer main controller revision, NIASH00019 instead of NIASH00014.
+More registers are readable (most HP3300 registers are write-only), there are extra
+registers and also the meaning of some registers seems to have changed slightly.<BR>
+<BR>
+One of these is register 0x07, which is both readable and writeable on the HP3400
+and seems to be used to determine how other the registers operate.
+If registers 0x07 is writeable, the following is different:<BR>
+<UL>
+<LI>Registers 0x08/0x09 (exposure time) and 0x12/0x13 (width of scan)
+	are written directly with the required value, instead of the value - 1.
+<LI>Registers 0x0A/0x0B (motor speed), 0x17/0x18 (top of scan) and 0x19/0x1A (top of scan)
+	are not written at all.
+</UL>
+
+While the HP3300 only writes the gamma/gain/offset table to the scanner,
+the HP3400 also writes other data to the scanner.
+The address to write to (minus 1) is set by registers 0x21/0x22/0x23.<BR>
+The following data blocks are written to the scanner:<BR>
+<BR>
+
+<TABLE BORDER="1">
+<TR><TH>Address</TH><TH>Length</TH><TH>Data</TH></TR>
+<TR><TD>0x000000</TD><TD>96</TD><TD>Stepper motor acceleration profile,
+	used when positioning head</TD></TR>
+<TR><TD>0x000400</TD><TD>36</TD><TD>Stepper motor acceleration profile,
+	used when actually scanning</TD></TR>
+<TR><TD>0x002000</TD><TD>56376</TD><TD>Gamma and gain/offser table</TD></TR>
+</TABLE>
+<BR>
+The data written to addresses 0x000000 and 0x000400 seems to contain an
+exponentially decaying series.
+<a href="motor1.png">This picture</a> shows the values that are inside the table
+(ignoring first 2 values and most significant bits).
+A good approximation to the graph is
+<i>y2 = 676 / (2 - e <sup>0.113 * (1 - x)</sup>)</i>, shown as the continuous curve.
+This approximation is correct within 1 unit, except for the 2nd and last value.<br>
+<br>
+Given the fact that registers 0x0A/0x0B (motor speed) and 0x17/0x18, 0x19/0x1A (top of scan)
+are not written directly, it seems plausible that their values are somehow encoded
+in these data blocks.
+
+<h2>Buttons and display on the 4300c</h2>
+(Contributed by James Paige)<br>
+
+<ul>
+<li>0x2E bit 1 scan-icon
+<li>0x2E bit 2 mail-button
+<li>0x2E bit 4 printer-button
+<li>0x3D bit 3 color/BW-toggle-button (button hardware-toggles the two least signifigant bits of 0x3D)
+<li>0x3D bit 5 plus-button (button hardware-increments 0x3C auto-adjusting for the decmal/hex wierdness)
+<li>0x3D bit 7 minus-button (button hardware-decrements 0x3C auto-adjusting for the decmal/hex wierdness)
+</ul>
+(bit 0 is least significant bit)
+
+<A NAME="niash00033"></A>
+<H1>NIASH00033 chip specifics</H1>
+This chip is used in the HP5400c and HP5470c scanners.
+A short analysis of the USB traffic between the scanner and the Windows driver
+shows that at least the USB transfer method is completely different.
+I suspect/hope that these scanners have some kind of microcontroller sitting
+between USB and the NIASH chip (opposed to just a simple IEEE1284-USB bridge),
+doing all the complicated stuff.
+In that case it would be somewhat easier to write a backend, although currently
+this is all just speculation.<br>
+<br>
+I wrote a simple utility (<a href="hp5400.zip">hp5400.zip</a>) to test communication
+with the HP5400/5470 under Linux.
+It requires libusb (and the libusb devel package) for USB access.
+The 'scanner' kernel module should be unloaded (run 'modprobe -r scanner' as root).
+You probably also need to be root to run the test utility itself.
+
+<A NAME="logs"></A>
+<H1>HP3300c USB snoopy logs</H1>
+The following files are HP3300c logs and have been generated by a
+<A HREF="squeezelog.pl">perl-script</A> from the actual (rather big) USB snoopy logs.
+This perl-script is an adapted version of the one in the
+<A HREF="http://sm3600.sourceforge.net">Microtek 3600</A> SANE backend.
+Furthermore I used a text-editor to remove all lines with 14->[87] in them and to add
+white lines for clarity.<BR>
+(xx->[83] means 'write address xx', yy->[85] means 'write data yy',
+[84]=zz means that data zz was read.)<BR>
+
+<UL>
+<LI><A HREF="preview.txt">preview.txt</A>, a standard 150 DPI preview color scan.
+<LI><A HREF="scan1.txt">scan1.txt</A>, a 300 DPI color scan of an area of 2x2 cm near the top left.
+<LI><A HREF="scan2.txt">scan2.txt</A>, a 300 DPI color scan of an area of 2x2 cm near the top right.
+<LI><A HREF="scan3.txt">scan3.txt</A>, a 300 DPI color scan of an area of 2x2 cm near the bottom right.
+<LI><A HREF="scan4.txt">scan4.txt</A>, a 600 DPI color scan of an area of 2x2 cm near the top left.
+</UL>
+All scans were done after a fresh reboot and a preview scan.
+The initial calibration sequence is not recorded in these logs.
+
+</BODY>
+</HTML>
+------------3szg95D1ayux3zdUsle1k3
+Content-Disposition: inline; filename=stylesheet.css
+Content-Type: text/css; name=stylesheet.css
+Content-Location: http://bertrik.sikken.nl/hp3300c/stylesheet.css
+Content-Transfer-Encoding: 8bit
+
+P  {}
+
+H2  {
+	font-size : medium;
+	text-decoration : underline;
+}
+
+H3  {
+	font-size : small;
+	font-weight : bold;
+}
+
+BODY  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+H1  {
+	font-size : medium;
+	text-align : center;
+	background-color : #e0e0e0;
+	font-weight : bold;
+}
+
+TD.leftbar  {
+	background-color : #f0f0c0;
+	text-align : right;
+	border-style : solid;
+	font-size : x-small;
+	border-width : thin;
+	border-color : #000000;
+	vertical-align : top;
+	padding-right : 2;
+	padding-left : 2;
+}
+
+TD.topbar  {
+	background-color : #d0e0ff;
+	text-align : center;
+	font-weight : bold;
+	font-size : x-large;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+	font-family : Comic Sans MS;
+}
+
+TD.bottombar  {
+	font-size : x-small;
+	background-color : #d0e0ff;
+	text-align : center;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD.main  {
+	background-color : #FFFFFF;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+
+------------3szg95D1ayux3zdUsle1k3--

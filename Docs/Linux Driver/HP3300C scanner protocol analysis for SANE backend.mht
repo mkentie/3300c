@@ -1,0 +1,246 @@
+Content-Type: multipart/related; start=<op.mhtml.1374610678258.a71e7f16394d45df@192.168.220.1>; boundary=----------fcdSGooeEuF1lXrA2Fqskb
+Content-Location: http://bertrik.sikken.nl/hp3300c/transfer.html
+Subject: =?utf-8?Q?HP3300C=20scanner=20protocol=20analysis=20for=20SANE=20backend?=
+MIME-Version: 1.0
+
+------------fcdSGooeEuF1lXrA2Fqskb
+Content-Disposition: inline; filename=transfer.html
+Content-Type: text/html; name=transfer.html
+Content-ID: <op.mhtml.1374610678258.a71e7f16394d45df@192.168.220.1>
+Content-Location: http://bertrik.sikken.nl/hp3300c/transfer.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+	<TITLE>HP3300C scanner protocol analysis for SANE backend</TITLE>
+	<LINK REL="stylesheet" HREF="stylesheet.css" STYLE="text/css">
+</HEAD>
+
+<BODY>
+(<A HREF="hp3300c.html">main page</A>)
+<I>Last update Sunday, September 30, 2001,
+<A HREF="mailto:bertrik@sikken.nl">Bertrik Sikken</A></I><BR>
+(Removed links to some USB logs)
+
+<H1>Contents</H1>
+<UL>
+<LI><A HREF="#introduction">Introduction</A>
+<LI><A HREF="#control">Control transfers</A>
+<LI><A HREF="#bulk">Bulk transfers</A>
+<LI><A HREF="#examples">Examples</A>
+</UL>
+
+
+<A NAME="introduction"></A>
+<H1>Introduction</H1>
+This page describes my interpretation of the USB transfer protocol used by the
+HP3300C color scanner.<BR>
+<BR>
+The HP3300C seems to be a parallel port scanner internally.
+Low level accesses to the parallel port registers are wrapped into
+USB control packets of type URB_FUNCTION_VENDOR_DEVICE.
+Image data and gamma/gain/offset tables are transferred using USB bulk transfers.<BR>
+<BR>
+
+<A NAME="control"></A>
+<H1>USB control transfers</H1>
+USB control transfers are used to write a register of the parallel port inside the HP3300c.<BR>
+The transfer consists of a standard 8-byte 'setup packet' plus 1 byte data,
+looking like this for example:<BR>
+<BR>
+<TABLE BORDER="1">
+<TR><TH>Data</TH><TH>Field</TH><TH>Remark</TH></TR>
+<TR><TD>40</TD><TD>RequestTypeReservedBits</TD><TD>Vendor type request, 40 = PC-to-scanner, C0 = Scanner-to-PC</TD></TR>
+<TR><TD>0c</TD><TD>Request</TD><TD>0C when 1 byte is transferred, 04 when more bytes are transferred</TD></TR>
+<TR><TD>0088</TD><TD><B>Value</B></TD><TD>Parallel port register code, see table below</TD></TR>
+<TR><TD>0d74</TD><TD>Index</TD><TD>Does not seem important. In my test program a value of 0 works OK.</TD></TR>
+<TR><TD>0001</TD><TD>TransferBufferLength</TD><TD>Length of additional data, always 1 for simple packets</TD></TR>
+<TR><TD>90</TD><TD><B>Data</B></TD><TD>Data transferred from or to register</TD></TR>
+</TABLE>
+<BR>
+In this particular case register 0x88 (SPP data port) was written with 0x90.<BR>
+<BR>
+
+<H3>Parallel port register codes</H3>
+In the setup packet, the fields Value and Data contain the parallel port register
+and the data to be written to it respectively.<BR>
+<BR>
+The parallel port register codes are shown in the table below:<BR>
+
+<TABLE BORDER="1">
+<TR><TH>Code</TH><TH>Parallel port</TH></TR>
+<TR><TD>0x82</TD><TD>USB bulk transfer setup</TD></TR>
+<TR><TD>0x83</TD><TD>EPP address</TD></TR>
+<TR><TD>0x84</TD><TD>EPP data for reading</TD></TR>
+<TR><TD>0x85</TD><TD>EPP data for writing</TD></TR>
+<TR><TD>0x86</TD><TD>SPP status</TD></TR>
+<TR><TD>0x87</TD><TD>SPP control</TD></TR>
+<TR><TD>0x88</TD><TD>SPP data</TD></TR>
+<TR><TD>0x89</TD><TD>??? (GLGpioOE, output enable?)</TD></TR>
+<TR><TD>0x8A</TD><TD>??? (GLGpioRead)</TD></TR>
+<TR><TD>0x8B</TD><TD>??? (GLGpioWrite)</TD></TR>
+</TABLE>
+<BR>
+This looks very similar (if not identical) to the implementation in the sources
+of the E3 chipset scanner backend
+<A HREF="http://website.lineone.net/~dvnix/scanner">here</A>.<BR>
+
+
+<H3>Poll for buttons pressed</H3>
+A good example of the way several of the transfers shown above are combined to actually
+do something, is an analysis of the button poll sequence.
+The button poll takes place about once a second
+(if device events are enabled in the settings/control panel).<BR>
+<BR>
+See <A HREF="poll.log">poll.log</A> (20k).
+In this log two polls are done (the first starts at 00000000, the second at 99185520).
+I had just pressed one of the buttons on the front of the scanner,
+so you can also see a difference between the first and second poll.<BR>
+<BR>
+<TABLE BORDER="1">
+<TR><TH>Data</TH><TH>Register</TH><TH>Meaning</TH></TR>
+<TR><TD>0x14</TD><TD>SPP control</TD><TD>Needed to be able to output to the parallel port</TD></TR>
+<TR><TD>0x2E</TD><TD>EPP address</TD><TD>EPP Address to write to</TD></TR>
+<TR><TD>0x14</TD><TD>SPP control</TD><TD>Init the parallel port again for output</TD></TR>
+<TR><TD>0x34</TD><TD>SPP control</TD><TD>Flip the direction bit for input</TD></TR>
+<TR><TD>[data]</TD><TD>EPP data</TD><TD>Read data from the address just set</TD></TR>
+<TR><TD>0x14</TD><TD>SPP control</TD><TD>Init the parallel port again for output</TD></TR>
+</TABLE>
+<BR>
+It turns out that when none of the buttons on the front has been pressed,
+[data] contains 0x00.
+When the left button was pressed, it contains 0x04 (bit 2).
+When the right button was pressed, it contains 0x10 (bit 4).
+
+
+<A NAME="bulk"></A>
+<H1>USB bulk transfers</H1>
+USB bulk transfers are used for reading image data and for writing the gamma/gain/offset tables.<BR>
+They are always preceded by a control transfer specifying the type of bulk transfer and the
+number of bytes to be transferred.
+This control transfer has its 'value' field set to 0x82 and it contains 8 additional data bytes.
+The first four bytes seem to indicate the type of transfer.
+The last four bytes indicate the length of the following bulk transfer.<BR>
+<BR>
+The table below summarises the types of transfers and the corresponding 8-byte setup packet:
+
+<TABLE BORDER="1">
+<TR><TH>Transfer type</TH><TH>Buffer</TH><TH>Remark</TH></TR>
+<TR><TD><B>UsbReadScanner</B></TD><TD>00 00 XX 00 [4-byte length]</TD><TD>XX is some variable value, usually 0</TD></TR>
+<TR><TD>UsbReadScannerLines</TD><TD>00 00 00 00 00 0C XX 00</TD><TD>This command seems a bit odd compared to the others</TD></TR>
+<TR><TD>UsbReadScannerFast</TD><TD>XX 04 YY XX [4-byte length]</TD><TD>???</TD></TR>
+<TR><TD><B>UsbWriteScanner</B></TD><TD>01 00 XX 00 [4-byte length]</TD>
+	<TD>The HP3300 uses this command to write the gamma and gain/offset tables.
+	XX is some variable value, usually 0</TD></TR>
+<TR><TD><B>UsbWriteScannerFw</B></TD><TD>01 01 00 00 [4-byte length]</TD>
+	<TD>The HP3400 uses this command to write the gamma and gain/offset tables.</TD></TR>
+<TR><TD>UsbWriteScannerAD</TD><TD>01 11 00 00 [4-byte length]</TD><TD>???</TD></TR>
+</TABLE>
+<BR>
+The first byte indicates a read or a write (01 is a write).<BR>
+In the USB log I see only packets with the first four bytes set either to
+{0x00, 0x00, 0x00, 0x00} or {0x01 0x00, 0x00, 0x00),
+corresponding to simple UsbReadScanner and UsbWriteScanners transfers respectively.<BR>
+<BR>
+Another thing to note is that scanner register 0x24 is always selected just before any
+bulk transfer. This register thus seems to be the data transfer register.
+
+<A NAME="examples"></A>
+<H1>Examples</H1>
+
+<H2>Plugging scanner into USB</H2>
+See <A HREF="plugin.log">plugin.log</A> (73k).<BR>
+The scanner apparently supports three 'endpoints':
+<UL>
+<LI>Pipe 0x81 of type UsbdPipeTypeBulk, used for transferring large chunks of data to the PC.
+<LI>Pipe 0x02 of type UsbdPipeTypeBulk, used for transferring large chunks of data to the scanner.
+<LI>Pipe 0x83 of type UsbdPipeTypeInterrupt.
+</UL>
+Further, just after the pipe-info, we see the following:
+<UL>
+<LI>The 12-byte 'magic' sequence written to the SPP data port.
+<LI>The SPP simulated write of 0x00 to EPP register 0x04.
+<LI>Writing of the sequence (0xA0 0xA0 0x80 0xA0) to register 0x02.
+<LI>A button poll (read of register 0x2E).
+</UL>
+
+</BODY>
+</HTML>
+------------fcdSGooeEuF1lXrA2Fqskb
+Content-Disposition: inline; filename=stylesheet.css
+Content-Type: text/css; name=stylesheet.css
+Content-Location: http://bertrik.sikken.nl/hp3300c/stylesheet.css
+Content-Transfer-Encoding: 8bit
+
+P  {}
+
+H2  {
+	font-size : medium;
+	text-decoration : underline;
+}
+
+H3  {
+	font-size : small;
+	font-weight : bold;
+}
+
+BODY  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+H1  {
+	font-size : medium;
+	text-align : center;
+	background-color : #e0e0e0;
+	font-weight : bold;
+}
+
+TD.leftbar  {
+	background-color : #f0f0c0;
+	text-align : right;
+	border-style : solid;
+	font-size : x-small;
+	border-width : thin;
+	border-color : #000000;
+	vertical-align : top;
+	padding-right : 2;
+	padding-left : 2;
+}
+
+TD.topbar  {
+	background-color : #d0e0ff;
+	text-align : center;
+	font-weight : bold;
+	font-size : x-large;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+	font-family : Comic Sans MS;
+}
+
+TD.bottombar  {
+	font-size : x-small;
+	background-color : #d0e0ff;
+	text-align : center;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD.main  {
+	background-color : #FFFFFF;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+
+------------fcdSGooeEuF1lXrA2Fqskb--

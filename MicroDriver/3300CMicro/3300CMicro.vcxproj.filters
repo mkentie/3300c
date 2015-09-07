@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SANE driver">
+      <UniqueIdentifier>{9624da34-cbfc-4f11-9e67-b91afe83db99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SANE driver\Header Files">
+      <UniqueIdentifier>{3582330c-abe1-4ad6-ac9c-36d085429672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SANE driver\Source Files">
+      <UniqueIdentifier>{5bbbb364-3a91-4397-bba1-279f5eb5396e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3300C.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="niash_core.c">
+      <Filter>SANE driver\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testtool_xfer.c">
+      <Filter>SANE driver\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="niash_win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="niash_ext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="niash.c">
+      <Filter>SANE driver\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hpgt33tk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3300C.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="niash_xfer.h">
+      <Filter>SANE driver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="niash_core.h">
+      <Filter>SANE driver\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="niash_win.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="niash_ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hpgt33tk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="3300cMicro.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="3300cMicro.inf">
+      <Filter>Source Files</Filter>
+    </Inf>
+  </ItemGroup>
+</Project>

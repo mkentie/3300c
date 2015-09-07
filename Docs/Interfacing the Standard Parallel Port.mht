@@ -1,0 +1,2113 @@
+Content-Type: multipart/related; start=<op.mhtml.1379269538692.b2274f1d2a39546d@192.168.220.1>; boundary=----------LveGILu7P5rjRC9Um1wlRv
+Content-Location: http://retired.beyondlogic.org/spp/parallel.htm
+Subject: =?utf-8?Q?Interfacing=20the=20Standard=20Parallel=20Port?=
+MIME-Version: 1.0
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=parallel.htm
+Content-Type: text/html; name=parallel.htm
+Content-ID: <op.mhtml.1379269538692.b2274f1d2a39546d@192.168.220.1>
+Content-Location: http://retired.beyondlogic.org/spp/parallel.htm
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+   <META NAME="description" CONTENT="Describes interfacing the SPP (Standard Parallel Port) with pin diagrams, sample schematics & source code in C. Also avaliable in PDF.">
+   <META NAME="keywords" CONTENT="Parallel Port, Printer Port, Centronics Port, IEEE 1284, Centronics Mode, Nibble Mode, Byte Mode, EPP Mode, ECP Mode, ECP, SPP, EPP, Extended Capabilities Port, Enhanced Parallel Port">
+   <TITLE>Interfacing the Standard Parallel Port</TITLE>
+</HEAD>
+
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" background="/bgyellow.gif" BASEFONT FACE=ARIAL>
+
+<STYLE TYPE="text/css">
+#TITLEBLOCK { text-decoration: none; color:#FFFFFF }
+TD,P,FONT,A,LI,B {font-family : Arial}
+PRE,TT {color:#100080}
+</STYLE>
+
+<BR><CENTER>
+<TABLE BOARDER=0 WIDTH="95%"><TR>
+  <TD WIDTH="25%"><CENTER><a href="http://www.beyondlogic.org"><img src="/beyondsmall.gif" alt="Beyond Logic" border=0></a></CENTER></TD>
+  <TD WIDTH="50%"><CENTER>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-7725444460812017";
+/* 728x90, created 10/25/10 */
+google_ad_slot = "9436888885";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+  <NOSCRIPT><FONT COLOR=RED>This page is optimised with JavaScript 1.2. Currently your browser has JavaScript switched off.</NOSCRIPT>
+  </CENTER></TD>
+  <TD ALIGN=RIGHT VALIGN=CENTER><BR><FONT FACE=ARIAL>
+  <script language=javascript src="http://www.beyondlogic.org/menu/beyondmenu_plain.js"></script>
+<NOSCRIPT></TD></TR></TABLE></CENTER></noscript>
+
+<CENTER>
+<TABLE WIDTH="95%"><TR><TD>
+<BR>
+<BR>
+<CENTER><FONT SIZE=5 COLOR=GREEN>Interfacing the Standard Parallel Port</FONT></CENTER>
+
+<CENTER><BR><B><I><FONT SIZE=+2>Table of Contents</FONT></I></B></CENTER>
+<BR>
+<CENTER><B><I><FONT SIZE=+2></FONT></I></B></CENTER>
+<CENTER><A HREF="#1">Introduction to Parallel Ports</A></CENTER>
+<CENTER><A HREF="#2">Hardware Properties</A></CENTER>
+<CENTER><A HREF="#3">Centronics?</A></CENTER>
+<CENTER><A HREF="#4">Port Addresses</A></CENTER>
+<CENTER><A HREF="#5">Software Registers - Standard Parallel Port (SPP)</A></CENTER>
+<CENTER><A HREF="#6">Bi-directional Ports</A></CENTER>
+<CENTER><A HREF="#7">Using the Parallel Port to Input 8 Bits</A></CENTER>
+<CENTER><A HREF="#8">Nibble Mode</A></CENTER>
+<CENTER><A HREF="#9">Using the Parallel Port's IRQ</A></CENTER>
+<CENTER><A HREF="#10">Parallel Port Modes in BIOS</A></CENTER>
+<CENTER><A HREF="#11">Parallel Port Modes and the ECP's Extended Control Register</A></CENTER>
+<CENTER><A HREF="#12">PDF Version</A></CENTER>
+<BR>
+<A NAME="1"><I><FONT SIZE=+2>Introduction to Parallel Ports</FONT></I><HR></A>
+<UL>
+<P>
+The Parallel Port is the most commonly used port for interfacing home made projects. 
+This port will allow the input of up to 9 bits or the output of 12 bits at any one 
+given time, thus requiring minimal external circuitry to implement many simpler tasks. 
+The port is composed of 4 control lines, 5 status lines and 8 data lines. It's found 
+commonly on the back of your PC as a D-Type 25 Pin female connector. There may also be 
+a D-Type 25 pin male connector. This will be a serial RS-232 port and thus, is a totally 
+incompatible port. 
+</P>
+<CENTER><I>For more information on Serial RS-232 Ports See <A HREF="/serial/serial.htm">http://www.beyondlogic.org/serial/serial.htm</A></I></CENTER>
+<P>
+Newer Parallel Port’s are standardized under the IEEE 1284 standard first released
+in 1994. This standard defines 5 modes of operation which are as follows, 
+</P>
+<UL>1. Compatibility Mode.
+<BR>2. Nibble Mode. (Protocol not Described in this Document)
+<BR>3. Byte Mode. (Protocol not Described in this Document)
+<BR>4. EPP Mode (Enhanced Parallel Port).
+<BR>5. ECP Mode (Extended Capabilities Mode).
+</UL>
+<P>
+The aim was to design new drivers and devices which were compatible with each other and 
+also backwards compatible with the Standard Parallel Port (SPP). Compatibility, Nibble 
+& Byte modes use just the standard hardware available on the original Parallel Port 
+cards while EPP & ECP modes require additional hardware which can run at faster speeds, 
+while still being downwards compatible with the Standard Parallel Port. 
+</P>
+<P>
+Compatibility mode or "Centronics Mode" as it is commonly known, can only send data in 
+the forward direction at a typical speed of 50 kbytes per second but can be as high as 
+150+ kbytes a second. In order to receive data, you must change the mode to either Nibble 
+or Byte mode. Nibble mode can input a nibble (4 bits) in the reverse direction. E.g. from 
+device to computer. Byte mode uses the Parallel's bi-directional feature (found only on 
+some cards) to input a byte (8 bits) of data in the reverse direction. 
+</P>
+Extended and Enhanced Parallel Ports use additional hardware to generate
+and manage handshaking. To output a byte to a printer (or anything in that
+matter) using compatibility mode, the software must,
+</P>
+<UL><I>1. Write the byte to the Data Port.</I>
+<BR><I>2. Check to see is the printer is busy. If the printer is busy, it will
+not accept any data, thus any data which is written will be lost.</I>
+<BR><I>3. Take the Strobe (Pin 1) low. This tells the printer that there is
+the correct data on the data lines. (Pins 2-9)</I>
+<BR><I>4. Put the strobe high again after waiting approximately 5 microseconds
+after putting the strobe low. (Step 3)</I>
+</UL>
+<p>
+This limits the speed at which the port can run at. The EPP & ECP ports get
+around this by letting the hardware check to see if the printer is busy and
+generate a strobe and /or appropriate handshaking. This means only one I/O
+instruction need to be performed, thus increasing the speed. These ports
+can output at around 1-2 megabytes per second. The ECP port also has the
+advantage of using DMA channels and FIFO buffers, thus data can be shifted
+around without using I/O instructions.
+</P>
+</UL>
+<A NAME="2"><I><FONT SIZE=+2>Hardware Properties</FONT></I><HR></A>
+<UL>
+<P>
+Below is a table of the "Pin Outs" of the D-Type 25 Pin
+connector and the Centronics 34 Pin connector. The D-Type 25 pin
+connector is the most common connector found on the Parallel Port of
+the computer, while the Centronics Connector is commonly found on printers.
+The IEEE 1284 standard however specifies 3 different connectors for use
+with the Parallel Port. The first one, 1284 Type A is the D-Type 25
+connector found on the back of most computers. The 2nd is the 1284 Type
+B which is the 36 pin Centronics Connector found on most printers.
+</P>
+<P>
+IEEE 1284 Type C however, is a 36 conductor connector like the Centronics,
+but smaller. This connector is claimed to have a better clip latch, better
+electrical properties and is easier to assemble. It also contains two more
+pins for signals which can be used to see whether the other device
+connected, has power. 1284 Type C connectors are recommended for new
+designs, so we can look forward on seeing these new connectors in the
+near future.
+</P>
+
+<CENTER>
+<TABLE BORDER WIDTH="75%">
+<TR><TD width="20%"><CENTER><B>Pin No (D-Type  25)</B></CENTER></TD><TD width="20%"><CENTER><B>Pin No (Centronics)</B></CENTER></TD><TD width="25%"><CENTER><B>SPP Signal</B></CENTER></TD><TD width="10%"><CENTER><B>Direction In/out</B></CENTER></TD><TD width="10%"><CENTER><B>Register</B></CENTER></TD><TD width="15%"><CENTER><B>Hardware Inverted</B></CENTER></TD></TR>
+<TR>
+    <TD><CENTER>1</CENTER></TD>
+    <TD><CENTER>1</CENTER></TD>
+    <TD><CENTER>nStrobe</CENTER></TD>
+    <TD><CENTER>In/Out</CENTER></TD>
+    <TD><CENTER>Control</CENTER></TD>
+    <TD><CENTER>Yes</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>2</CENTER></TD>
+    <TD><CENTER>2</CENTER></TD>
+    <TD><CENTER>Data 0</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>3</CENTER></TD>
+    <TD><CENTER>3</CENTER></TD>
+    <TD><CENTER>Data 1</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>4</CENTER></TD>
+    <TD><CENTER>4</CENTER></TD>
+    <TD><CENTER>Data 2</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>5</CENTER></TD>
+    <TD><CENTER>5</CENTER></TD>
+    <TD><CENTER>Data 3</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>6</CENTER></TD>
+    <TD><CENTER>6</CENTER></TD>
+    <TD><CENTER>Data 4</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>7</CENTER></TD>
+    <TD><CENTER>7</CENTER></TD>
+    <TD><CENTER>Data 5</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>8</CENTER></TD>
+    <TD><CENTER>8</CENTER></TD>
+    <TD><CENTER>Data 6</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>9</CENTER></TD>
+    <TD><CENTER>9</CENTER></TD>
+    <TD><CENTER>Data 7</CENTER></TD>
+    <TD><CENTER>Out</CENTER></TD>
+    <TD><CENTER>Data</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>10</CENTER></TD>
+    <TD><CENTER>10</CENTER></TD>
+    <TD><CENTER>nAck</CENTER></TD>
+    <TD><CENTER>In</CENTER></TD>
+    <TD><CENTER>Status</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>11</CENTER></TD>
+    <TD><CENTER>11</CENTER></TD>
+    <TD><CENTER>Busy</CENTER></TD>
+    <TD><CENTER>In</CENTER></TD>
+    <TD><CENTER>Status</CENTER></TD>
+    <TD><CENTER>Yes</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>12</CENTER></TD>
+    <TD><CENTER>12</CENTER></TD>
+    <TD><CENTER>Paper-Out / Paper-End</CENTER></TD>
+    <TD><CENTER>In</CENTER></TD>
+    <TD><CENTER>Status</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>13</CENTER></TD>
+    <TD><CENTER>13</CENTER></TD>
+    <TD><CENTER>Select</CENTER></TD>
+    <TD><CENTER>In</CENTER></TD>
+    <TD><CENTER>Status</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>14</CENTER></TD>
+    <TD><CENTER>14</CENTER></TD>
+    <TD><CENTER>nAuto-Linefeed</CENTER></TD>
+    <TD><CENTER>In/Out</CENTER></TD>
+    <TD><CENTER>Control</CENTER></TD>
+    <TD><CENTER>Yes</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>15</CENTER></TD>
+    <TD><CENTER>32</CENTER></TD>
+    <TD><CENTER>nError / nFault</CENTER></TD>
+    <TD><CENTER>In</CENTER></TD>
+    <TD><CENTER>Status</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>16</CENTER></TD>
+    <TD><CENTER>31</CENTER></TD>
+    <TD><CENTER>nInitialize</CENTER></TD>
+    <TD><CENTER>In/Out</CENTER></TD>
+    <TD><CENTER>Control</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>17</CENTER></TD>
+    <TD><CENTER>36</CENTER></TD>
+    <TD><CENTER>nSelect-Printer / nSelect-In</CENTER></TD>
+    <TD><CENTER>In/Out</CENTER></TD>
+    <TD><CENTER>Control</CENTER></TD>
+    <TD><CENTER>Yes</CENTER></TD>
+</TR>
+<TR>
+    <TD><CENTER>18 - 25</CENTER></TD>
+    <TD><CENTER>19-30</CENTER></TD>
+    <TD><CENTER>Ground</CENTER></TD>
+    <TD><CENTER>Gnd</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+    <TD><CENTER>&nbsp;</CENTER></TD>
+</TR>
+</TABLE></CENTER>
+<CENTER><FONT SIZE=-1>Table 1. Pin Assignments of the D-Type 25 pin Parallel Port Connector.</FONT></CENTER>
+<P>
+The above table uses "n" in front of the signal name to denote that the
+signal is active low. e.g. nError. If the printer has occurred an error
+then this line is low. This line normally is high, should the printer be
+functioning correctly. The "Hardware Inverted" means the signal is inverted
+by the Parallel card's hardware. Such an example is the Busy line. If +5v
+(Logic 1) was applied to this pin and the status register read, it would
+return back a 0 in Bit 7 of the Status Register.
+</P>
+<P>
+The output of the Parallel Port is normally TTL logic levels. The voltage
+levels are the easy part. The current you can sink and source varies from
+port to port. Most Parallel Ports implemented in ASIC, can sink and source
+around 12mA. However these are just some of the figures taken from Data
+sheets, Sink/Source 6mA, Source 12mA/Sink 20mA, Sink 16mA/Source 4mA,
+Sink/Source 12mA. As you can see they vary quite a bit. The best bet is
+to use a buffer, so the least current is drawn from the Parallel Port.
+</P>
+</UL>
+<A NAME="3"><I><FONT SIZE=+2>Centronics?</FONT></I><HR></A>
+<UL>
+<P>
+Centronics is an early standard for transferring data from a host to the
+printer. The majority of printers use this handshake. This handshake is
+normally implemented using a Standard Parallel Port under software control.
+Below is a simplified diagram of the `Centronics' Protocol.
+</P>
+<center><img src="centron.gif" alt="Centronics Waveform" border=0></center>
+<P>
+Data is first applied on the Parallel Port pins 2 to 7. The host then
+checks to see if the printer is busy. i.e. the busy line should be low.
+The program then asserts the strobe, waits a minimum of 1uS, and then
+de-asserts the strobe. Data is normally read by the printer/peripheral
+on the rising edge of the strobe. The printer will indicate that it is
+busy processing data via the Busy line. Once the printer has accepted
+data, it will acknowledge the byte by a negative pulse about 5uS on the
+nAck line.
+</P>
+<P>
+Quite often the host will ignore the nAck line to save time. Latter in
+the Extended Capabilities Port, you will see a Fast Centronics Mode,
+which lets the hardware do all the handshaking for you. All the programmer
+must do is write the byte of data to the I/O port. The hardware will check
+to see if the printer is busy, generate the strobe. Note that this mode
+commonly doesn't check the nAck either.
+</P>
+</UL>
+<A NAME="4"><I><FONT SIZE=+2>Port Addresses</FONT></I><HR></A>
+<UL>
+<P>
+The Parallel Port has three commonly used base addresses. These are
+listed in table 2, below. The 3BCh base address was originally introduced
+used for Parallel Ports on early Video Cards. This address then disappeared
+for a while, when Parallel Ports were later removed from Video Cards. They
+has now reappeared as an option for Parallel Ports integrated onto
+motherboards, upon which their configuration can be changed using BIOS.
+</P>
+<P>
+LPT1 is normally assigned base address 378h, while LPT2 is assigned 278h.
+However this may not always be the case as explained later. 378h & 278h
+have always been commonly used for Parallel Ports. The lower case h
+denotes that it is in hexadecimal. These addresses may change from
+machine to machine.
+</P>
+<BR>
+<CENTER>
+<TABLE BORDER WIDTH="80%">
+<TR><TD width="30%"><CENTER><B>Address</B></CENTER></TD><TD><CENTER><B>Notes:</B></CENTER></TD></TR>
+<TR><TD valign=top><CENTER>3BCh - 3BFh</CENTER></TD><TD>Used for Parallel Ports which were incorporated on to Video Cards - Doesn't support ECP addresses</TD></TR>
+<TR><TD><CENTER>378h - 37Fh</CENTER></TD><TD>Usual Address For LPT 1</TD></TR>
+<TR><TD><CENTER>278h - 27Fh</CENTER></TD><TD>Usual Address For LPT 2</TD></TR>
+</TABLE>
+<FONT SIZE=-1>Table 2 Port Addresses</FONT></CENTER>
+<P>
+When the computer is first turned on, BIOS (Basic Input/Output System)
+will determine the number of ports you have and assign device labels
+LPT1, LPT2 & LPT3 to them. BIOS first looks at address 3BCh. If a
+Parallel Port is found here, it is assigned as LPT1, then it searches
+at location 378h. If a Parallel card is found there, it is assigned
+the next free device label. This would be LPT1 if a card wasn't found
+at 3BCh or LPT2 if a card was found at 3BCh. The last port of call, is
+278h and follows the same procedure than the other two ports. Therefore
+it is possible to have a LPT2 which is at 378h and not at the expected
+address 278h.
+</P>
+<P>
+What can make this even confusing, is that some manufacturers of Parallel
+Port Cards, have jumpers which allow you to set your Port to LPT1, LPT2,
+LPT3. Now what address is LPT1? - On the majority of cards LPT1 is 378h,
+and LPT2, 278h, but some will use 3BCh as LPT1, 378h as LPT1 and 278h as
+LPT2. <I>Life wasn't meant to be easy.</I>
+</P>
+<P>
+The assigned devices LPT1, LPT2 & LPT3 should not be a worry to people
+wishing to interface devices to their PC's. Most of the time the base
+address is used to interface the port rather than LPT1 etc. However should
+you want to find the address of LPT1 or any of the Line PrinTer Devices,
+you can use a lookup table provided by BIOS. When BIOS assigns addresses
+to your printer devices, it stores the address at specific locations in
+memory, so we can find them.
+</P>
+<center>
+<table border width="60%">
+<TR><TD width="40%"><B><center>Start Address</center><B></TD><TD width="60%"><B><center>Function</center><B></TD></TR>
+<TR><TD><center>0000:0408</center></TD><TD>LPT1's Base Address</TD></TR>
+<TR><TD><center>0000:040A</center></TD><TD>LPT2's Base Address</TD></TR>
+<TR><TD><center>0000:040C</center></TD><TD>LPT3's Base Address</TD></TR>
+<TR><TD><center>0000:040E</center></TD><TD>LPT4's Base Address (Note 1)</TD></TR>
+</Table>
+<FONT SIZE=-1>Table 3 - LPT Addresses in the BIOS Data Area;</FONT></CENTER>
+<BR>
+<I>Note 1 : Address 0000:040E in the BIOS Data Area may be used as the Extended
+Bios Data Area in PS/2 and newer Bioses.</I>
+<P>
+The above table, table 3, shows the address at which we can find the
+Printer Port's addresses in the BIOS Data Area. Each address will
+take up 2 bytes. The following sample program in C, shows how you
+can read these locations to obtain the addresses of your printer ports.
+</P>
+<UL>
+</FONT>
+<PRE>
+#include &lt;stdio.h&gt;
+#include &lt;dos.h&gt;
+
+void main(void)
+{
+ unsigned int far *ptraddr;  /* Pointer to location of Port Addresses */
+ unsigned int address;       /* Address of Port */
+ int a;
+
+ ptraddr=(unsigned int far *)0x00000408;
+
+ for (a = 0; a &lt; 3; a++)
+   {
+    address = *ptraddr;
+    if (address == 0)
+		printf("No port found for LPT%d \n",a+1);
+    else
+		printf("Address assigned to LPT%d is %Xh\n",a+1,address);
+    *ptraddr++;
+   }
+}
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+</UL> 
+
+<A NAME="5"><I><FONT SIZE=+2>Software Registers - Standard Parallel Port (SPP)</FONT><HR></I></A>
+<UL>
+<CENTER>
+<TABLE BORDER WIDTH="80%">
+<TR><TD width="15%"><CENTER><B>Offset</B></CENTER></TD><TD width="15%"><CENTER><B>Name</B></CENTER></TD><TD width="15%"><CENTER><B>Read/Write</B></CENTER></TD><TD width="25%"><CENTER><B>Bit No.</B></CENTER></TD><TD width="30%"><CENTER><B>Properties</B></CENTER></TD></TR>
+<TR><TD rowspan=8 VALIGN=top><CENTER>Base + 0</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Data Port</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Write (Note-1)</CENTER></TD><TD><CENTER>Bit 7</CENTER></TD><TD><CENTER>Data 7</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 6</CENTER></TD><TD><CENTER>Data 6</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 5</CENTER></TD><TD><CENTER>Data 5</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 4</CENTER></TD><TD><CENTER>Data 4</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 3</CENTER></TD><TD><CENTER>Data 3</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 2</CENTER></TD><TD><CENTER>Data 2</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 1</CENTER></TD><TD><CENTER>Data 1</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 0</CENTER></TD><TD><CENTER>Data 0</CENTER></TD></TR>
+</TABLE>
+<FONT SIZE=-1>Table 4 Data Port</FONT></CENTER>
+<BR>
+<I> Note 1 : If the Port is Bi-Directional then Read and Write Operations
+can be performed on the Data Register.</I>
+<BR>
+<P>
+The base address, usually called the Data Port or Data Register is simply
+used for outputting data on the Parallel Port's data lines (Pins 2-9).
+This register is normally a write only port. If you read from the port,
+you should get the last byte sent. However if your port is bi-directional,
+you can receive data on this address. See Bi-directional Ports for more
+detail.
+</P>
+<CENTER>
+<TABLE BORDER WIDTH="80%">
+<TR><TD width="15%"><CENTER><B>Offset</B></CENTER></TD><TD width="15%"><CENTER><B>Name</B></CENTER></TD><TD width="15%"><CENTER><B>Read/Write</B></CENTER></TD><TD width="25%"><CENTER><B>Bit No.</B></CENTER></TD><TD width="30%"><CENTER><B>Properties</B></CENTER></TD></TR>
+<TR><TD rowspan=8 VALIGN=top><CENTER>Base + 1</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Status Port</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Read Only</CENTER></TD><TD><CENTER>Bit 7</CENTER></TD><TD><CENTER>Busy</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 6</CENTER></TD><TD><CENTER>Ack</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 5</CENTER></TD><TD><CENTER>Paper Out</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 4</CENTER></TD><TD><CENTER>Select In</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 3</CENTER></TD><TD><CENTER>Error</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 2</CENTER></TD><TD><CENTER>IRQ (Not)</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 1</CENTER></TD><TD><CENTER>Reserved</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 0</CENTER></TD><TD><CENTER>Reserved</CENTER></TD></TR>
+</TABLE>
+<FONT SIZE=-1>Table 5 Status Port</FONT></CENTER>
+<P>
+The Status Port (base address + 1) is a read only port. Any data written
+to this port will be ignored. The Status Port is made up of 5 input lines
+(Pins 10,11,12,13 & 15), a IRQ status register and two reserved bits.
+Please note that Bit 7 (Busy) is a active low input. E.g. If bit 7
+happens to show a logic 0, this means that there is +5v at pin 11.
+Likewise with Bit 2. (nIRQ) If this bit shows a '1' then an interrupt
+has <B>not</B> occurred.
+</P>
+<CENTER>
+<TABLE BORDER WIDTH="80%">
+<TR><TD width="15%"><CENTER><B>Offset</B></CENTER></TD><TD width="15%"><CENTER><B>Name</B></CENTER></TD><TD width="15%"><CENTER><B>Read/Write</B></CENTER></TD><TD width="25%"><CENTER><B>Bit No.</B></CENTER></TD><TD width="30%"><CENTER><B>Properties</B></CENTER></TD></TR>
+<TR><TD rowspan=8 VALIGN=top><CENTER>Base + 2</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Control Port</CENTER></TD><TD rowspan=8 VALIGN=top><CENTER>Read/Write</CENTER></TD><TD><CENTER>Bit 7</CENTER></TD><TD><CENTER>Unused</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 6</CENTER></TD><TD><CENTER>Unused</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 5</CENTER></TD><TD><CENTER>Enable Bi-Directional Port</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 4</CENTER></TD><TD><CENTER>Enable IRQ Via Ack Line</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 3</CENTER></TD><TD><CENTER>Select Printer</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 2</CENTER></TD><TD><CENTER>Initialize Printer (Reset)</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 1</CENTER></TD><TD><CENTER>Auto Linefeed</CENTER></TD></TR>
+<TR><TD><CENTER>Bit 0</CENTER></TD><TD><CENTER>Strobe</CENTER></TD></TR>
+</TABLE>
+<FONT SIZE=-1>Table 6 Control Port</FONT></CENTER>
+<P>
+The Control Port (base address + 2) was intended as a write only port.
+When a printer is attached to the Parallel Port, four "controls" are used.
+These are Strobe, Auto Linefeed, Initialize and Select Printer, all of
+which are inverted except Initialize.
+</P>
+<P>
+The printer would not send a signal to initialize the computer, nor would
+it tell the computer to use auto linefeed. However these four outputs can
+also be used for inputs. If the computer has placed a pin high (e.g. +5v)
+and your device wanted to take it low, you would effectively short out
+the port, causing a conflict on that pin. Therefore these lines are "open
+collector" outputs (or open drain for CMOS devices). This means that it
+has two states. A low state (0v) and a high impedance state (open
+circuit).
+</P>
+<P>
+Normally the Printer Card will have internal pull-up resistors, but as
+you would expect, not all will. Some may just have open collector outputs,
+while others may even have normal totem pole outputs. In order to make
+your device work correctly on as many Printer Ports as possible, you
+can use an external resistor as well. Should you already have an internal
+resistor, then it will act in Parallel with it, or if you have Totem
+pole outputs, the resistor will act as a load.
+</P>
+<P>
+An external 4.7k resistor can be used to pull the pin high. I wouldn't
+use anything lower, just in case you do have an internal pull up resistor,
+as the external resistor would act in parallel giving effectively, a
+lower value pull up resistor. When in high impedance state the pin on
+the Parallel Port is high (+5v). When in this state, your external
+device can pull the pin low and have the control port change read a
+different value. This way the 4 pins of the Control Port can be used
+for bi-directional data transfer. However the Control Port must be
+set to xxxx0100 to be able to read data, that is all pins to be +5v
+at the port so that you can pull it down to GND (logic 0).
+</P>
+<P>
+Bits 4 & 5 are internal controls. Bit four will enable the IRQ (See
+Using the Parallel Ports IRQ) and Bit 5 will enable the bi-directional
+port meaning that you can input 8 bits using (DATA0-7). This mode is
+only possible if your card supports it. Bits 6 & 7 are reserved. Any
+writes to these two bits will be ignored.
+</P>
+</UL>
+
+<A NAME="6"><I><FONT SIZE=+2>Bi-directional Ports</FONT></I><HR></A>
+<UL>
+<P>
+The schematic diagram below, shows a simplified view of the Parallel
+Port's Data Register. The original Parallel Port card's implemented
+74LS logic. These days all this is crammed into one ASIC, but the
+theory of operation is still the same.
+</P>
+<center><img src="bidi.gif" alt="Internal's of bi-directional Port" border=0></center>
+<P>
+The non bi-directional ports were manufactured with the 74LS374's output
+enable tied permanent low, thus the data port is always output only.
+When you read the Parallel Port's data register, the data comes from
+the 74LS374 which is also connected to the data pins. Now if you can
+overdrive the '374 you can effectively have a Bi-directional Port.
+<I>(or a input only port, once you blow up the latches output!)</I>
+</P>
+<P>
+What is very concerning is that people have actually done this. I've
+seen one circuit, a scope connected to the Parallel Port distributed
+on the Internet. The author uses an ADC of some type, but finds the
+ADC requires transistors on each data line, to make it work! No wonder
+why. Others have had similar trouble, the 68HC11 cannot sink enough
+current (30 to 40mA!)
+</P>
+<P>
+Bi-directional ports use Control Bit 5 connected to the 374's Output Enable so that
+it's output drivers can be turned off. This way you can read data present
+on the Parallel Port's Data Pins, without having bus conflicts and
+excessive current drains.
+</P>
+<P>
+Bit 5 of the Control Port enables or disables the bi-directional function
+of the Parallel Port. This is only available on true bi-directional ports.
+When this bit is set to one, pins 2 to 9 go into high impedance state.
+Once in this state you can enter data on these lines and retrieve it
+from the Data Port (base address). Any data which is written to the
+data port will be stored but will not be available at the data pins.
+To turn off bi-directional mode, set bit 5 of the Control Port to '0'.
+</P>
+<P>
+However not all ports behave in the same way. Other ports may require
+setting bit 6 of the Control Port to enable Bi-directional mode and
+setting of Bit 5 to dis-enable Bi-directional mode, Different
+manufacturers implement their bi-directional ports in different ways.
+If you wish to use your Bi-directional port to input data, test it
+with a logic probe or multimeter first to make sure it is in bi-directional
+mode.
+</P>
+</UL>
+<A NAME="7"><I><FONT SIZE=+2>Using The Parallel Port to Input 8 Bits.</FONT></I><HR></A>
+<UL>
+<P>
+If your Parallel Port doesn't support bi-directional mode, don't despair.
+You can input a maximum of 9 bits at any one given time. To do this you
+can use the 5 input lines of the Status Port and the 4 inputs (open
+collector) lines of the Control Port.
+</P>
+<center><img src="8inputs.gif" alt="Schematic showing how to input 8 bits using Control and Status Port" border=0></center>
+<P>
+The inputs to the Parallel Port has be chosen as such, to make life easier
+for us. Busy just happens to be the MSB (Bit 7) of the Status Port, then
+in ascending order comes Ack, Paper Out and Select, making up the most
+significant nibble of the Control Port. The Bars are used to represent
+which inputs are Hardware inverted, i.e. +5v will read 0 from the
+register, while GND will read 1. The Status Port only has one inverted
+input.
+</P>
+<P>
+The Control port is used to read the least significant nibble. As
+described before, the control port has open collector outputs, i.e.
+two possible states, high impedance and GND. If we connect our inputs
+directly to the port (For example an ADC0804 with totem pole outputs),
+a conflict will result if the input is high and the port is trying to
+pull it down. Therefore we use open collector inverters.
+</P>
+<P>
+However this is not always entirely necessary. If we were connecting
+single pole switches to the port with a pull up resistor, then there is
+no need to bother with this protection. Also if your software initializes
+the control port with xxxx0100 so that all the pins on the control port
+are high, then it may be unnecessary. If however you don't bother and
+your device is connected to the Parallel Port before your software has
+a chance to initialize then you may encounter problems.
+</P>
+<P>
+Another problem to be aware of is the pull up resistors on the control
+port. The average pull-up resistor is 4.7k. In order to pull the line
+low, your device will need to sink 1mA, which some low powered devices
+may struggle to do. Now what happens if I suggest that some ports have
+1K pull up resistors? Yes, there are such cards. Your device now has to
+sink 5mA. More reason to use the open collector inverters.
+</P>
+<P>
+Open collector inverters were chosen over open collector buffers as they
+are more popular, and thus easier to obtain. There is no reason, however
+why you can't use them. Another possibility is to use transistors.
+</P>
+<P>
+The input, D3 is connected via the inverter to Select Printer. Select
+Printer just happens to be bit 3 of the control port. D2, D1 & D0 are
+connected to Init, Auto linefeed and strobe, respectively to make up
+the lower nibble. Now this is done, all we have to do is assemble the
+byte using software. The first thing we must do is to write xxxx0100
+to the Control Port. This places all the control port lines high, so
+they can be pulled down to input data.
+</P>
+<UL>
+</FONT>
+<PRE>
+outportb(CONTROL, inportb(CONTROL) & 0xF0 | 0x04);
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+Now that this is done, we can read the most significant nibble. This
+just happens to be the most significant nibble of the status port. As
+we are only interested in the MSnibble we will AND the results with 0xF0,
+so that the LSnibble is clear. Busy is hardware inverted, but we won't
+worry about it now. Once the two bytes are constructed, we can kill two
+birds with one stone by toggling Busy and Init at the same time.
+</P>
+<UL>
+</FONT>
+<PRE>
+a = (inportb(STATUS) & 0xF0); /* Read MSnibble */
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+We can now read the LSnibble. This just happens to be LSnibble of the
+control port - How convenient! This time we are not interested with the
+MSnibble of the port, thus we AND the result with 0x0F to clear the
+MSnibble. Once this is done, it is time to combine the two bytes together.
+This is done by OR'ing the two bytes. This now leaves us with one byte,
+however we are not finished yet. Bits 2 and 7 are inverted. This is
+overcome by XOR'ing the byte with 0x84, which toggles the two bits.
+</P>
+<UL>
+</FONT>
+<PRE>
+a = a |(inportb(CONTROL) & 0x0F); /* Read LSnibble */
+a = a ^ 0x84; /* Toggle Bit 2 & 7 */
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+<B>
+Note:   Some control ports are not open collector, but have totem pole
+outputs. This is also the case with EPP and ECP Ports. Normally when you
+place a Parallel Port in ECP or EPP mode, the control port becomes totem
+pole outputs only. Now what happens if you connect your device to the
+Parallel Port in this mode? Therefore, in the interest of portability
+I recommend using the next circuit, reading a nibble at a time.
+</B>
+</P>
+</UL>
+
+<A NAME="8"><I><FONT SIZE=+2>Nibble Mode.</FONT></I><HR></A>
+<UL>
+<P>
+Nibble mode is the preferred way of reading 8 bits of data without
+placing the port in reverse mode and using the data lines. Nibble
+mode uses a Quad 2 line to 1 line multiplexer to read a nibble of
+data at a time. Then it "switches" to the other nibble and reads its.
+Software can then be used to construct the two nibbles into a byte.
+The only disadvantage of this technique is that it is slower. It now
+requires a few I/O instructions to read the one byte, and it requires
+the use of an external IC.
+</P>
+<P>
+<center><img src="74hc157.gif" alt="Schematic - 8 inputs using 74ls157 Multiplexer" border=0></center>
+<P>
+The operation of the 74LS157, Quad 2 line to 1 line multiplexer is quite
+simple. It simply acts as four switches. When the A/B input is low, the A
+inputs are selected. E.g. 1A passes through to 1Y, 2A passes through to 2Y
+etc.  When the A/B is high, the B inputs are selected. The Y outputs are
+connected up to the Parallel Port's status port, in such a manner that it
+represents the MSnibble of the status register. While this is not necessary,
+it makes the software easier.
+</P>
+<P>
+To use this circuit, first we must initialize the multiplexer to switch
+either inputs A or B. We will read the LSnibble first, thus we must place
+A/B low. The strobe is hardware inverted, thus we must set Bit 0 of the
+control port to get a low on Pin 1.
+<P>
+<UL>
+</FONT>
+<PRE>
+outportb(CONTROL, inportb(CONTROL) | 0x01); /* Select Low Nibble (A)*/
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+Once the low nibble is selected, we can read the LSnibble from the Status
+Port. Take note that the Busy Line is inverted, however we won't tackle it
+just yet. We are only interested in the MSnibble of the result, thus we
+AND the result with 0xF0, to clear the LSnibble.
+</P>
+<UL>
+</FONT>
+<PRE>
+a = (inportb(STATUS) & 0xF0); /* Read Low Nibble */
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+Now it's time to shift the nibble we have just read to the LSnibble of
+variable a,
+</P>
+<UL>
+</FONT>
+<PRE>
+a = a >> 4; /* Shift Right 4 Bits */
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+We are now half way there. It's time to get the MSnibble, thus we must
+switch the multiplexer to select inputs B. Then we can read the MSnibble
+and put the two nibbles together to make a byte,
+</P>
+<UL>
+</FONT>
+<PRE>
+outportb(CONTROL, inportb(CONTROL) & 0xFE); /* Select High Nibble (B)*/
+a = a |(inportb(STATUS) & 0xF0); /* Read High Nibble */
+byte = byte ^ 0x88;
+</PRE>
+<FONT FACE="ARIAL">
+</UL>
+<P>
+The last line toggles two inverted bits which were read in on the Busy
+line. It may be necessary to add delays in the process, if the incorrect
+results are being returned.
+</P>
+</UL>
+
+<A NAME="9"><I><FONT SIZE=+2>Using the Parallel Port's IRQ</FONT></I><HR></A>
+<UL>
+<P>
+The Parallel Port's interrupt request is not used for printing under
+DOS or Windows. Early versions of OS-2 used them, but don't anymore.
+Interrupts are good when interfacing monitoring devices such as high
+temp alarms etc, where you don't know when it is going to be activated.
+It's more efficient to have an interrupt request rather than have the
+software poll the ports regularly to see if something has changed. This
+is even more noticeable if you are using your computer for other tasks,
+such as with a multitasking operating system.
+</P>
+<P>
+The Parallel Port's interrupt request is normally IRQ5 or IRQ7 but may
+be something else if these are in use. It may also be possible that the
+interrupts are totally disabled on the card, if the card was only used
+for printing. The Parallel Port interrupt can be disabled and enabled
+using bit 4 of the control register, Enable IRQ Via Ack Line. Once
+enabled, an interrupt will occur upon a low to high transition (rising
+edge) of the nACK. However like always, some cards may trigger the
+interrupt on the high to low transition.
+</P>
+<P>
+The following code is an Interrupt Polarity Tester, which serves as
+two things. It will determine which polarity your Parallel Port
+interrupt is, while also giving you an example for how to use the
+Parallel Port's Interrupt. It checks if your interrupt is generated
+on the rising or falling edge of the nACK line. To use the program
+simply wire <B>one of</B> the Data lines (Pins 2 to 9) to the Ack Pin (Pin
+10). The easiest way to do this is to bridge some solder from DATA7
+(Pin 9) to ACK (Pin 10) on a male DB25 connector.
+</P>
+<BR>
+<UL>
+</FONT>
+<PRE>
+/*  Parallel Port Interrupt Polarity Tester                           */
+/*  2nd February 1998			                              */
+/*  Copyright 1997 Craig Peacock                                      */
+/*  WWW     - http://www.beyondlogic.org                              */
+/*  Email   - cpeacock@senet.com.au                                   */
+
+#include &lt;dos.h&gt;
+
+#define PORTADDRESS 0x378  /* Enter Your Port Address Here */
+#define IRQ 7              /* IRQ Here */
+
+#define DATA PORTADDRESS+0
+#define STATUS PORTADDRESS+1
+#define CONTROL PORTADDRESS+2
+
+#define PIC1 0x20
+#define PIC2 0xA0
+
+int interflag; /* Interrupt Flag */
+int picaddr;   /* Programmable Interrupt Controller (PIC) Base Address */
+
+void interrupt (*oldhandler)();
+
+void interrupt parisr()  /* Interrupt Service Routine (ISR) */
+{
+  interflag = 1;
+  outportb(picaddr,0x20); /* End of Interrupt (EOI) */
+}
+
+void main(void)
+{
+ int c;
+ int intno;    /* Interrupt Vector Number */
+ int picmask;  /* PIC's Mask */
+
+ /* Calculate Interrupt Vector, PIC Addr & Mask. */
+
+ if (IRQ &gt;= 2 && IRQ &lt;= 7) {
+			    intno = IRQ + 0x08;
+			    picaddr = PIC1;
+			    picmask = 1;
+                            picmask = picmask &lt;&lt; IRQ;
+			   }
+ if (IRQ &gt;= 8 && IRQ &lt;= 15) {
+			     intno = IRQ + 0x68;
+			     picaddr = PIC2;
+			     picmask = 1;
+                             picmask = picmask &lt;&lt; (IRQ-8);
+			    }
+ if (IRQ &lt; 2 || IRQ &gt; 15)
+	{
+	 printf("IRQ Out of Range\n");
+	 exit();
+	}
+
+ outportb(CONTROL, inportb(CONTROL) & 0xDF); /* Make sure port is in Forward Direction */
+ outportb(DATA,0xFF);
+ oldhandler = getvect(intno);  /* Save Old Interrupt Vector */
+ setvect(intno, parisr);      /* Set New Interrupt Vector Entry */
+ outportb(picaddr+1,inportb(picaddr+1) & (0xFF - picmask)); /* Un-Mask Pic */
+ outportb(CONTROL, inportb(CONTROL) | 0x10); /* Enable Parallel Port IRQ's */
+
+ clrscr();
+ printf("Parallel Port Interrupt Polarity Tester\n");
+ printf("IRQ %d : INTNO %02X : PIC Addr 0x%X : Mask 0x%02X\n",IRQ,intno,picaddr,picmask);
+ interflag = 0; /* Reset Interrupt Flag */
+ delay(10);
+ outportb(DATA,0x00); /* High to Low Transition */
+ delay(10);           /* Wait */
+ if (interflag == 1) printf("Interrupts Occur on High to Low Transition of ACK.\n");
+ else
+   {
+    outportb(DATA,0xFF); /* Low to High Transition */
+    delay(10);           /* wait */
+    if (interflag == 1) printf("Interrupts Occur on Low to High Transition of ACK.\n");
+    else printf("No Interrupt Activity Occurred. \nCheck IRQ Number, Port Address and Wiring.");
+    }
+
+ outportb(CONTROL, inportb(CONTROL) & 0xEF); /* Disable Parallel Port IRQ's */
+ outportb(picaddr+1,inportb(picaddr+1) | picmask); /* Mask Pic */
+ setvect(intno, oldhandler); /* Restore old Interrupt Vector Before Exit */
+}
+</UL>
+</PRE>
+<FONT FACE="ARIAL">
+<P>
+At compile time, the above source may generate a few warnings, condition
+always true, condition always false, unreachable code etc. These are
+perfectly O.K. They are generated as some of the condition structures
+test which IRQ you are using, and as the IRQ is defined as a constant
+some outcomes will never change. While they would of been better
+implemented as a preprocessor directive, I've done this so you can
+cut and paste the source code in your own programs which may use
+command line arguments, user input etc instead of a defined IRQ.
+</P>
+<P>
+To understand how this example works, the reader must have an assumed
+knowledge and understanding of Interrupts and Interrupt Service Routines
+(ISR). If not, See <a href="/interrupts/interupt.htm">Interfacing the PC : Using Interrupts</A>
+for a quick introduction.
+</P>
+<P>
+The first part of the mainline routine calculates the
+Interrupt Vector, PIC Addr & Mask in order to use the Parallel Port's
+Interrupt Facility. After the Interrupt Service Routine (ISR) has been
+set up and the Programmable Interrupt Controller (PIC) set, we must
+enable the interrupt on the Parallel Port. This is done by setting bit
+4 of the Parallel Port's Control Register using
+<PRE>outportb(CONTROL,inportb(CONTROL) | 0x10);</PRE>
+</P>
+<P>
+Before enabling the interrupts, we wrote 0xFF to the Parallel Port to
+enable the 8 data lines into a known state. At this point of the program,
+all the data lines should be high. The interrupt service routine simply
+sets a flag (interflag), thus we can determine when an IRQ occurs. We are
+now in a position to write 0x00 to the data port, which causes a high to
+low transition on the Parallel Port's Acknowledge line as it's connected
+to one of the data lines.
+</P>
+<P>
+If the interrupt occurs on the high to low transition, the interrupt
+flag (interflag) should be set. We now test this, and if this is so the
+program informs the user. However if it is not set, then an interrupt
+has not yet occurred. We now write 0xFF to the data port, which will
+cause a low to high transition on the nAck line and check the interrupt
+flag again. If set, then the interrupt occurs on the low to high
+transition.
+</P>
+<P>
+However if the interrupt flag is still reset, then this would suggest
+that the interrupts are not working. Make sure your IRQ and Base Address
+is correct and also check the wiring of the plug.
+</P>
+</UL>
+
+<A NAME="10"><I><FONT SIZE=+2>Parallel Port Modes in BIOS</FONT></I><HR></A>
+<UL>
+<P>
+Today, most Parallel Ports are mulimode ports. They are normally software
+configurable to one of many modes from BIOS. The typical modes are,
+</P>
+<UL>
+Printer Mode (Sometimes called Default or Normal Modes)<BR>
+Standard & Bi-directional (SPP) Mode<BR>
+EPP1.7 and SPP Mode<BR>
+EPP1.9 and SPP Mode<BR>
+ECP Mode<BR>
+ECP and EPP1.7 Mode<BR>
+ECP and EPP1.9 Mode<BR>
+</UL>
+<P>
+<I>Printer Mode</I> is the most basic mode. It is a Standard Parallel
+Port in forward mode only. It has no bi-directional feature, thus Bit 5
+of the Control Port will not respond. <I>Standard & Bi-directional (SPP)
+Mode</I> is the bi-directional mode. Using this mode, bit 5 of the Control
+Port will reverse the direction of the port, so you can read back a
+value on the data lines.
+</P>
+<P>
+<I>EPP1.7 and SPP Mode</I> is a combination of EPP 1.7 (Enhanced Parallel
+Port) and SPP Modes. In this mode of operation you will have access to
+the SPP registers (Data, Status and Control) and access to the EPP
+Registers. In this mode you should be able to reverse the direction
+of the port using bit 5 of the control register. EPP 1.7 is the earlier
+version of EPP. This version, version 1.7, may not have the time-out bit.
+See <a href="/epp/epp.htm">
+Interfacing the Enhanced Parallel Port</A> for more information.
+</P>
+<P>
+<I>EPP1.9 and SPP Mode</I> is just like the previous mode, only it uses
+EPP Version 1.9 this time. As in the other mode, you will have access to
+the SPP registers, including Bit 5 of the control port. However this
+differs from EPP1.7 and SPP Mode as you should have access to the EPP
+Timeout bit.
+</P>
+<P>
+<I>ECP Mode</I> will give you an Extended Capabilities Port. The mode of
+this port can then be set using the ECP's Extended Control Register (ECR).
+However in this mode from BIOS the EPP Mode (100) will not be available.
+We will further discuss the ECP's Extended Control Register in this
+document, but if you want further information on the ECP port, consult
+<a href="/ecp/ecp.htm">Interfacing the Extended Capabilities Port.</a>
+</P>
+<P>
+<I>ECP and EPP1.7 Mode</I> and <I> ECP and EPP1.9 Mode</I> will give you
+an Extended Capabilities Port, just like the previous mode. However the
+EPP Mode in the ECP's ECR will now be available. Should you be in <I>ECP and
+EPP1.7 Mode</I> you will get an EPP1.7 Port, or if you are in <i>ECP and EPP1.9
+Mode</I>, an EPP1.9 Port will be at your disposal.
+</P>
+<P>
+The above modes are configurable via BIOS. You can reconfigure them by
+using your own software, but this is <B>not recommended</B>. These software
+registers, typically found at 0x2FA, 0x3F0, 0x3F1 etc are only intended
+to be accessed by BIOS. There is no set standard for these configuration
+registers, thus if you were to use these registers, your software would
+not be very portable. With today's multitasking operating systems, its
+also not a good idea to change them when it suits you.
+</P>
+<P>
+A better option is to select <I>ECP and EPP1.7 Mode</I> or <I>ECP and EPP1.9 Mode</I>
+from BIOS and then use the ECP's Extended Control Register to select your
+Parallel Port's Mode. The EPP1.7 mode had a few problems in regards to the
+Data and Address Strobes being asserted to start a cycle regardless of
+the wait state, thus this mode if not typically used now. Best set your
+Parallel Port to <I>ECP and EPP1.9 Mode.</I>
+</P>
+</UL>
+
+<A NAME="11"><I><FONT SIZE=+2>Parallel Port Modes and the ECP's Extended Control Register</FONT></I><HR></A>
+<UL>
+<P>
+As we have just discussed, it is better to set the Parallel Port to <I>ECP
+and EPP1.9 Mode</I> and use the ECP's Extended Control Register to select
+different modes of operation. The ECP Registers are standardized under
+Microsoft's <B>Extended Capabilities Port Protocol and ISA Interface
+Standard</B>, thus we don't have that problem of every vendor having their
+own register set.
+</P>
+<P>
+When set to ECP Mode, a new set of registers become available at Base +
+0x400h. A discussion of these registers are available in
+<a href="/ecp/ecp.htm">Interfacing the Extended Capabilities Port</a>. 
+Here we are only interested in the Extended
+Control Register (ECR) which is mapped at Base + 0x402h. It should be
+stated that the ECP's registers are not available for port's with a base
+address of 0x3BCh.
+</P>
+<P>
+<CENTER>
+<TABLE BORDER WIDTH="65%">
+<TR><TD width="10%"><CENTER><B>Bit</B></CENTER></TD><TD colspan=2><CENTER><B>Function</B></CENTER></TD></TR>
+<TR><TD rowspan=9 valign=top><CENTER>7:5</CENTER></TD><TD colspan=2><I>Selects Current Mode of Operation</I></TD></TR>
+<TR><TD width="10%"><CENTER>000</CENTER></TD><TD>Standard Mode</TD></TR>
+<TR><TD><CENTER>001</CENTER></TD><TD>Byte Mode</TD></TR>
+<TR><TD><CENTER>010</CENTER></TD><TD>Parallel Port FIFO Mode</TD></TR>
+<TR><TD><CENTER>011</CENTER></TD><TD>ECP FIFO Mode</TD></TR>
+<TR><TD><CENTER>100</CENTER></TD><TD>EPP Mode</TD></TR>
+<TR><TD><CENTER>101</CENTER></TD><TD>Reserved</TD></TR>
+<TR><TD><CENTER>110</CENTER></TD><TD>FIFO Test Mode</TD></TR>
+<TR><TD><CENTER>111</CENTER></TD><TD>Configuration Mode</TD></TR>
+<TR><TD><CENTER>4</CENTER></TD><TD colspan=2>ECP Interrupt Bit</TD></TR>
+<TR><TD><CENTER>3</CENTER></TD><TD colspan=2>DMA Enable Bit</TD></TR>
+<TR><TD><CENTER>2</CENTER></TD><TD colspan=2>ECP Service Bit</TD></TR>
+<TR><TD><CENTER>1</CENTER></TD><TD colspan=2>FIFO Full</TD></TR>
+<TR><TD><CENTER>0</CENTER></TD><TD colspan=2>FIFO Empty</TD></TR>
+</TABLE>
+<FONT SIZE=-1>Table 7 - Extended Control Register (ECR)</FONT></CENTER>
+</P>
+<P>
+The table above is of the Extended Control Register. We are only
+interested in the three MSB of the Extended Control Register which
+selects the mode of operation. There are 7 possible modes of operation,
+but not all ports will support all modes. The EPP mode is one such example,
+not being available on some ports.
+</P>
+
+<P>
+<CENTER><TABLE WIDTH="90%">
+<TR><TD width="25%" colspan=2><CENTER><HR><B>Modes of Operation</B><HR></CENTER></TD></TR>
+<TR><TD valign=top>Standard Mode</TD><TD>Selecting this mode will cause the ECP port to behave as a Standard Parallel Port, without bi-directional functionality. </TD></TR>
+<TR><TD valign=top>Byte Mode / PS/2 Mode</TD><TD>Behaves as a SPP in bi-directional mode. Bit 5 will place the port in reverse mode. </TD></TR>
+<TR><TD valign=top>Parallel Port FIFO Mode</TD><TD>In this mode, any data written to the Data FIFO will be sent to the peripheral using the SPP Handshake. The hardware will generate the handshaking required. Useful with non-ECP devices such as Printers. You can have some of the features of ECP like FIFO buffers and hardware generation of handshaking but with the existing SPP handshake instead of the ECP Handshake.</TD></TR>
+<TR><TD valign=top>ECP FIFO Mode</TD><TD>Standard mode for ECP use. This mode uses the ECP Handshake described in Interfacing the Extended Capabilities Port. - <I>When in ECP Mode though BIOS,  and the ECR register is set to ECP FIFO Mode (011), the SPP registers may disappear.</I></TD></TR>
+<TR><TD valign=top>EPP Mode<I>/Reserved</I></TD><TD>This will enable EPP Mode, if available. Under BIOS, if ECP mode is set then it's more than likely, this mode is not an option. However if BIOS is set to ECP and EPP1.x Mode, then EPP 1.x will be enabled. - <I>Under Microsoft's <B>Extended Capabilities Port Protocol and ISA Interface Standard</B> this mode is Vendor Specified.</I></TD></TR>
+<TR><TD valign=top>Reserved</TD><TD>Currently Reserved. - <i>Under Microsoft's <B>Extended Capabilities Port Protocol and ISA Interface Standard</B> this mode is Vendor Specified.</I></TD></TR>
+<TR><TD valign=top>FIFO Test Mode</TD><TD>While in this mode, any data written to the Test FIFO Register will be placed into the FIFO and any data read from the Test FIFO register will be read from the FIFO buffer. The FIFO Full/Empty Status Bits will reflect their true value, thus FIFO depth, among other things can be determined in this mode. </TD></TR>
+<TR><TD valign=top>Configuration Mode</TD><TD>In this mode, the two configuration registers, cnfgA &amp; cnfgB become available at their designated register addresses.</TD></TR>
+<TR><TD colspan=2><HR></TD></TR>
+</TABLE>
+</CENTER>
+</P>
+
+<P>
+If you are in ECP Mode under BIOS, or if your card is jumpered to use
+ECP then it is a good idea to initialize the mode of your ECP port to
+a pre-defined state before use. If you are using SPP, then set the port
+to Standard Mode as the first thing you do. Don't assume that the port
+will already be in Standard (SPP) mode.
+</P>
+<P>
+Under some of the modes, the SPP registers may disappear or not work
+correctly. If you are using SPP, then set the ECR to Standard Mode. This
+is one of the most common mistakes that people make.
+</P>
+<BR>
+</ul>
+<A NAME="12"><I><FONT SIZE=+2>PDF Version</FONT></I><HR></A>
+<UL>
+This page, <I>Interfacing the Standard Parallel Port</I> is also avaliable in PDF (Portable Document Format),<BR>
+<BR>
+<UL>
+<font size=+1><a href="parallel.pdf">Interfacing the Standard Parallel Port (76KB)</a></font>
+</Ul>
+</UL>
+
+</TD></TR></TABLE>
+<BR><BR>
+<FONT SIZE=2>Copyright 1999-2010 <A href="/about.htm">Craig Peacock </a> 15th June 2005.</FONT>
+<BR><BR>
+</CENTER>
+</BODY>
+</HTML>
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=bgyellow.gif
+Content-Type: image/gif; name=bgyellow.gif
+Content-Location: http://retired.beyondlogic.org/bgyellow.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhAAUBAPcAAAAAAP//////AP//Af//Av//A///BP//Bf//Bv//B///CP//
+Cf//Cv//C///DP//Df//Dv//D///EP//Ef//Ev//E///FP//Fv//F///Gf//Gv//
+HP//Hf//Hv//H///IP//Iv//I///Jf//Jv//KP//Kf//K///LP//Lf//L///MP//
+Mv//M///NP//Nv//N///Of//Ov//O///Pf//Pv//Qf//Qv//Rf//Rv//SP//Sf//
+Sv//TP//Tf//UP//Uf//VP//Vf//Vv//WP//Wf//XP//Xf//YP//Yf//Yv//ZP//
+Zf//aP//af//bP//bf//bv//cP//cf//cv//dP//df//dv//eP//ef//ev//ff//
+fv//gf//gv//hf//hv//if//iv//i///jf//jv//j///kf//kv//k///lf//lv//
+l///mf//mv//m///nf//nv//n///of//ov//o///pv//p///qv//q///rf//rv//
+r///sv//s///tf//tv//t///uf//uv//u///vf//vv//wf//wv//xP//xf//xv//
+yP//yf//y///zP//zf//z///0P//0v//0///1P//1v//1///2f//2v//3P//3f//
+3v//3///4P//4v//4///5f//5v//6P//6f//6///7P//7f//7v//8P//8f//8v//
+8///9P//9f//9v//9///+P//+f//+v//+////P///f///v///wAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACH5BAEAALcALAAAAAAABQEAAAilAAUIIFDggAIGDiJMsHBB
+A4cPIUaUOKGChQsZNGzg0NHjhxAiRpAsaQJFipUsW7p8EVPmzBo3cebYwbOHDyBB
+hQ4pYuQo0iRLmDZ1+hRqVKlTqVi5giWLlq0AUKNKnUq1qtWrWLNq3cq1q9evYMOK
+HUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPe2su3r9+/gAMLHky4sOHDiBMrXsy4
+sePHfAMCADs=
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=beyondsmall.gif
+Content-Type: image/gif; name=beyondsmall.gif
+Content-Location: http://retired.beyondlogic.org/beyondsmall.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhtABBAPcAAAAAAP///wcH3hUV/hISugwMfCAg/iAg3ykp/xwckTY2/i8v
+uEZG/j093j09yFJS/kpK5h0dWVRU8TU1lltb/lJS2mJi/2Ji+ikpaGVl/11d62Zm
+/2Vl+2lp/2Rk8Glp+lRUyGxs/0REnm9v/01NsHJy/3Fx+29v9nR0/2xs7Hd3/3Z2
+/HV1+Gdn23l5/3x8/3p6+nZ28H9//319+IOD/0ZGiIKC+oSE/IeH/2pqyXx86YmJ
+/0BAd4KC74yM/4iI9mBgrnh42FZWl5KS/5WV/zc3XpiY/4yM65eX+Jyc/29vtIiI
+3JSU7VJSgqKi/56e+aam/319wKKi+EVFaamp/6Cg8K2t/2FhjoqKyWtrnJ2d5LKy
+/1tbgamp77a2/5mZ17q6/7y8/7Oz78DA/3d3nWxsjcXF/7+/+JWVwTo6S8HB+Lq6
+766u3lVVbMrK/2VlgEREVqio04qKrc3N/8LC8MfH9dDQ/8vL+U1NXnR0jdXV/9LS
++6GhwNfX/9XV/b294djY/8/P9crK79ra/25ugdfX+t3d/8fH5paWrXx8j97e/9nZ
++d7e/dTU8uHh/+Pj/+Tk/9/f+URETOPj/NDQ53V1gjc3Pefn/9vb8rGxxKKis4KC
+kGlpdF5eaExMVMjI3Onp/+Tk+uLi+IqKl1NTW+vr/2VlbtjY6sDA0JKSnu3t/0FB
+Ruvr/Hp6gykpLOrq+vLy/0lJTe7u+urq9nV1e/b2/9LS2uTk7PPz+vr6//b2+pyc
+npiYmoeHiUVFRv39/2pqa5OTlIKCg0xMPHJyZ+Pj0/Dw4FZWUIiIf2RkXnl5c56e
+l/j47uHh2Ofn3tfXz9HRyf7++Pr69PHx6+Pj3cnJxE1NS9vb1sHBvbq6tpmZlmZm
+ZF5eXFlZV6enpP///Onp5uHh3qGhn1JSUe3t68TEwr29u7W1s7Gxr6ysqn19fPb2
+9fPz8vDw79ra2dTU09HR0KSko5CQj4uLiv7+/v39/fv7+/n5+eTk5N7e3tfX18zM
+zJubm3FxcUNDQ////yH5BAEAAP8ALAAAAAC0AEEAQAj/AP8JHEiwoMGDCBMqXMiw
+IUFj9hSyM0bR2DSHGBuy28Qx0ahoGQVuOqCgpMmTJjGgC8mypcsmCEouOBYvIZeY
+JTEo0+fSZbEEJg+QYumshgULGSSsKidwVAUORyWkwTaQWQ0KHKBmsEAim8BvqSBs
+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
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=beyondmenu_plain.js
+Content-Type: application/javascript; name=beyondmenu_plain.js
+Content-Location: http://www.beyondlogic.org/menu/beyondmenu_plain.js
+Content-Transfer-Encoding: Base64
+
+DQogICBITV9ET00gPSAoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQpID8gdHJ1ZSA6
+IGZhbHNlOw0KICAgSE1fTlM0ID0gKGRvY3VtZW50LmxheWVycykgPyB0cnVlIDog
+ZmFsc2U7DQogICAgSE1fSUUgPSAoZG9jdW1lbnQuYWxsKSA/IHRydWUgOiBmYWxz
+ZTsNCiAgIEhNX0lFNCA9IEhNX0lFICYmICFITV9ET007DQogICBITV9NYWMgPSAo
+bmF2aWdhdG9yLmFwcFZlcnNpb24uaW5kZXhPZigiTWFjIikgIT0gLTEpOw0KICBI
+TV9JRTRNID0gSE1fSUU0ICYmIEhNX01hYzsNCkhNX0lzTWVudSA9IChITV9ET00g
+fHwgSE1fTlM0IHx8IChITV9JRTQgJiYgIUhNX0lFNE0pKTsNCg0KSE1fQnJvd3Nl
+clN0cmluZyA9IEhNX05TNCA/ICJOUzQiIDogSE1fRE9NID8gIkRPTSIgOiAiSUU0
+IjsNCg0KaWYod2luZG93LmV2ZW50ICsgIiIgPT0gInVuZGVmaW5lZCIpIGV2ZW50
+ID0gbnVsbDsNCmZ1bmN0aW9uIEhNX2ZfUG9wVXAoKXtyZXR1cm4gZmFsc2V9Ow0K
+ZnVuY3Rpb24gSE1fZl9Qb3BEb3duKCl7cmV0dXJuIGZhbHNlfTsNCnBvcFVwID0g
+SE1fZl9Qb3BVcDsNCnBvcERvd24gPSBITV9mX1BvcERvd247DQoNCkhNX1BHX01l
+bnVXaWR0aCA9IDE1MDsNCkhNX1BHX0ZvbnRGYW1pbHkgPSAiVmVyZGFuYSxBcmlh
+bCxzYW5zLXNlcmlmIjsNCkhNX1BHX0ZvbnRTaXplID0gMTA7DQpITV9QR19Gb250
+Qm9sZCA9IDE7DQpITV9QR19Gb250SXRhbGljID0gMDsNCkhNX1BHX0ZvbnRDb2xv
+ciA9ICJ3aGl0ZSI7DQpITV9QR19Gb250Q29sb3JPdmVyID0gImJsdWUiOw0KSE1f
+UEdfQkdDb2xvciA9ICJCTFVFIjsNCkhNX1BHX0JHQ29sb3JPdmVyID0gIldISVRF
+IjsNCkhNX1BHX0l0ZW1QYWRkaW5nID0gMDsNCg0KSE1fUEdfQm9yZGVyV2lkdGgg
+PSAxOw0KSE1fUEdfQm9yZGVyQ29sb3IgPSAiIzVENkNBOCI7DQpITV9QR19Cb3Jk
+ZXJTdHlsZSA9ICJzb2xpZCI7DQpITV9QR19TZXBhcmF0b3JTaXplID0gMTsNCkhN
+X1BHX1NlcGFyYXRvckNvbG9yID0gIiM1RDZDQTgiOw0KDQpITV9QR19JbWFnZVNy
+YyA9ICIvbWVudS9ITV9Nb3JlX3doaXRlX3JpZ2h0LmdpZiI7DQpITV9QR19JbWFn
+ZVNyY0xlZnQgPSAiL21lbnUvSE1fTW9yZV93aGl0ZV9sZWZ0LmdpZiI7DQoNCkhN
+X1BHX0ltYWdlU3JjT3ZlciA9ICIvbWVudS9ITV9Nb3JlX2JsdWVfcmlnaHQuZ2lm
+IjsNCkhNX1BHX0ltYWdlU3JjTGVmdE92ZXIgPSAiL21lbnUvSE1fTW9yZV9ibHVl
+X2xlZnQuZ2lmIjsNCg0KSE1fUEdfSW1hZ2VTaXplID0gNTsNCkhNX1BHX0ltYWdl
+SG9yaXpTcGFjZSA9IDA7DQpITV9QR19JbWFnZVZlcnRTcGFjZSA9IDI7DQoNCkhN
+X1BHX0tlZXBIaWxpdGUgPSB0cnVlOyANCkhNX1BHX0NsaWNrU3RhcnQgPSAwOw0K
+SE1fUEdfQ2xpY2tLaWxsID0gZmFsc2U7DQpITV9QR19DaGlsZE92ZXJsYXAgPSAy
+MDsNCkhNX1BHX0NoaWxkT2Zmc2V0ID0gMTA7DQpITV9QR19DaGlsZFBlckNlbnRP
+dmVyID0gbnVsbDsNCkhNX1BHX1RvcFNlY29uZHNWaXNpYmxlID0gLjU7DQpITV9Q
+R19TdGF0dXNEaXNwbGF5QnVpbGQgPTA7DQpITV9QR19TdGF0dXNEaXNwbGF5TGlu
+ayA9IDA7DQpITV9QR19VcG9uRGlzcGxheSA9IG51bGw7DQpITV9QR19VcG9uSGlk
+ZSA9IG51bGw7DQpITV9QR19SaWdodFRvTGVmdCA9IGZhbHNlOw0KDQpITV9QR19D
+cmVhdGVUb3BPbmx5ID0gMTsNCkhNX1BHX1Nob3dMaW5rQ3Vyc29yID0gMTsNCkhN
+X1BHX05TRm9udE92ZXIgPSB0cnVlOw0KDQo8IS0tIFVuaXZlcnNhbCBTZXJpYWwg
+QnVzIC0tPiANCkhNX0FycmF5MSA9IFsNClszMDAsDQoibW91c2VfeF9wb3NpdGlv
+biIsDQoibW91c2VfeV9wb3NpdGlvbiJdLA0KDQpbIlVTQiBpbiBhIE51dHNoZWxs
+IC0gSW50cm9kdWN0aW9uIiwiL3VzYm51dHNoZWxsL3VzYjEuaHRtIiwxLDAsMF0s
+DQpbIlVTQiBpbiBhIE51dHNoZWxsIC0gSGFyZHdhcmUiLCIvdXNibnV0c2hlbGwv
+dXNiMi5odG0iLDEsMCwwXSwNClsiVVNCIGluIGEgTnV0c2hlbGwgLSBVU0IgUHJv
+dG9jb2xzIiwiL3VzYm51dHNoZWxsL3VzYjMuaHRtIiwxLDAsMF0sDQpbIlVTQiBp
+biBhIE51dHNoZWxsIC0gRW5kcG9pbnQgVHlwZXMiLCIvdXNibnV0c2hlbGwvdXNi
+NC5odG0iLDEsMCwwXSwNClsiVVNCIGluIGEgTnV0c2hlbGwgLSBVU0IgRGVzY3Jp
+cHRvcnMiLCIvdXNibnV0c2hlbGwvdXNiNS5odG0iLDEsMCwwXSwNClsiVVNCIGlu
+IGEgTnV0c2hlbGwgLSBVU0IgUmVxdWVzdHMiLCIvdXNibnV0c2hlbGwvdXNiNi5o
+dG0iLDEsMCwwXSwNClsiVVNCIGluIGEgTnV0c2hlbGwgLSBFbnVtZXJhdGlvbiIs
+Ii91c2JudXRzaGVsbC91c2I3Lmh0bSIsMSwwLDBdLA0KWyJQSUMxNkY4N3ggYW5k
+IFBESVVTQkQxMSBVU0IgRXhhbXBsZSIsIi91c2JudXRzaGVsbC91c2I3Lmh0bSNQ
+SUMxNkY4NzZFeGFtcGxlIiwxLDAsMF0sDQpbIlVTQiAxLjEgSW50ZWdyYXRlZCBD
+aXJjdWl0cyIsIi91c2IvdXNiaGFyZC5odG0iLDEsMCwwXSwNClsiVVNCIDIuMCBJ
+bnRlZ3JhdGVkIENpcmN1aXRzIiwiL3VzYi91c2JoYXJkMi5odG0iLDEsMCwwXSwN
+ClsiVVNCIFByb3RvY29sIEFuYWx5c2VycyIsIi91c2IvcHJvdG9jb2xhbmFseXNl
+cnMuaHRtIiwxLDAsMF0sDQpbIlVTQiBEZXZpY2UgRHJpdmVyIERldmVsb3BtZW50
+IiwiL3VzYi91c2JkZXZkcnZzLmh0bSIsMSwwLDBdLA0KWyJVU0Igd2l0aCB0aGUg
+c2ltcGxpY2l0eSBvZiBSUy0yMzIiLCIvdXNiL2Z0ZGkuaHRtIiwxLDAsMF0sDQpb
+Ik9uLVRoZS1HbyBTdXBwbGVtZW50IC0gUG9pbnQtdG8tUG9pbnQgQ29ubmVjdGl2
+aXR5IGZvciBVU0IuIiwiL3VzYi9vdGdob3N0Lmh0bSIsMSwwLDBdLA0KWyJJU1Ax
+MTYxIEhvc3QgQ29udHJvbGxlciBmb3IgRW1iZWRkZWQgU3lzdGVtcyIsIi91c2Iv
+b3RnaG9zdC5odG0iLDEsMCwwXSwNClsiUERJVVNCRDExIFVTQiBJbnRlcmZhY2Ui
+LCIvdXNiL3BkaXVzYmQxMS5wZGYiLDEsMCwwXSwNClsiV2luIDIwMDAvWFAgRHJp
+dmVyIGZvciBEZVZhU3lzIFVTQkxQVC1QRDExIFVTQiBCb2FyZHMiLCIvdXNiL3Vz
+YmxwdHBkMTEuaHRtIiwxLDAsMF0sDQpbIlVTQiBEcml2ZXIgZm9yIHRoZSBDeXBy
+ZXNzIFVTQiBTdGFydGVyIEtpdCIsIi91c2IvY3lwcmVzcy5odG0iLDEsMCwwXSwN
+ClsiTGlua3MiLCIiLDEsMCwxXQ0KXQ0KDQpITV9BcnJheTFfMTkgPSBbDQpbXSwN
+ClsiVVNCLUlGIERldmVsb3BlcnMgRGlzY3Vzc2lvbiBGb3J1bSIsImh0dHA6Ly93
+d3cudXNiLm9yZy9waHBiYi8iLDEsMCwwXSwNClsiVW5pdmVyc2FsIFNlcmlhbCBC
+dXMgSG9tZSBQYWdlICh3d3cudXNiLm9yZykiLCJodHRwOi8vd3d3LnVzYi5vcmci
+LDEsMCwwXSwNClsiVW5pdmVyc2FsIFNlcmlhbCBCdXMgRGV2aWNlIENsYXNzIFNw
+ZWNzIiwiaHR0cDovL3d3dy51c2Iub3JnL2RldmVsb3BlcnMvZGV2Y2xhc3MuaHRt
+bCIsMSwwLDBdLA0KWyJVU0IgQ2VudHJhbCAvIFVTQiBDb21wbGV0ZSAoSmFuIEF4
+ZWxzb24pIiwiaHR0cDovL3d3dy5sdnIuY29tL3VzYi5odG0iLDEsMCwwXSwNClsi
+VVNCIGJ5IEV4YW1wbGUgKEpvaG4gSHlkZSkiLCJodHRwOi8vd3d3LlVTQi1CeS1F
+eGFtcGxlLmNvbSIsMSwwLDBdLA0KWyJEZVZhU3lzIChVU0IgSTJDSU8gYW5kIFVT
+QkxQVC1QRDExKSIsImh0dHA6Ly93d3cuZGV2YXN5cy5jb20iLDEsMCwwXSwNClsi
+VW5pdmVyc2FsIFNlcmlhbCBCdXMgVGVjaG5vbG9neSAoTWljcm9zb2Z0KSIsImh0
+dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9od2Rldi9idXMvVVNCL2RlZmF1bHQuYXNw
+IiwxLDAsMF0sDQpbIlBPUyBVU0IgRHJpdmVyIC0gRW11bGF0ZXMgQ09NIERyaXZl
+ciAoTWljcm9zb2Z0KSIsImh0dHA6Ly93d3cuZXUubWljcm9zb2Z0LmNvbS9od2Rl
+di91c2IvcG9zdXNiLmh0bSIsMSwwLDBdLA0KWyJVU0JTaW1tIEouR29yZG9uIEVs
+ZWN0cm9uaWMgRGVzaWduIiwiaHR0cDovL3d3dy5qZ2VkLmNvbS93ZWJfcGFnZXMv
+dXNic2ltbS5odG1sIiwxLDAsMF0sDQpbIkV6VVNCMjEzMSBMb2FkZXIgZm9yIExp
+bnV4IiwiaHR0cDovL2V6dXNiMjEzMS5zb3VyY2Vmb3JnZS5uZXQiLDEsMCwwXSwN
+ClsiVVNCTWFuIC0gVGhlIFdlYnMgIzEgVVNCIEhlbHAgU291cmNlIiwiaHR0cDov
+L3d3dy51c2JtYW4uY29tIiwxLDAsMF0sDQpbIlVTQiBEZXZlbG9wZXIgLSBJbmZv
+cm1hdGlvbiBmb3Igc3R1ZGVudHMgYW5kIGVsZWN0cm9uaWNzIGVudGh1c2lhc3Rz
+IiwiaHR0cDovL3d3dy51c2JkZXZlbG9wZXIuY29tIiwxLDAsMF0sDQpbIlVTQiBT
+bm9vcHkiLCJodHRwOi8vaG9tZS5qcHMubmV0L35rb21hLyIsMSwwLDBdLA0KWyJV
+U0IgU25vb3B5IFBybyIsImh0dHA6Ly9zb3VyY2Vmb3JnZS5uZXQvcHJvamVjdHMv
+dXNic25vb3AiLDEsMCwwXSwNClsiVUhDSTogVW5pdmVyc2FsIEhvc3QgQ29udHJv
+bGxlciBJbnRlcmZhY2UgU3BlYyIsImh0dHA6Ly9kZXZlbG9wZXIuaW50ZWwuY29t
+L2Rlc2lnbi9VU0IvVUhDSTExRC5odG0iLDEsMCwwXSwNClsiT0hDSTogT3BlbiBI
+b3N0IENvbnRyb2xsZXIgSW50ZXJmYWNlIFNwZWMiLCJodHRwOi8vd3d3LmNvbXBh
+cS5jb20vcHJvZHVjdGluZm8vZGV2ZWxvcG1lbnQvb3BlbmhjaS5odG1sIiwxLDAs
+MF0sDQpbIkVIQ0k6IEVuaGFuY2VkIEhvc3QgQ29udHJvbGxlciBJbnRlcmZhY2Ug
+U3BlYyIsImh0dHA6Ly9kZXZlbG9wZXIuaW50ZWwuY29tL3RlY2hub2xvZ3kvdXNi
+L2VoY2lzcGVjLmh0bSIsMSwwLDBdLA0KWyJVU0IgT24tVGhlLUdvIFN1cHBsZW1l
+bnQgKHd3dy51c2Iub3JnKSIsImh0dHA6Ly93d3cudXNiLm9yZy9kZXZlbG9wZXJz
+L29udGhlZ28vIiwxLDAsMF0NCl0NCg0KPCEtLSBFbWJlZGRlZCBJbnRlcm5ldCAt
+LT4gDQpITV9BcnJheTIgPSBbDQpbMzAwLA0KIm1vdXNlX3hfcG9zaXRpb24iLA0K
+Im1vdXNlX3lfcG9zaXRpb24iXSwNClsiRXRoZXJuZXQgJiBUQ1AvSVAgSW50ZXJm
+YWNlcyIsIi9ldGhlcmlwL2lwLmh0bSIsMSwwLDBdLA0KWyJFbWJlZGRlZCBMaW51
+eCwgU2V0dGluZyB1cCB0aGUgRGV2ZWxvcG1lbnQgRW52aXJvbm1lbnQiLCIvdUNs
+aW51eC91Q2xpbnV4Lmh0bSIsMSwwLDBdLA0KWyJFbWJlZGRlZCBMaW51eCwgVW5k
+ZXJzdGFuZGluZyB0aGUgQnVpbGQgVG9vbHMiLCIvdUNsaW51eC9idWlsZHVDLmh0
+bSIsMSwwLDBdLA0KWyJFbWJlZGRlZCBMaW51eCwgQnVpbGRpbmcgZ2NjLTIuOTUu
+MyBtNjhrLWVsZiBmb3IgdUNsaW51eCIsIi91Q2xpbnV4L2djYy0yLjk1LjMucGRm
+IiwxLDAsMF0sDQpbIkVtYmVkZGVkIExpbnV4LCBCRkxUIEJpbmFyeSBGbGF0IEZv
+cm1hdCIsIi91Q2xpbnV4L2JmbHQuaHRtIiwxLDAsMF0sDQpbIkV4cGxvcmluZyB0
+aGUgTmV0Y29tbSBOQjUiLCIvbmI1IiwxLDAsMF0sDQpbIkxpbmtzIiwiIiwxLDAs
+MV0NCl0NCg0KSE1fQXJyYXkyXzcgPSBbDQpbNDAwXSwNClsiSXBzaWwgLSBIb21l
+IG9mIHRoZSBJULU4OTMwLCBJULU4OTMyIGFuZCBJULU4OTQyIiwiaHR0cDovL3d3
+dy5pcHNpbC5jb20iLDEsMCwwXSwNClsiV2l6TmV0IEluYyAtIHczMTAwYSIsImh0
+dHA6Ly93d3cud2l6bmV0LmNvLmtyLyIsMSwwLDBdLA0KWyJDb25uZWN0IE9uZSAt
+IGlDaGlwICYgaUNoaXAgTGFuIiwiaHR0cDovL3d3dy5jb25uZWN0b25lLmNvbS8i
+LDEsMCwwXSwNClsidUNsaW51eCAtIEEgVmVyc2lvbiBvZiBFbWJlZGRlZCBMaW51
+eCIsImh0dHA6Ly93d3cudWNsaW51eC5vcmciLDEsMCwwXSwNClsidUNsaW51eCBm
+b3IgdGhlIFhpbGlueCBNaWNyb2JsYXplIFNvZnQgUHJvY2Vzc29yIiwiaHR0cDov
+L3d3dy5pdGVlLnVxLmVkdS5hdS9+andpbGxpYW1zL21ibGF6ZS11Y2xpbnV4LyIs
+MSwwLDBdLA0KWyJ1Q2RvdCAtIEVtYmVkZGVkIExpbnV4IERldmVsb3BlciBGb3J1
+bSIsImh0dHA6Ly93d3cudWNkb3Qub3JnLyIsMSwwLDBdLA0KWyJUaGUgdUNsaW51
+eCBEaXJlY3RvcnkiLCJodHRwOi8vaG9tZS5hdC91Y2xpbnV4LyIsMSwwLDBdLA0K
+WyJBeGlzIEVtYmVkZGVkIExpbnV4IChlTGludXgpICYgRVRSQVggUHJvY2Vzc29y
+cyIsImh0dHA6Ly93d3cuZGV2ZWxvcGVyLmF4aXMuY29tLyIsMSwwLDBdLA0KWyJv
+cGVuaGFyZHdhcmUubmV0IChUb20gV2Fsc2gpIiwiaHR0cDovL3d3dy5vcGVuaGFy
+ZHdhcmUubmV0LyIsMSwwLDBdLA0KWyJQaWNvV2ViIC0gQSAkMjUgV2ViIFNlcnZl
+ciB1c2luZyBhbiBBVE1FTCBNaWNyb2NvbnRyb2xsZXIiLCJodHRwOi8vd3d3LnBp
+Y293ZWIubmV0LyIsMSwwLDBdLA0KWyJFbWJlZGRlZCBFdGhlcm5ldCAtIENyeXN0
+YWwgTGFuIENTODkwMCBDb250cm9sbGVyIiwiaHR0cDovL3d3dy5lbWJlZGRlZGV0
+aGVybmV0LmNvbS8iLDEsMCwwXSwNClsiQ1M4OTAwQSBDcnlzdGFsTEFOIEV0aGVy
+bmV0IENvbnRyb2xsZXIgKENpcnJ1cyBMb2dpYykiLCJodHRwOi8vd3d3LmNpcnJ1
+cy5jb20vcHJvZHVjdHMvb3ZlcnZpZXdzL2NzODkwMGEuaHRtbCIsMSwwLDBdLA0K
+WyJOZXRidXJuZXIgLSBFbWJlZGVkIEV0aGVybmV0IENvbnRyb2xsZXJzIiwiaHR0
+cDovL3d3dy5uZXRidXJuZXIuY29tLyIsMSwwLDBdLA0KWyJTLTc2MDBBIFRDUC9J
+UCBOZXR3b3JrIFByb3RvY29sIFN0YWNrIExTSSIsImh0dHA6Ly93d3cuc2Vpa28t
+dXNhLWVjZC5jb20vaW50Y2lyL2h0bWwvYXNzcC9zNzYwMGEuaHRtbCIsMSwwLDBd
+LA0KWyJTbWFsbCBXZWIgU2VydmVyIFBJQzE2Rjg0IFMtNzYwMEEgVENQL0lQIEhh
+cmR3YXJlIFN0YWNrIiwiaHR0cDovL3d3dy5teWNhbC5uZXQvd3N3ZWIvIiwxLDAs
+MF0sDQpbImlSZWFkeS5vcmcgZGV2ZWxvcGVycycgd2Vic2l0ZSIsImh0dHA6Ly93
+d3cuaXJlYWR5Lm9yZy8iLDEsMCwwXSwNClsiTEFSVCBTdHJvbmdBUk0gcnVubmlu
+ZyBMaW51eCIsImh0dHA6Ly93d3cubGFydC50dWRlbGZ0Lm5sLyIsMSwwLDBdDQpd
+DQoNCjwhLS0gTGVnYWN5IFBvcnRzIC0tPiANCkhNX0FycmF5MyA9IFsNClszMDAs
+DQoibW91c2VfeF9wb3NpdGlvbiIsDQoibW91c2VfeV9wb3NpdGlvbiJdLA0KWyJT
+dGFuZGFyZCBQYXJhbGxlbCBQb3J0IChTUFApIiwiL3NwcC9wYXJhbGxlbC5odG0i
+LDEsMCwwXSwNClsiRW5oYW5jZWQgUGFyYWxsZWwgUG9ydCAoRVBQKSIsIi9lcHAv
+ZXBwLmh0bSIsMSwwLDBdLA0KWyJFeHRlbmRlZCBDYXBhYmlsaXRpZXMgUGFyYWxs
+ZWwgUG9ydCAoRUNQKSIsIi9lY3AvZWNwLmh0bSIsMSwwLDBdLA0KWyJQYXJhbGxl
+bCBQb3J0IERlYnVnIFRvb2wiLCIvcGFyZGVidWcvcGRlYnVnLmh0bSIsMSwwLDBd
+LA0KWyJQYXJhbGxlbCBQb3J0IExDRCBJbnRlcmZhY2UgRXhhbXBsZSIsIi9wYXJs
+Y2QvcGFybGNkLmh0bSIsMSwwLDBdLA0KWyJSUy0yMzIgSGFyZHdhcmUgJiBTb2Z0
+d2FyZSBSZWdpc3RlcnMiLCIvc2VyaWFsL3NlcmlhbC5odG0iLDEsMCwwXSwNClsi
+UlMtMjMyIExvdyBMZXZlbCBQcm9ncmFtbWluZyAmIEV4dGVybmFsIEhhcmR3YXJl
+IiwiL3NlcmlhbC9zZXJpYWwxLmh0bSIsMSwwLDBdLA0KWyJVc2luZyBJbnRlcnJ1
+cHRzIChQQykiLCIvaW50ZXJydXB0cy9pbnRlcnVwdC5odG0iLDEsMCwwXSwNClsi
+SW50ZXJmYWNpbmcgRXhhbXBsZSAtIEFuYWxvZyBTYW1wbGluZyBWaWEgdGhlIFJT
+LTIzMiBQb3J0IiwiL3NlcmlhbC9zZXJpYWwyLmh0bSIsMSwwLDBdLA0KWyJJbnRl
+cmZhY2luZyBFeGFtcGxlIC0gQ29ubmVjdGluZyBhIExDRCBNb2R1bGUgdG8gdGhl
+IFJTLTIzMiBQb3J0IiwiL3NlcmlhbC9zZXJpYWwzLmh0bSIsMSwwLDBdLA0KWyJR
+dWljayBhbmQgU2ltcGxlIFJTLTIzMiBUZXJtaW5hbCIsIi90ZXJtaW5hbC90ZXJt
+aW5hbC5odG0iLDEsMCwwXSwNClsiUlMtMjMyIFByb3RvY29sIEFuYWx5c2VyIiwi
+L3Byb3RvY29sYW5hbHlzZXIvcHJvdG9jb2xhbmFseXNlci5odG0iLDEsMCwwXSwN
+ClsiTGlua3MiLCIiLDEsMCwxXQ0KXQ0KDQpITV9BcnJheTNfMTMgPSBbDQpbXSwN
+ClsiUG9ydG1vbiBmb3IgV2luZG93cyBOVC85eCAoU3lzdGVtIEludGVybmFscyki
+LCJodHRwOi8vd3d3LnN5c2ludGVybmFscy5jb20vbnR3MmsvZnJlZXdhcmUvcG9y
+dG1vbi5zaHRtbCIsMSwwLDBdLA0KWyJQYXJhbGxlbCBQb3J0IENlbnRyYWwgKEph
+biBBeGVsc29uKSIsImh0dHA6Ly93d3cubHZyLmNvbS9wYXJwb3J0Lmh0bSIsMSww
+LDBdLA0KWyJQQyBQYXJhbGxlbCBQb3J0IE1pbmktRkFRIChLcmlzIEhlaWRlbnN0
+cm9tKSIsImh0dHA6Ly9ob21lLmNsZWFyLm5ldC5uei9wYWdlcy9raGVpZGVucy9w
+cG1mYXEva2hwcG1mYXEuaHRtIiwxLDAsMF0sDQpbIkxQVENBUCBQYXJhbGxlbCBQ
+cmludCBEYXRhIENhcHR1cmUgU3lzdGVtIChLcmlzIEhlaWRlbnN0cm9tKSIsImh0
+dHA6Ly9ob21lLmNsZWFyLm5ldC5uei9wYWdlcy9raGVpZGVucy9scHRjYXAvbHB0
+Y2FwLmh0bSIsMSwwLDBdLA0KWyJTZXJpYWwgUG9ydCBDZW50cmFsIC8gU2VyaWFs
+IFBvcnQgQ29tcGxldGUgKEphbiBBeGVsc29uKSIsImh0dHA6Ly93d3cubHZyLmNv
+bS9zZXJwb3J0Lmh0bSIsMSwwLDBdLA0KWyJTZXJpYWwgQ29tbXVuaWNhdGlvbnMg
+aW4gV2luMzIgKE1pY3Jvc29mdCkiLCJodHRwOi8vbXNkbi5taWNyb3NvZnQuY29t
+L2xpYnJhcnkvdGVjaGFydC9tc2RuX3NlcmlhbC5odG0iLDEsMCwwXSwNClsiV2lu
+ZG93cyBTZXJpYWwgQVBJIEFuZCBEZXZpY2VzIHdpdGggQysrIEJ1aWxkZXIiLCJo
+dHRwOi8vd3d3LnRlbXBvcmFsZG9vcndheS5jb20vcHJvZ3JhbW1pbmcvY2J1aWxk
+ZXIvd2luZG93c2FwaS9pbmRleC5odG0iLDEsMCwwXSwNClsiU2FtcGxlIFdpbmRv
+d3MgVGVybWluYWwgUHJvZ3JhbSB3aXRoIFNvdXJjZSBmb3IgQm9ybGFuZCBDKysg
+QnVpbGRlciIsImh0dHA6Ly93d3cudHJhdmVyc2UubmV0L3Blb3BsZS9wb2luc2V0
+dC9iY2Jjb21tLmh0bWwiLDEsMCwwXQ0KXQ0KDQo8IS0tIERldmljZSBEcml2ZXJz
+IC0tPiANCkhNX0FycmF5NCA9IFsNClszMDAsDQoibW91c2VfeF9wb3NpdGlvbiIs
+DQoibW91c2VfeV9wb3NpdGlvbiJdLA0KWyJQb3J0VGFsayAtIEEgV2luZG93cyBO
+VCBJL08gUG9ydCBEZXZpY2UgRHJpdmVyIiwiL3BvcnR0YWxrL3BvcnR0YWxrLmh0
+bSIsMSwwLDBdLA0KWyJVbml2ZXJzYWwgU2VyaWFsIEJ1cyBEZXZpY2UgRHJpdmVy
+IERldmVsb3BtZW50ICIsIi91c2IvdXNiZGV2ZHJ2cy5odG0iLDEsMCwwXSwNClsi
+SW50ZXJydXB0cyBhbmQgRGVmZXJyZWQgUHJvY2VkdXJlIENhbGxzIG9uIFdpbmRv
+d3MgTlQ0LzIwMDAvWFAgIiwiL2ludGVycnVwdHMvd2lubnRfaXNyX2RwYy5odG0i
+LDEsMCwwXSwNCg0KWyJVU0IgRHJpdmVyIGZvciB0aGUgQ3lwcmVzcyBVU0IgU3Rh
+cnRlciBLaXQiLCIvdXNiL2N5cHJlc3MuaHRtIiwxLDAsMF0sDQpbIkRldmljZSBE
+cml2ZXIgRmlkZGxlciAodG9vbHMpIiwiL2RkZHRvb2xzL2RkZHRvb2xzLmh0bSIs
+MSwwLDBdLA0KWyJXaW5kb3dzIE5UIERldmljZSBEcml2ZXIgSW5zdGFsbGVyICh0
+b29scykiLCIvZGRkdG9vbHMvZGRkdG9vbHMuaHRtIiwxLDAsMF0sDQpbIkRldmlj
+ZSBEcml2ZXIgUmVtb3ZlciBXaW45eCAodG9vbHMpIiwiL2RkZHRvb2xzL2RkZHRv
+b2xzLmh0bSIsMSwwLDBdLA0KWyJMaW5rcyIsIiIsMSwwLDFdDQpdDQoNCkhNX0Fy
+cmF5NF84ID0gWw0KW10sDQpbIlN5c3RlbSBJbnRlcm5hbHMiLCJodHRwOi8vd3d3
+LnN5c2ludGVybmFscy5jb20iLDEsMCwwXSwNClsiSnVuZ28gV2luRHJpdmVyIiwi
+aHR0cDovL3d3dy5qdW5nby5jb20vd2luZHJpdmVyLmh0bWwiLDEsMCwwXSwNClsi
+SnVuZ28gS2VybmVsRHJpdmVyIiwiaHR0cDovL3d3dy5qdW5nby5jb20va2VybmVs
+ZHJpdmVyLmh0bWwiLDEsMCwwXSwNClsiTWljcm9zb2Z0IFdpbmRvd3MgRHJpdmVy
+IERldmVsb3BtZW50IEtpdHMiLCJodHRwOi8vd3d3Lm1pY3Jvc29mdC5jb20vZGRr
+LyIsMSwwLDBdDQpdDQoNCjwhLS0gTWlzYyAtLT4gDQpITV9BcnJheTUgPSBbDQpb
+MzAwLA0KIm1vdXNlX3hfcG9zaXRpb24iLA0KIm1vdXNlX3lfcG9zaXRpb24iXSwN
+ClsiQ01PUyBEaWdpdGFsIEltYWdlIFNlbnNvcnMgYW5kIExlbnNlcyIsIi9pbWFn
+aW5nL2NhbWVyYS5odG0iLDEsMCwwXSwNClsiR2VuZXJhdGUgUmluZyBUb25lcyBv
+biB5b3VyIFBJQzE2Rjg3eCBNaWNyb2NvbnRyb2xsZXIiLCIvcGljL3Jpbmd0b25l
+cy5odG0iLDEsMCwwXSwNClsiSW50ZXJmYWNpbmcgdGhlIEFUIEtleWJvYXJkIiwi
+L2tleWJvYXJkL2tleWJyZC5odG0iLDEsMCwwXSwNClsiSG93IGRvZXMgdGhlIE1p
+Y3JvY2hpcCBJQ0QgV29yaz8iLCIvcGljL2ljZC5odG0iLDEsMCwwXSwNClsiVHJ1
+c3QtTm8tRXhlIiwiL2NvbnN1bHRpbmcvdHJ1c3Qtbm8tZXhlL3RydXN0LW5vLWV4
+ZS5odG0iLDEsMCwwXSwNClsiQ29tbWFuZCBMaW5lIFByb2Nlc3MgVmlld2VyL0tp
+bGxlci9TdXNwZW5kZXIgZm9yIFdpbmRvd3MgTlQvMjAwMC9YUCIsIi9jb25zdWx0
+aW5nL3Byb2Nlc3N1dGlsL3Byb2Nlc3N1dGlsLmh0bSIsMSwwLDBdLA0KWyJCZXlv
+bmRFeGVjIC0gU3Bhd24gUHJvY2Vzc2VzIG9uIFJlbW90ZSBXaW5kb3dzIE5ULzIw
+MDAvWFAgV29ya1N0YXRpb25zIiwiL2NvbnN1bHRpbmcvcmVtb3RlcHJvY2Vzcy9C
+ZXlvbmRFeGVjLmh0bSIsMSwwLDBdLA0KWyJCZXlvbmQgTG9naWMgU2h1dGRvd24g
+VXRpbGl0eSBmb3IgTlQvMjAwMC9YUCIsIi9jb25zdWx0aW5nL3NodXRkb3duL3No
+dXRkb3duLmh0bSIsMSwwLDBdLA0KWyJCbWFpbCAtIENvbW1hbmQgTGluZSBTTVRQ
+IE1haWxlciBmb3IgQmF0Y2ggSm9icyIsIi9jb25zdWx0aW5nL2NtZGxpbmVtYWls
+L2NtZGxpbmVtYWlsLmh0bSIsMSwwLDBdLA0KWyJEZWxldGUvQ29weSBieSBPd25l
+ciB1dGlsaXR5IGZvciBXaW5kb3dzIE5ULzIwMDAvWFAiLCIvY29uc3VsdGluZy9k
+ZWxieW93bmVyL2RlbGJ5b3duZXIuaHRtIiwxLDAsMF0sDQpbIldpbjMyIFBpcGUg
+U2VjdXJpdHkgRWRpdG9yIFdpbmRvd3MgTlQvMjAwMC9YUCIsIi9jb25zdWx0aW5n
+L3BpcGVzZWMvcGlwZXNlYy5odG0iLDEsMCwwXSwNClsiQ29uc29sZSBDb21wdXRl
+ciBJbmZvcm1hdGlvbiBVdGlsaXR5IGZvciAyMDAwL1hQIiwiL2NvbnN1bHRpbmcv
+Y29tcGluZm8vY29tcGluZm8uaHRtIiwxLDAsMF0sDQpbIlNNQVJUICYgU2ltcGxl
+IGZvciBOVC8yMDAwL1hQIiwiL2NvbnN1bHRpbmcvc21hcnQvc21hcnQuaHRtIiwx
+LDAsMF0sDQpbIktvZGFrIERDMjE1IFN1cHBvcnQgYW5kIEZBUSIsIi9Lb2Rha0RD
+MjE1L2RjMjE1Lmh0bSIsMSwwLDBdLA0KWyJTb3V0aCBBdXN0cmFsaWFuIEVsZWN0
+cmljaXR5IEdlbmVyYXRpb24iLCIvc291dGhhdXN0cmFsaWFwb3dlciIsMSwwLDBd
+LA0KWyJMaW5rcyIsIiIsMSwwLDFdDQpdDQoNCkhNX0FycmF5NV8xNiA9IFsNCltd
+LA0KWyJBbHRpdW0gLSBNYWtpbmcgRWxlY3Ryb25pY3MgRGVzaWduIEVhc2llciIs
+Imh0dHA6Ly93d3cuYWx0aXVtLmNvbSIsMSwwLDBdLA0KWyJDaXJjdWl0IENlbGxh
+ciAoTWFnYXppbmUpIiwiaHR0cDovL3d3dy5jaXJjdWl0Y2VsbGFyLmNvbSIsMSww
+LDBdLA0KWyJFcGFub3JhbWEuTmV0IC0gRWxlY3Ryb25pYydzIExpbmtzIiwiaHR0
+cDovL3d3dy5lcGFub3JhbWEubmV0IiwxLDAsMF0sDQpbIkVsZWN0cm9uaWNzIElu
+ZGV4IiwiaHR0cDovL3d3dy53ZWlzZC5jb20vc3RvcmUvbGlua3MvdGhlbWVpbmRl
+eC5odG1sIiwxLDAsMF0sDQpbIklyREEgU3BlY2lmaWNhdGlvbnMgKHd3dy5pcmRh
+Lm9yZykiLCJodHRwOi8vd3d3LmlyZGEub3JnL3N0YW5kYXJkcy9zcGVjaWZpY2F0
+aW9ucy5hc3AiLDEsMCwwXSwNClsiUENJIFNwZWNpYWwgSW50ZXJlc3QgR3JvdXAg
+KHd3dy5wY2lzaWcuY29tKSIsImh0dHA6Ly93d3cucGNpc2lnLmNvbSIsMSwwLDBd
+LA0KWyJQaWMgTWljcm8gV2ViIEJvYXJkIChIb3N0ZWQgYnkgTWljcm9jaGlwKSIs
+Imh0dHA6Ly93d3cubWljcm9jaGlwLmNvbS93ZWJib2FyZC93YnB4LmRsbC9+cGlj
+bWljcm8iLDEsMCwwXSwNClsiUGljIERldlRvb2xzIFdlYiBCb2FyZCAoSG9zdGVk
+IGJ5IE1pY3JvY2hpcCkiLCJodHRwOi8vd3d3Lm1pY3JvY2hpcC5jb20vd2ViYm9h
+cmQvd2JweC5kbGwvfmRldnRvb2xzIiwxLDAsMF0sDQpbIlBJQ3VXRUIgLSBQcm9n
+cmFtIFBJQyBtaWNyb3Mgd2l0aCBDIiwiaHR0cDovL3d3dy5taWNyb2NoaXBjLmNv
+bSIsMSwwLDBdLA0KWyJXYXJwLTEzIE1QTEFCIENvbXBhdGlibGUgUElDIFByb2dy
+YW1tZXIiLCJodHRwOi8vd3d3Lm5ld2ZvdW5kZWxlY3Ryb25pY3MuY29tLyIsMSww
+LDBdLA0KWyJFbWJlZHRyb25pY3MiLCJodHRwOi8vd3d3LmVtYmVkdHJvbmljcy5j
+b20iLDEsMCwwXSwNClsiQVZSIEZyZWFrcyIsImh0dHA6Ly93d3cuYXZyZnJlYWtz
+Lm5ldCIsMSwwLDBdLA0KWyJFbWJlZGRlZCBEZXNpZ24gd2l0aCB0aGUgUElDMThG
+NDUyIE1pY3JvY29udHJvbGxlciIsImh0dHA6Ly93d3cucGljYm9vay5jb20iLDEs
+MCwwXQ0KXQ0KDQppZihITV9Jc01lbnUpIHsgZG9jdW1lbnQud3JpdGUoIjxTQ1Ii
+ICsgIklQVCBMQU5HVUFHRT0nSmF2YVNjcmlwdDEuMicgU1JDPScvbWVudS9ITV9T
+Y3JpcHQiKyBITV9Ccm93c2VyU3RyaW5nICsiLmpzJyBUWVBFPSd0ZXh0L2phdmFz
+Y3JpcHQnPjxcL1NDUiIgKyAiSVBUPiIpOyB9DQoNCjwhLS0gVGhpcyBzY3JpcHQg
+YW5kIG1hbnkgbW9yZSBhcmUgYXZhaWxhYmxlIGZyZWUgb25saW5lIGF0IC0tPg0K
+PCEtLSBUaGUgSmF2YVNjcmlwdCBTb3VyY2UhISBodHRwOi8vamF2YXNjcmlwdC5p
+bnRlcm5ldC5jb20gLS0+DQo8IS0tIEJlZ2luDQpkID0gbmV3IEFycmF5KCJTdW5k
+YXkiLCJNb25kYXkiLCJUdWVzZGF5IiwiV2VkbmVzZGF5IiwiVGh1cnNkYXkiLCJG
+cmlkYXkiLCJTYXR1cmRheSIpOw0KbSA9IG5ldyBBcnJheSgiSmFudWFyeSIsIkZl
+YnJ1YXJ5IiwiTWFyY2giLCJBcHJpbCIsIk1heSIsIkp1bmUiLCJKdWx5IiwiQXVn
+dXN0IiwiU2VwdGVtYmVyIiwiT2N0b2JlciIsIk5vdmVtYmVyIiwiRGVjZW1iZXIi
+KTsNCnRvZGF5ID0gbmV3IERhdGUoKTsNCmRheSA9IHRvZGF5LmdldERhdGUoKTsN
+CnllYXIgPSB0b2RheS5nZXRZZWFyKCk7DQppZiAoeWVhciA8IDIwMDApICAgIC8v
+IFkySyBGaXgsIElzYWFjIFBvd2VsbA0KeWVhciA9IHllYXIgKyAxOTAwOyAvLyBo
+dHRwOi8vb255eC5pZGJzdS5lZHUvfmlwb3dlbGwNCmVuZCA9ICJ0aCI7DQppZiAo
+ZGF5PT0xIHx8IGRheT09MjEgfHwgZGF5PT0zMSkgZW5kPSJzdCI7DQppZiAoZGF5
+PT0yIHx8IGRheT09MjIpIGVuZD0ibmQiOw0KaWYgKGRheT09MyB8fCBkYXk9PTIz
+KSBlbmQ9InJkIjsNCmRheSs9ZW5kOw0KZG9jdW1lbnQud3JpdGUoIjxGT05UIFNJ
+WkU9LTE+IitkW3RvZGF5LmdldERheSgpXSsiLCAiK21bdG9kYXkuZ2V0TW9udGgo
+KV0rIiAiKTsNCmRvY3VtZW50LndyaXRlKGRheSsiLCAiICsgeWVhcik7DQpkb2N1
+bWVudC53cml0ZSgiPC9GT05UPjxCUj48L1REPjwvVFI+PC9UQUJMRT48L0NFTlRF
+Uj4iKTsNCg0KZG9jdW1lbnQud3JpdGUoIjx0YWJsZSB3aWR0aD0xMDAlIGJvcmRl
+cj0wIGNlbGxzcGFjaW5nPTAgY2VsbHBhZGRpbmc9MSBmcmFtZT1CZWxvdz48dHI+
+PHRkIGFsaWduPWNlbnRlciBCR0NPTE9SPUJMVUUgbm93cmFwPiIpOw0KZG9jdW1l
+bnQud3JpdGUoIjxGT05UIEZBQ0U9QVJJQUwgQ09MT1I9V0hJVEU+PEI+PENFTlRF
+Uj48QSBJRD0nVElUTEVCTE9DSycgSFJFRj0nL2luZGV4Lmh0bSNVU0InIG9uTW91
+c2VPdmVyPUhNX2ZfUG9wVXAoJ2VsTWVudTEnLGV2ZW50KSBvbk1vdXNlT3V0PUhN
+X2ZfUG9wRG93bignZWxNZW51MScpPlVuaXZlcnNhbCBTZXJpYWwgQnVzPC9hPiZu
+YnNwOzxpbWcgc3JjPScvbWVudS9ITV9Nb3JlX3doaXRlX2Rvd24uZ2lmJz48L3Rk
+Pjx0ZCBhbGlnbj0nY2VudGVyJyBCR0NPTE9SPUJMVUUgbm93cmFwPiIpOw0KZG9j
+dW1lbnQud3JpdGUoIjxGT05UIEZBQ0U9QVJJQUwgQ09MT1I9V0hJVEU+PEI+PENF
+TlRFUj48QSBJRD0nVElUTEVCTE9DSycgSFJFRj0nL2luZGV4Lmh0bSN1Q2xpbnV4
+JyBvbk1vdXNlT3Zlcj1ITV9mX1BvcFVwKCdlbE1lbnUyJyxldmVudCkgb25Nb3Vz
+ZU91dD1ITV9mX1BvcERvd24oJ2VsTWVudTInKT5FbWJlZGRlZCBJbnRlcm5ldDwv
+YT4mbmJzcDs8aW1nIHNyYz0nL21lbnUvSE1fTW9yZV93aGl0ZV9kb3duLmdpZic+
+PC90ZD48dGQgYWxpZ249J2NlbnRlcicgQkdDT0xPUj1CTFVFIG5vd3JhcD4iKTsN
+CmRvY3VtZW50LndyaXRlKCI8Rk9OVCBGQUNFPUFSSUFMIENPTE9SPVdISVRFPjxC
+PjxDRU5URVI+PEEgSUQ9J1RJVExFQkxPQ0snIEhSRUY9Jy9pbmRleC5odG0jTGVn
+YWN5JyBvbk1vdXNlT3Zlcj1ITV9mX1BvcFVwKCdlbE1lbnUzJyxldmVudCkgb25N
+b3VzZU91dD1ITV9mX1BvcERvd24oJ2VsTWVudTMnKT5MZWdhY3kgUG9ydHM8L2E+
+Jm5ic3A7PGltZyBzcmM9Jy9tZW51L0hNX01vcmVfd2hpdGVfZG93bi5naWYnPjwv
+dGQ+PHRkIGFsaWduPSdjZW50ZXInIEJHQ09MT1I9QkxVRSBub3dyYXA+Iik7DQpk
+b2N1bWVudC53cml0ZSgiPEZPTlQgRkFDRT1BUklBTCBDT0xPUj1XSElURT48Qj48
+Q0VOVEVSPjxBIElEPSdUSVRMRUJMT0NLJyBIUkVGPScvaW5kZXguaHRtI0Rldmlj
+ZURyaXZlcnMnIG9uTW91c2VPdmVyPUhNX2ZfUG9wVXAoJ2VsTWVudTQnLGV2ZW50
+KSBvbk1vdXNlT3V0PUhNX2ZfUG9wRG93bignZWxNZW51NCcpPkRldmljZSBEcml2
+ZXJzPC9hPiZuYnNwOzxpbWcgc3JjPScvbWVudS9ITV9Nb3JlX3doaXRlX2Rvd24u
+Z2lmJz48L3RkPjx0ZCBhbGlnbj0nY2VudGVyJyBCR0NPTE9SPUJMVUUgbm93cmFw
+PiIpOw0KZG9jdW1lbnQud3JpdGUoIjxGT05UIEZBQ0U9QVJJQUwgQ09MT1I9V0hJ
+VEU+PEI+PENFTlRFUj48QSBJRD0nVElUTEVCTE9DSycgSFJFRj0nL2luZGV4Lmh0
+bSNNaXNjJyBvbk1vdXNlT3Zlcj1ITV9mX1BvcFVwKCdlbE1lbnU1JyxldmVudCkg
+b25Nb3VzZU91dD1ITV9mX1BvcERvd24oJ2VsTWVudTUnKT5NaXNjZWxsYW5lb3Vz
+PC9hPiZuYnNwOzxpbWcgc3JjPScvbWVudS9ITV9Nb3JlX3doaXRlX2Rvd24uZ2lm
+Jz48L3RkPiIpOw0KZG9jdW1lbnQud3JpdGUoIjwvdHI+PC9UQUJMRT48QlI+Iik7
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=centron.gif
+Content-Type: image/gif; name=centron.gif
+Content-Location: http://retired.beyondlogic.org/spp/centron.gif
+Content-Transfer-Encoding: Base64
+
+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
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=bidi.gif
+Content-Type: image/gif; name=bidi.gif
+Content-Location: http://retired.beyondlogic.org/spp/bidi.gif
+Content-Transfer-Encoding: Base64
+
+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
+2MSMjLlBxMatRMu2NEpbJJLfcJr6iA++AzyzFEhm5EpVZMu9fEe3bMUdusLJqydJ
+tbzFvvTKt7zK/mtDD8lL6QNMcoRHxFTMxaTFtGzMNinKy0xMyUz/SsrkzM4cSI3M
+MsHczGq0TM9EPNAUzdGMTKn7H6eUpNN0zda8xsNkTb3MRMP8C2aakLsEJ+5rJheS
+ySvsysq0zdxMzuMMzcCMi+4wknG5rOg5NuiMSsWwyd1cy9xEyYLUTWRsC/qZLOnM
+mHdZJfE8S+7STp5UQuVEzdSsTca8JwxxH50TTvsZjs6ooIr6mvUszO1kze70S/Bc
+iw4yogAKIPRqvKHkDd6Ez+90z5wkyAGdzAhNOwd9TQi10KNkzvdczQ1lL/98UMgE
+0QzV0OUE0BL1rv9kT62MUAHl0BRV0Wli0RqtUO6USBNFyhl1TBE10fa0UBidUNzk
+UU3zUdsEadIXzVEUJdIi7YrsbFEZRUwhHdEdddJKOVLk1FInpVId9U5nNE2r/FEM
+/VAlpVAvldIQDVOaHFEoJVC27FImfVOzSM/WeswOjc/mLNI43VLVjK81XdE2JdOv
+3FA+1VPY1CFWo80T7VNEnf9TnDRUD5VPgAQXEiMXg1SJTfosYezJqrTRMU1TOF3S
+Rt1JSiUJIJk351yi+DhPDbvTYxTUUN3KSM1TVQWsU/UXQk1FtjGnYtNVMZ3UWG1S
+0KRVRv3ViqzUGMobQYMoAHE7ZyUpi4RLYX3UZCxWEi1TZFXUbSVNUsVWLh3VQ8VU
+bS1CbsXMKB1WyrxWlCTEXqEruiIgz0jXN4JVUJ3XvlxXGmzX7dkaDJm4mrAfCeoi
++3nAV43RowTRfH062dTFk0BVJ6m6qGHV8xBGhhWeekVSF3VPhb1X4XPYXP0WzpKP
+XImfOh2aM03OhA1XSQUOucSjx/E4nKC13cqQmP3MQhynUn9UWZT11jUZTGmt0i81
+WdPg2GpN1HI1VTRF2EJd2VqlG0+8tcixtZwIHQxy1cxkWT+1VRzlWXEl2o+1lagS
+H85gOrHKVpwNWr5k2q49NIt1W8zTuPqStudKmvMsy6N62z9iW6ed0aKVGpcVr/OL
+iRACSZPbv0Hd2gBt2lhUD8C1WlDUiZmNqb670T/91LPl2oM1Wuj42aO1182VQb8V
+mKGNyO/L0sT/JdbF7dTG9UQDyqPamJxdeqnKDRHELdggVV3SVVNcdRuz7VW6FSCy
+vZzDPd3bNVPNHau8Vd7TAVs7Y8TVXSL9hI/xTN7ljSTbHVflvNYwctzXUqviXB/L
+8Ttm1V0dnNabzdyctdbWzauQTaW6TBbAu1rxwFPGPV71RcXy3dXqqF/o3VjV5d7O
+5dy/xFzF3duZMrmbGYlIJNiZqIyo+Mm7zd4GJeBj1V4ABiLSihuXkZbdCtj55V+M
+teD0rVJ8xb3tQ11wiRmB9dUUflqdXdulnVWq8800lNn2qJXoamHjDWEZvt8SFlWg
+/Vu1xV0ihlQB7mEYLmIfXl8hHl0j/l8oYc5fN5mhqOymfbyJrLGp9yDfDJZiEtZR
+E2acruJDnPDgyBBc/S0Lob3Snu3bE94n0IldAfpFEJ5iWT1iPA5iXDW/51FHmYDI
+ccu1T1FjQEVfA+7YKUXiJ9bjO05kMTbk0NX/2Atu5DyO5BJM0ih+5D2+DzKx4i+T
+4OojsjRZjsyi3VTJZEre5BmG4z7Eo4h1WPX7yWhl5VX+wUJm3WnROt414xUGxwa2
+3yZu4wkeZp7KDffRHVoR3JeooCOyoEMBJ1re2WL2X2qu5kD94TbGZfpd5Fu25msu
+5m0GXUamZnGmjmUqJk6ys14mJmJSs0PG5G825+eIDhxLVdwiFt+ZWNySWx525G8G
+aAmVV5QSqENpvZkLJ7VKiPok5IB2aIfWDVEJCqr0Z84DCd0jp9joZ2J+6I5W1272
+6JDmZKQV6ZKeZnM16ZRWZZRW6ZZWZCd26Zi2ZJaW6bXoyJX7mE09DliuGOnVAume
+tqJ5ZEjI0Wmc9g6gwWKg5rCfVtRqHfQWSQtKzYMbDDvqP27qSh7Gq06Lm47EHZnE
+NIKgj/mdMATfjt6Wc4QyI9XqtdYVXwtltWbrNbbeuabrhoUvf6JouI7rvT5ntyax
+gzZfvhZseu5ETyw3Gh3sxKZnplbsxsbaCHTsyMY3xpbsykY+tLXszBahunYdzfbs
+/BC8zxZttrTOPixc3Oqm4aiueR7t1m4arKHeqP6Pz9qS2N4M1nbt3NYKASloaJJg
+74kWhu7tt9bt4l7s5DuTiDLJ7Cif+sJt44bu6Jbu6abu6rbu68bu7BfW7u3m7u72
+7u8G7/AW7/Em7/I277sICAA7
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=8inputs.gif
+Content-Type: image/gif; name=8inputs.gif
+Content-Location: http://retired.beyondlogic.org/spp/8inputs.gif
+Content-Transfer-Encoding: Base64
+
+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
+jNiIjtgpAQEAOw==
+
+------------LveGILu7P5rjRC9Um1wlRv
+Content-Disposition: inline; filename=74hc157.gif
+Content-Type: image/gif; name=74hc157.gif
+Content-Location: http://retired.beyondlogic.org/spp/74hc157.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhwgFAAfcAAAAAAP///wAAVvXghuoWyAdW9QAAegcAAPKGOy+/BTmHPI4I
+AS4HAAA2878FAAApAAAA5gEiAEMBAAAAAEgAAADYEAIAZwH+/2cBNvN4BScDCAVD
+ASIASAAIAmMAIgBIAAgCRoenh08ERvQCAOCHAgBoh2cBLgcAAAtwPGxCbFKHwhhn
+Fy4Hgge3R6iHIACXATIHYIdIKve/AAAAAOYBGwDwDIUAAQAAAAAAAADgEGcXAAAA
+AAKQ/L8AAAAAH/hvAOD3bwAUP/e/GwAAAPtB97+QlPy/6s33v5CU/L8AAAAAD/hv
+AAAAAAC8928AAAAAABH4bwAAAAAA4hP3v18BAADFEve/TnFvABYAAABeQfe/LPlv
+ANz7bwAAAAAAFPlvAMlj978P+G8AFgAAACz5bwAAAAAA3PtvAAAAAAAAAAAAqHJI
+AEJsGkM6XE5FV0hPTX4xXFNQUFw3NEhDMTU3LkdJRgAAAgBkgiIASABUiGloZxdM
+iCdiZgh+B2SCAgBkggIAhxYAAAAA2QOXAnCIdz1/F2YIfgdkggIAZIICABQAfgcA
+AH4HZgiaiKRLOzb3v/wIAABHAAAAAAAAAAL5bwC/R8CIZwEAAKT4bwAmGPe/AAAA
+AFoQRQDsQvm/uBn3v+CIAAAo/m8AbRj3v79HwIgAAAAAwIgnYgAAAAACkPy/AAAA
+ALhySABw+m8AFD/3vxsAAAD7Qfe/kJT8v+rN97+QlPy/AAAAANz7bwAAAAAA4hP3
+v18BAADFEve/oXEAAAAAAADgZPe/3PtvAAAAAAABAAAAnApFAGECbwAAAAAA3Ptv
+ACAAAAAAy0hbdPlvAEDxDAAcAQAAqA1QAJGj978AAE0AxA5QAEDxDAAAAAAADABN
+AAAATQCoDVAAQAAAAAAAAADQBQAAAQUAAJz5bwBBpfe/AABNAFil978AAE0AQQAA
+AEEAAAAAAAAAxA1QAAAAAAAAAAAABI9DAMQNUAAcok4ArA1QAMgNUADEckgA////
+/wAAAACAj0MAxA1QACH5BAEAAAEALAAAAADCAUABQAj/AAMIHEiwoMGDCBMqXMiw
+ocOHECNKnEixosWLGDNq3Mixo8ePIC8CGAngYMmQEk9GJEmyoEqVBFnCDABTJk2b
+Lk0mnElzJ8qfQIMKHUrUYU2DJ18KHLm0qVOlTmMOTDr1adWeN5H6jHq1K9avWHlK
+jUrV6tekZcueXWu2qNu3cOPKnUu3rt27ePPq3cs35VSWY8H2HUy4sOHDiGPKXMyY
+ceLHkCNLniz06F+mlDNr3sy5s2WwYjuLHk16cujSDU+jXs26deqiJT/nhO2ypevA
+t+Py3I3z9mKvXGeqzluz9+zgg3v/pjg898fdWsdChcpVM/ToiWULrg44eeDmD8E7
+/wdZHDPC5uL5Xl9qW3B6ud1vxj8OOvn8+Rbfj9dI3b3O6dWZhht9ha0X4Hbl6QeU
+ZdpVpKBnipkXYXvPUViaWvL1t91e8S2HXVcNwncffiLth9xW0WGmIlkH1sfihpH1
+JxxiDBIYYILESTcgRg+a6BWJ7Flo42Yz7sgWcIS9ZNyOMuK1ZIsZ9bhfkwSqldZV
+ABKp05AFAicWbxLq1aCUK/lopm6rfamQgX0ZB+SC5zH5YpZhRXgmaWQGaaGGehbZ
+Z4ZhvmgjmIHeVSOSHuV556Jl8ogim58dapKQqvkJY11uCskfo5zShueQbCIo5nch
+KdrpqeFdSOmaH0KpG4mmcj2J6qwcxeqkVGqCuqVd2tnqKq3Alphmq7oSKyKFb/oV
+7LKJsoYhkr4SJemlRjG7ZnpFihctr0bGppWlmW0b/6611YbXIYbtjSjuWyFK6KGW
+ZhZK7rwQhcZniMPSq29r67KKlKbO7iswav2iyGnBAyfsG6oIK+wwwUFdp9SzDVP7
+8MUYk5fxxhzz+2HFHYcscpQjl2zyYyCfrPLKyrLs8sswxyzzzDTXbPPNOJOnKVpP
+XdnWvVgGnVWdQ7fq7YE7XxamvWtZ+TN7ZlF3NFvy5uxwykZVna/VXDtnU65dh60y
+lYiKbfbLWJ+tdrCRyrf22yOnDffcbqWc7WzgPhev3HTPNbXFU/7LN12De02sh3Q6
+PSHKhwOeo9LyNib55JRXbrm79Cla+MVaH4ZvvLh2ntvmC594nNRt6cn4rj2Rzhdc
+n/ZeLvvstGOOq9ub9j2u0J2u97lrrv/DxXSVc/ocVqiKCwdwm7XNGLy5Sr5Z+/TU
+NzZgbMm+vvHzhsbpuOFVil76vMrH7qfxyTfPfblVOZ/dWU/CXv38s1/fPpy6C3hq
+pfueNqaw+UsVxEg1KfoZsH5eusxQCrY+mtnKfUgrVPSWViv1NfBWAdTf1vgkvwN6
+0DEJlJWDMmgdhjWOURckYctGg6yyffCFk7Nf2UaowhLuj3WtA10NbfipthUQhkBs
+4e1mKMAdxshIZ0ohph72IPOg7mlHytDqCBjF7xlGiewy4hFbhMUsavGL3gPR8j4F
+RpbJrYt1K6PILoe/3qnxjVbMT4qoJsKNoBGOA7ujtPDIR/j08Y8cOsSNHgFJyCIW
+8pBbQ6QiKcPGRTrykZCMpCQnSf/JSlrykhGTkxy7pxho4c1FOIRaJ70HnkFikn2i
+oiMUy7Or6PFOccSrIuuGdymqoG+VQnPThJ51Ssko0ZS566Uwh0nMYhoTMv9D4jGX
+yRBa5pCZ0IymNJk3zWqSzJrYpOHUgJnN/PnwV92EJjfDmUcTktNkIAMbpcR3zdGN
+c5JYe6KxfvLOjtSTj7bb4+moiBL/BS5nL0Sm6Q5msPHc0ztHgZSJZPM3WaoHlEgr
+kEKViUqOIe+TZMEcoaaIqHH2KpRimmgc/ZXBgwqKoET0kUlJmLc7MRSla4wi04Zz
+0FAJyqPcASlxFLqtlXpnoPK7UaCyxyFj4TSEdcQUTylar3MTNlNHN7wfUA3q1IW0
+hJcuxc7vPP8WOGfmtFmyeqcQtZrSovpnnk6a6Lp8ukIu7sQ20+kO2F7JnTGa1Wi+
+/GpSCSfSsjYKY2zlD5UC285nohV8VVWnOZFIWBoyq6GeVOZ7BjnBFdWGnxJFKlOV
+ite/9JNcXt0STtACV6PZdVS88ysnNTRX9agVnIWt6mapWtBloSdpw2wsAPfKtqXh
+1rLApSts56Zbw0pVp2nt7GztSNJUxhWXJ61hcYPzLtWKSLnW3WSp4FnBUaYyaJ97
+4GGjKlvk/hWKzaVltPhHq+mqzb3I8WeS+jrc85bXvLsL6ng5G8v62ve++6VtUxIK
+UwCHscA3QqGBrcrVAdc2pJ2FrKMW/GBp0ZAWSHccaubsSeHmKniI3v1nhw/84Q2P
+FEIjJrGFIYhf/tpvqxVN8XJXV1kJZpZ4MH6qjEXpX+DZdseCXKyQE4atAjoYd61j
+ZV47etaWLtmNGSsyVI+Uvh9ytMmazW9WgVy0DcG3rcD7grI3f5RdH3OZvFLMsojP
+LFBPRXZ8bL5yJtEcZxqlkc51ZtuQ8wwsMTeVz5474wLH2rPTMhfQP27jHIlWZu0h
+us+V4adle+zYR8/Kz4a0tNgwremrfazTkTQQp0HdXiuT+pGjPrW+Uq1q8rUak6x+
+taxnTes8s7PWuM61rnfN6177+tfgwA62sIftOU1WmnCXTfB3wjupZIv2NcSeqi0n
+hrp02TijAHKXhP0DtEdVeJuMnvaVnKjAm5I71nBLZuLmREQ6CZeDd3MVBU0n36NV
+ed3hPq67La3ud6f2zRJjt7Ihx0tLDY+99hY4vrEKbt6eGcPs1raKXGlqJMOSKTbF
+NlzxgyN5g0hpPbMKuYP0cZJT+tXr42DAos3ylrv85TCPea9bim6ZdymiM7a5y6xX
+8hPrfOcH3vbPwwaroRv96MJDOkuVXlKmB7DmTn/yyE8e9bhhtuoAXXajsR7Tnvuc
+6x1jqKH/wX4yqJP9PEFMu9rjd3Y/4rntbocy3Jc4Z4yCsmKsvjWf7WZ3hx96b62O
+p9dzHswtIzrHFfzoWT9LZsTaGvHdbZ7gIq1iM8f5b2YPq0ovP1XDB/hCJfMtdkd3
+vfPRSPHh07sXBz6RzGtsUHanuCxVT3c5cRP1hK/bnkys3bCf0N/fsuDa027UNus1
+97DZ/dVbb3XYT9l3Xj5qt4y/eOTXPnW73d7hMuXEeSNztMXnaHUbT/XK3CfyY86v
+68kv9x1DHs5TTyKXnRxIiMo/9GTLCU0ZSdae63FaXqY+STJlX+d35dR5xmVxXiJ9
+GyZWx7d10qJ8x/V3zWd/NxV8uzR8VUEUSg74gOVnft43YCoHZhbFfl8VcM5mZ4x1
+ZTT3ZEf2gdbnaiBXLOkCgcciNUtiSssxfnVlgn6jLuI1YgC4KNBngzy0YEoCgyzU
+f0qoQTKGVfcnaVH/aFD554GFx17vc4H+d0UEGICZM3YLtHyxRXoceDrnpmQJiIJJ
+pjzUF2Qd2IL2EYIJiH6O11HxU2WMpknupoHDR2L1RDEt9oNyiHkctma1FEZ4yGSx
+J1RtqGbFVn1GGHesN4aWN37+k3ASN0Mct3FcOIOgsSqn133S42zvtyBAqDeAdUMH
+t2ehtVDltYp41oqumFifFouVt3nWEn/0lXOUZWyeNXjz5YiiBoaU14PblYsqdok4
+qGR7woBpWIBZxFqBeIP9JXSFB2nmNXW39F2Awocw1IXQeGfS+HmvMojYh4p6Vobg
+WHDbZ3zVpYPgN31b1D5sR4dCJj3qIkZoSHt31+WLKtiNfhiDpohbdXdf6+dx9IKF
+3Mh8+LRnkahScxVwZ/hx1naQR1hiAkmEorZo+aZK4Wg206Vh8kVw1JQ6aTOSzgV8
+efiQVuNe0IGSHCKBk8h413Jt2dZxoghGLrlP01iO4JJxhXiMoZZIcNiGQEmBAOYr
+bDiJSaiJiKiOGQmCEtcwFll2SNlwFDWCSmmAU4iE1whLzSaFTShDY0lGQhhbO4hd
+sGiPUQl6T0iJGjdxMtkhQQdi28ePYZha4lKVZtRgc8iS/SSTC3mNHQZf38SVyWeO
+bUmO/04Vkv21mHcGjEh5liz0NVDJY5jJK+dCVCRYmKzImIn0lraImEv4cJ9JmhbG
+Zrr1UjA5mMj2Iz2lmn4pdGjEcbxHmKK5QS40X4pZlr4pTV8GiKDJST6Yfe6nKpPm
+j12WmYKoYZN5nG/HYoYIZBYZkb/5j6YZnSQ5ndSZJtJZLKiJjnloKnwpM475nZCp
+M+ZYireYm6l5d+2pmesZleVpnngSj4polBb4XynGnlnYWh8pPKdonJ7pn6H5dnHT
+h/P4iSAEZwi6avXCmcPZiW71LfW4oO1XTlL2bxWmZWoSb4B5fQimMJPlfZPGMx35
+i1koljzohERYgtojT8mzmd4IRCXCB5YByi0jykSZdnEquZQrGn1keZELVZ9ABzkh
+Ci9TYqRos5/VqDl3dadLGYiXGAql4rl8EvqeViqUh+maA7SlaJKejQilNZqDE+qC
+Wypot2l5YKqmGWqlbrqjcxenGJmmkSmnTEc9QomnYFqQddqn+vSmZ8dzfvqigLp6
+fHqoe0qT8EOA6aSod7qoICac9ASpbkaTchU14ZlpllqpivY0lMqoneqpEUNox0OM
+BDqqV2qoqkpPZfqqetqqZCirR0qrfSk4TGqr/2WgunppFUbXqzy6psB6gEE2rJ5m
+rKGHrMmqrF3HrL7nrM8KrdonrdNKralorQk5Pdi6rdzarVnTot4aruI6ruRaruZ6
+ruiaruqqMAEBADs=
+
+------------LveGILu7P5rjRC9Um1wlRv--

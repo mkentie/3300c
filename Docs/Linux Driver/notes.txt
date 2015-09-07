@@ -1,0 +1,11 @@
+600dpi
+5300x6800
+zadig: als je een cfg laadt, exporteert hij alleen, installeert niet
+/uselocaltime voor inf2cat, want stampinf gebruikt local time; kreeg errors om 12 uur snachts
+zonder microdriver, dus alleen usbscan.sys, zijn de normale createfile/deviceiocontrol/readfile functies te gebruiken vanuit een standalone applicatie, maar ook met de microdriver erbij werkt dat.
+bij 300dpi hebben zowel sanetest als microdriver last van backtracking... maar windows driver heeft dit ook!
+microdriver duwt slee verkeerde kant op bij 150dpi
+ScanInfo.bNeedDataAlignment = 1 is nodig
+gescand resultaat altijd donkerder dan xp driver
+gamma table met gamma 2.2-> ziet er beter uit. gamma table uit dll->ook iets beter. met vmware usb gelogd en nagelopen wat er in de registers gezet wordt, bijna hetzelfde als eigen driver doet, geen relevante verschillen.
+wrapper die xp driver gebruikt aangepast om halverwege naar direct usb reads te switchen->beeld wordt donkerder. De xp driver maakt dus de boel lichter na ontvangst.

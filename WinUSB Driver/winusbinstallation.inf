@@ -1,0 +1,50 @@
+;
+;
+; Installs WinUsb
+;
+
+[Version]
+Signature = "$Windows NT$"
+;Class     = Image
+;ClassGUID = {6bdd1fc6-810f-11d0-bec7-08002be2092f}
+Class     = USBDevice
+ClassGUID = {88BAE032-5A81-49f0-BC3D-A4FF138216D6}
+Provider  = %ManufacturerName%
+CatalogFile = WinUSBInstallation.cat
+DriverVer=09/08/2015,0.1.18.693
+
+; ========== Manufacturer/Models sections ===========
+
+[Manufacturer]
+%ManufacturerName% = Standard,NTamd64
+
+[Standard.NTamd64]
+%DeviceName% =USB_Install, USB\VID_03F0&PID_0205
+
+
+
+; =================== Installation ===================
+
+[USB_Install]
+Include = winusb.inf
+Needs   = WINUSB.NT
+
+
+[USB_Install.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+
+[USB_Install.HW]
+AddReg=Dev_AddReg
+
+[Dev_AddReg]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{7BB55D8E-9034-4F62-AF70-7E4286FD6D7D}"
+
+
+
+
+; =================== Strings ===================
+
+[Strings]
+ManufacturerName=""
+DeviceName="HP ScanJet 3300C"

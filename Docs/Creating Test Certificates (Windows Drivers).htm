@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head><link rel="canonical" href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff540213(v=vs.85).aspx" />
+        <title>Creating Test Certificates (Windows Drivers)</title>
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/en-us/library/windows/hardware/ff540213(d=default,l=en-us,v=vs.85).aspx" />
+
+<meta name="NormalizedUrl" content="http://msdn.microsoft.com/en-us/library/windows/hardware/ff540213(d=default,l=en-us,v=vs.85).aspx" />
+
+<meta name="ms.normalizedurl" content="http://msdn.microsoft.com/en-us/library/windows/hardware/ff540213(d=default,l=en-us,v=vs.85).aspx" />
+
+<meta name="VotingContextUrl" content="http://msdn.microsoft.com/en-us/library/windows/hardware/ff540213(d=default,l=en-us,v=vs.85).aspx" />
+
+<meta name="MN" content="EE4293C0-4:44:10 PM" />
+
+<meta name="Search.ShortId" content="ff540213" />
+
+<meta name="ms.shortidmsdn" content="ff540213" />
+
+<meta name="Ms.Locale" content="en-us" />
+
+<meta name="ms.prodver" content="VS.85" />
+
+<meta name="ms.contentlang" content="EN" />
+
+<meta name="ms.lang" content="EN" />
+
+<meta name="ms.loc" content="US" />
+
+<meta name="ms.sitever" content="2014.12.04.2" />
+
+<meta name="ms.assetid" content="4e6daa96-029c-4e1c-b483-b900cb836858" />
+
+<meta name="ms.auth" content="0" />
+
+
+
+
+
+
+
+
+        
+    <link rel="shortcut icon" href="/Areas/Epx/Themes/Windows/Content/Winlogo_favicon.ico" />
+
+    <link rel="stylesheet" type="text/css" href="http://i3.msdn.microsoft.com/Combined.css?resources=0:Topic,0:CodeSnippet,0:ProgrammingSelector,0:ExpandableCollapsibleArea,1:CommunityContent,0:TopicNotInScope,0:FeedViewerBasic,0:ImageSprite,2:Header,2:sprite,1:Toc,1:LibraryMemberFilter,2:Footer,3:LinkList,3:SelectLocaleFromPopUp,4:Windows;/Areas/Epx/Content/Css:0,/Areas/Library/Content:1,/Areas/Epx/Themes/Windows/Content:2,/Areas/Epx/Themes/Base/Content:3,/Areas/Library/Themes/Windows/Content:4&amp;amp;v=658263177A2A3046CAF9B5E000471201" /></head>
+    <body class="library FF FF3">
+        <div id="page">
+            
+
+            
+            
+            
+    
+    
+
+    <div id="ux-header" class="ltr">
+        <div id="headerContainer">
+            <div id="logoAndSearchBox">
+                <div id="logo">
+                    <a href="http://msdn.microsoft.com/windows/hardware" title="Windows"><img alt="Windows" src="http://i.msdn.microsoft.com/Areas/Epx/Themes/Windows/Content/Windows_logo.png?v=635533092582763982"></img></a>       
+                </div>
+              
+        <div id="selectedTab">
+            <a class="dropDownToggle" href="javascript:void(0);">Dev Center - Hardware</a>    
+        </div>
+    <div id="toclevel1_menu" style="display: none;">
+        <ul>
+                <li><a href="http://dev.windows.com/" title="Windows">Windows</a></li>
+                <li><a href="http://msdn.microsoft.com/windows/desktop/" title="Desktop">Desktop</a></li>
+                <li><a href="http://msdn.microsoft.com/windows/hardware/" title="Hardware">Hardware</a></li>
+                <li><a href="http://msdn.microsoft.com/ie/" title="Internet Explorer">Internet Explorer</a></li>
+        </ul>
+        <div style="clear: both"></div>
+    </div> 
+
+                
+                  
+
+    <div class="SearchBox">   
+        <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" onsubmit="return Epx.Controls.SearchBox.searchBoxOnSubmit(this);">
+        <input id="HeaderSearchTextBox" name="query" type="text" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" />            
+        <button id="HeaderSearchButton" value="" type="submit" class="header-search-button"></button>
+        </form>
+         
+            
+             
+    
+    </div>
+
+                <div class="Clear"></div>
+            </div>
+            <div class="Clear"></div>
+            <div class="ux-internav">
+    <div class="toclevel2"> 
+            <a class="normal" href="https://sysdev.microsoft.com/en-us/hardware/" title="Dashboard">Dashboard</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/gg507680" title="Get Started ">Get Started </a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/gg462970" title="Design">Design</a>
+            <a class="active" href="http://msdn.microsoft.com/windows/hardware/ff960953" title="Develop">Develop</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/gg463010" title="Certify">Certify</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/dn593619" title="Deploy">Deploy</a>
+    </div>
+    <div class="clear"></div>
+
+            </div>
+            <div id="signIn">
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=12&amp;ct=1419813851&amp;rver=6.0.5276.0&amp;wp=MCLBI&amp;wlcxt=MSDN%24MSDN%24MSDN&amp;wreply=http%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2fwindows%2fhardware%2fff540213%2528v%3dvs.85%2529.aspx&amp;lc=1033&amp;id=254354&amp;mkt=en-US" title="Sign in">Sign in</a></div>
+
+    
+
+        </div>  
+        <div id="blackBar">
+    <div class="toclevel3"> 
+            <a class="active" href="http://msdn.microsoft.com/library/windows/hardware/ff557573" title="Drivers">Drivers</a>
+            <a class="normal" href="http://msdn.microsoft.com/library/windows/hardware/ff551063(v=vs.85).aspx" title="Debugging">Debugging</a>
+            <a class="normal" href="http://msdn.microsoft.com/library/windows/hardware/dn613865" title="Device experience">Device experience</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/gg454513" title="Downloads">Downloads</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/dn433227.aspx" title="Samples">Samples</a>
+            <a class="normal" href="http://msdn.microsoft.com/library/windows/hardware/dn550976" title="Archive">Archive</a>
+            <a class="normal" href="http://msdn.microsoft.com/windows/hardware/gg454528" title="Support">Support</a>
+    </div>
+    <div class="clear"></div>
+
+        </div>
+    </div>
+
+
+
+            <div id="body">
+                
+
+
+
+
+
+
+
+    <div id="leftNav">
+
+
+
+<div id="tocnav">
+
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff549731(v=vs.85).aspx" id="ff571583_VS.85_en-us" mtpsaliasid="" mtpsassetid="5bb4d9d3-9dcb-4820-a6ad-0345f7645c82_VS.85_en-us" mtpsshortid="ff549731_VS.85_en-us" title="Device and Driver Installation">Device and Driver Installation</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff541156(v=vs.85).aspx" id="ff571587_VS.85_en-us" mtpsaliasid="" mtpsassetid="6de5e805-c9cb-4e7c-9779-20980a20fb67_VS.85_en-us" mtpsshortid="ff541156_VS.85_en-us" title="Design Guide">Design Guide</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff541165(v=vs.85).aspx" id="ff571608_VS.85_en-us" mtpsaliasid="" mtpsassetid="0215f185-6d30-4ce5-b30f-3132f75afba3_VS.85_en-us" mtpsshortid="ff541165_VS.85_en-us" title="Device and Driver Installation Fundamental Topics">Device and Driver Installation Fundamental Topics</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff544865(v=vs.85).aspx" id="ff571626_VS.85_en-us" mtpsaliasid="" mtpsassetid="1f7d5340-c7be-4b6a-a85e-246dcc78b1fa_VS.85_en-us" mtpsshortid="ff544865_VS.85_en-us" title="Driver Signing">Driver Signing</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff552264(v=vs.85).aspx" id="ff728931_VS.85_en-us" mtpsaliasid="" mtpsassetid="c6c20f58-0784-4646-abe1-ea3e64db3c21_VS.85_en-us" mtpsshortid="ff552264_VS.85_en-us" title="Signing Drivers during Development and Test">Signing Drivers during Development and Test</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff552275(v=vs.85).aspx" id="ff728932_VS.85_en-us" mtpsaliasid="" mtpsassetid="632a42e6-98e3-44c5-87b1-7bafff1963de_VS.85_en-us" mtpsshortid="ff552275_VS.85_en-us" title="Signing Drivers during Development and Test">Signing Drivers during Development and Test</a>            </div>
+            <div class="toclevel1" data-toclevel="1">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff546236(v=vs.85).aspx" id="ff728933_VS.85_en-us" mtpsaliasid="" mtpsassetid="992f0974-0b0e-4c96-ad16-c5894067896c_VS.85_en-us" mtpsshortid="ff546236_VS.85_en-us" title="How to Test-Sign a Driver Package">How to Test-Sign a Driver Package</a>            </div>
+            <div class="toclevel2 current" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff540213(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Creating Test Certificates">Creating Test Certificates</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff553957(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Viewing Test Certificates">Viewing Test Certificates</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff540177(v=vs.85).aspx" id="ff728934_VS.85_en-us" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Creating a Catalog File for Test-Signing a Driver Package">Creating a Catalog File for Test-Signing a Driver Package</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff553470(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Test-Signing a Driver Package's Catalog File">Test-Signing a Driver Package's Catalog File</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff553476(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Test-Signing a Driver through an Embedded Signature">Test-Signing a Driver through an Embedded Signature</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff539989(v=vs.85).aspx" id="ff728935_VS.85_en-us" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Configuring the Test Computer to Support Test-Signing">Configuring the Test Computer to Support Test-Signing</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff547646(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Installing Test Certificates">Installing Test Certificates</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/en-us/library/windows/hardware/ff553947(v=vs.85).aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Verifying the Test Signature">Verifying the Test Signature</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a data-tochassubtree="true" href="/en-us/library/windows/hardware/ff547621(v=vs.85).aspx" id="ff728936_VS.85_en-us" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Installing a Test-Signed Driver Package on the Test Computer">Installing a Test-Signed Driver Package on the Test Computer</a>            </div>
+</div>
+        
+
+        
+
+        
+        
+        <div id="toc-resizable-ew" class="toc-resizable-ew"></div>
+        
+    </div>
+<div id="content" class="content">
+
+
+
+
+
+
+
+        
+
+<div class="topic" xmlns="http://www.w3.org/1999/xhtml">
+  <h1 class="title">Creating Test Certificates</h1>
+  
+  <div id="mainSection">
+<div class="clsServerSDKContent">
+
+</div>
+<p>Test-signing requires a test certificate. After a test certificate is generated, it can be used to test-sign multiple drivers or <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff544840(v=vs.85).aspx">driver packages</a>. For more information, see <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff553457(v=vs.85).aspx">Test Certificates</a>.</p>
+<p>This topic describes how to use the <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff548309(v=vs.85).aspx"><strong xmlns="http://www.w3.org/1999/xhtml">MakeCert</strong></a> tool to create test certificates. In most development environments, test certificates generated through MakeCert should be sufficient to test the installation and loading of test-signed drivers or driver packages. For more information about this type of test certificate, see <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff548693(v=vs.85).aspx">MakeCert Test Certificate</a>.</p>
+<p>The following command-line example uses MakeCert to complete the following tasks:</p>
+<ul>
+<li>
+<p>Create a self-signed test certificate named <em>Contoso.com(Test)</em>. This certificate uses the same name for the subject name and the certificate authority (CA).</p>
+</li>
+<li>
+<p>Put a copy of the certificate in an output file that is named <em>ContosoTest.cer</em>.</p>
+</li>
+<li>
+<p>Put a copy of the certificate in a certificate store that is named <em>PrivateCertStore</em>. Putting the test certificate in <em>PrivateCertStore</em> keeps it separate from other certificates that may be on the system.</p>
+</li>
+</ul>
+<p>Use the following MakeCert command to create the <em>Contoso.com(Test)</em> certificate:</p>
+
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_5d9065d7-5fec-4ab7-a35c-b96e9677dc9e');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_5d9065d7-5fec-4ab7-a35c-b96e9677dc9e" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+
+makecert -r -pe -ss PrivateCertStore -n CN=Contoso.com(Test) ContosoTest.cer
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+<p>Where:</p>
+<ul>
+<li>
+<p>The<strong> -r</strong> option creates a self-signed certificate with the same issuer and subject name.</p>
+</li>
+<li>
+<p>The<strong> -pe</strong> option specifies that the private key that is associated with the certificate can be exported. </p>
+</li>
+<li>
+<p>The<strong> -ss</strong> option specifies the name of the certificate store that contains the test certificate (<em>PrivateCertStore</em>).</p>
+</li>
+<li>
+<p>The<strong> -n CN=</strong> option specifies the name of the certificate, Contoso.com(Test). This name is used with the <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff551778(v=vs.85).aspx"><strong xmlns="http://www.w3.org/1999/xhtml">SignTool</strong></a> tool to identify the certificate.</p>
+</li>
+<li>
+<p><em>ContosoTest.cer</em> is the file name that contains a copy of the test certificate, Contoso.com(Test). The certificate file is used to add the certificate to the Trusted Root Certification Authorities certificate store and the Trusted Publishers certificate store.</p>
+</li>
+</ul>
+<p>For more information about the MakeCert tool and its command-line arguments, see <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff548309(v=vs.85).aspx"><strong xmlns="http://www.w3.org/1999/xhtml">MakeCert</strong></a>. </p>
+<p>Also, refer to the readme file <em>Selfsign_readme.htm </em>and the script file <em>Selfsign_example.cmd</em>, which are located in the <em>src\general\build\driversigning </em>directory of the Windows Driver Kit (WDK). The script file <em>Selfsign_example.</em><em>cmd</em> includes a documented example of how to use MakeCert to create a test certificate.</p>
+<p> </p>
+<p> </p>
+<p><a href="mailto:wsddocfb@microsoft.com?subject=Documentation%20feedback [devinst\devinst]:%20Creating Test Certificates%20 RELEASE:%20(12/17/2014)&amp;body=%0A%0APRIVACY STATEMENT%0A%0AWe use your feedback to improve the documentation. We don't use your email address for any other purpose, and we'll remove your email address from our system after the issue that you're reporting is fixed. While we're working to fix this issue, we might send you an email message to ask for more info. Later, we might also send you an email message to let you know that we've addressed your feedback.%0A%0AFor more info about Microsoft's privacy policy, see http://privacy.microsoft.com/en-us/default.aspx." title="Send comments about this topic to Microsoft">Send comments about this topic to Microsoft</a></p>
+</div>
+</div>
+
+    
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Show:</span>
+        <label>
+            <input type="checkbox" class="libraryFilterInherited" checked="checked" value="Inherit" />Inherited
+        </label>
+        <label>
+            <input type="checkbox" class="libraryFilterProtected" checked="checked" value="Protected" />Protected
+        </label>
+    </div>
+</div>
+    
+<input type="hidden" id="libraryMemberFilterEmptyWarning" value="There are no members available with your current filter settings." />
+
+
+ 
+</div>
+
+
+
+
+            </div>
+            <div class="clear"></div>
+
+            
+    
+<input name="__RequestVerificationToken" type="hidden" value="MjsnFQ-kY2zDhA_CKpQMIBc68ofFpNEN37RRgpXBPAHC5XrfAVLKD_pcQHvflzESw7T9I0TGm3kIGOqsczlQTTjXxjA1" />
+<input id="ratingSubmitUrl" type="hidden" value="http://msdn.microsoft.com/en-us/library/feedback/add/ff540213(v=vs.85).aspx" />
+<input id="isTopicRated" type="hidden" value="false" />
+
+
+
+
+    
+
+
+    <div id="ux-footer" class="ltr">
+        
+            <div id="footerSock">
+                <div id="footerSockInner">
+                    <a name="feedback"></a>
+                    <div data-fragmentName="Survey" id="Fragment_Survey" xmlns="http://www.w3.org/1999/xhtml"></div>
+
+<div class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            Was this page helpful?
+        </div>
+        <div class="description">
+            Your feedback about this content is important.<br />Let us know what you think.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes">Yes</button>
+            <button class="button" id="ratingNo">No</button>
+        </div>
+        <input id="ratingValue" type="hidden" value="" />
+    </div>
+    <div id="ratingSection2">
+        <div class="title">
+            Additional feedback?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="counter right">
+            <span id="feedbackTextCounter">1500</span> characters remaining
+        </div>
+        <div class="buttons left">
+            <button class="button" id="ratingSubmit">Submit</button>
+            <button class="button" id="ratingSkipThis">Skip this</button>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            Thank you!
+        </div>
+        <div class="description">
+            We appreciate your feedback.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+
+                    <div data-fragmentName="SockLinks" id="Fragment_SockLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links">
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=317805" id="SockLinks_727_11" xmlns="http://www.w3.org/1999/xhtml">Find us on Facebook</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=317806" id="SockLinks_727_12" xmlns="http://www.w3.org/1999/xhtml">Follow us on Twitter</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=285656" id="SockLinks_727_40" xmlns="http://www.w3.org/1999/xhtml">Read the blog</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        <div id="footerContainer">
+            <div id="fourColumnFooter">
+                <div data-fragmentName="Column1" id="Fragment_Column1" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Centers</div>
+        <ul class="links">
+          <li>
+            <a href="http://dev.windows.com" id="Column1_727_13" xmlns="http://www.w3.org/1999/xhtml">Windows Dev Center</a>
+          </li>
+          <li>
+            <a href="http://msdn.microsoft.com/windows/desktop" id="Column1_727_16" xmlns="http://www.w3.org/1999/xhtml">Desktop</a>
+          </li>
+          <li>
+            <a href="http://msdn.microsoft.com/windows/hardware" id="Column1_727_17" xmlns="http://www.w3.org/1999/xhtml">Hardware</a>
+          </li>
+          <li>
+            <a href="http://msdn.microsoft.com/ie" id="Column1_727_15" xmlns="http://www.w3.org/1999/xhtml">Internet Explorer</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentName="Column2" id="Fragment_Column2" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Related developer sites</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285634" id="Column2_727_18" xmlns="http://www.w3.org/1999/xhtml">Microsoft Connect</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285635" id="Column2_727_19" xmlns="http://www.w3.org/1999/xhtml">OSR Online</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=282089" id="Column2_727_42" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=282087" id="Column2_727_43" xmlns="http://www.w3.org/1999/xhtml">Windows Server</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Other Windows sites</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285636" id="Column2_727_21" xmlns="http://www.w3.org/1999/xhtml">Enterprise</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285637" id="Column2_727_22" xmlns="http://www.w3.org/1999/xhtml">Small business</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285638" id="Column2_727_23" xmlns="http://www.w3.org/1999/xhtml">Students</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285639" id="Column2_727_24" xmlns="http://www.w3.org/1999/xhtml">Home users</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentName="Column3" id="Fragment_Column3" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Downloads</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285645" id="Column3_727_25" xmlns="http://www.w3.org/1999/xhtml">Windows Driver Kit</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285646" id="Column3_727_26" xmlns="http://www.w3.org/1999/xhtml">Windows Assessment and Deployment Kit</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285647" id="Column3_727_27" xmlns="http://www.w3.org/1999/xhtml">Windows Hardware Certification Kit</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?LinkID=285648" id="Column3_727_29" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285649" id="Column3_727_30" xmlns="http://www.w3.org/1999/xhtml">More downloads</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Support</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285664" id="Column3_727_44" xmlns="http://www.w3.org/1999/xhtml">Forums</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285663" id="Column3_727_45" xmlns="http://www.w3.org/1999/xhtml">More support options</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentName="Column4" id="Fragment_Column4" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Essentials</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285651" id="Column4_727_47" xmlns="http://www.w3.org/1999/xhtml">Debugging</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=328186" id="Column4_727_48" xmlns="http://www.w3.org/1999/xhtml">Samples</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285653" id="Column4_727_49" xmlns="http://www.w3.org/1999/xhtml">Hardware dashboard</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=317804" id="Column4_727_50" xmlns="http://www.w3.org/1999/xhtml">Partner with Microsoft</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Stay connected</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285658" id="Column4_727_36" xmlns="http://www.w3.org/1999/xhtml">Microsoft events</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285656" id="Column4_727_37" xmlns="http://www.w3.org/1999/xhtml">Windows Hardware Certification blog</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+            </div>
+
+            <div id="baseFooterLogos">
+                <span class="microsoftlogo" title="Microsoft"></span>
+                <a href="http://msdn.microsoft.com/en-us" class="msdnlogo" title="MSDN"></a>
+            </div>
+        
+            <div id="baseFooter">
+                <div id="FooterCopyright">© 2014 Microsoft</div>
+                <div data-fragmentName="BaseFooter" id="Fragment_BaseFooter" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://go.microsoft.com/fwlink/?LinkId=248681" id="BaseFooter_35351_3" xmlns="http://www.w3.org/1999/xhtml">Privacy and Cookies</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=248155" id="BaseFooter_35351_1" xmlns="http://www.w3.org/1999/xhtml">Terms of Use</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=248154" id="BaseFooter_35351_2" xmlns="http://www.w3.org/1999/xhtml">Trademarks</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=400453" id="BaseFooter_730_5" xmlns="http://www.w3.org/1999/xhtml">Site map</a>
+      </li>
+    </ul>
+  </div>
+</div>  
+                <div data-fragmentName="HelloText" id="Fragment_HelloText" xmlns="http://www.w3.org/1999/xhtml">Hello from Seattle.
+</div>  
+                        
+    
+    <span id="selectLocaleFromPopUp">
+        <div class="locale-selector" style="position: relative">
+            <a class="current-locale" href="javascript:void(0)">
+                <span class="text">English</span>
+                <span class="gear"></span>
+            </a>
+            <div class="locale-selection-panel site-flag site-flag-lang" style="top: -245px; display: none;">
+                <div class="content">
+                    <table class="all-locales" cellspacing="0" autogeneratecolumns="false" allowpaging="false" allowsorting="false" style="border-collapse: collapse;">
+                        <tbody>
+                            <tr>
+
+
+                                    <td><a title="Deutsch" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=de-de&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Deutsch</a></td>
+                                    <td><a title="English" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=en-us&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link selected">English</a></td>
+                                    <td><a title="Español" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=es-es&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Español</a></td>
+                                    <td><a title="Français" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=fr-fr&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Français</a></td>
+                                        </tr><tr>
+                                    <td><a title="Italiano" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=it-it&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Italiano</a></td>
+                                    <td><a title="日本語" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ja-jp&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">日本語</a></td>
+                                    <td><a title="한국어" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ko-kr&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">한국어</a></td>
+                                    <td><a title="Português" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=pt-br&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Português</a></td>
+                                        </tr><tr>
+                                    <td><a title="Pусский" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ru-ru&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">Pусский</a></td>
+                                    <td><a title="简体中文" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=zh-cn&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">简体中文</a></td>
+                                    <td><a title="繁體中文" href="http://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=zh-tw&amp;fromPage=/en-us/library/windows/hardware/ff540213(v=vs.85).aspx/" class="locale-link">繁體中文</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="arrow">
+                         </div>
+                </div>
+            </div>
+        </div>
+    </span>
+
+  
+                <link type="text/css" rel="stylesheet" />
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div> 
+
+
+            <div class="footerPrintView">
+                <div class="footerCopyrightPrintView">© 2014 Microsoft</div>
+            </div>
+
+            
+            
+    
+
+
+
+            <input id="MtpsDevice" type="hidden" value="Default" />
+
+
+<![CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]>
+
+            
+            
+            
+            
+            
+
+
+
+
+
+
+
+<noscript><div><img alt="DCSIMG" id="Img1" width="1" height="1" src="http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  <a href="http://www.omniture.com" title="Web Analytics">
+    <img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" />
+  </a>
+</noscript>
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" type="hidden" value="KlWr2WhGV0TvcMeJoH5l9oM-Y8D0hNnL1gyP12etW6jld6IUVKs8YXb1i_kEltVLCuNttUHQvHXshcgiMQssUrPfy_I1" />
+</div>
+
+
+        </div>
+
+        
+        
+        
+        
+    <script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"http://i.msdn.microsoft.com\", \r\n\t\"js\": \"http://i2.msdn.microsoft.com\", \r\n\t\"css\": \"http://i3.msdn.microsoft.com\", \r\n\t\"xap\": \"http://msdn.microsoft.com\"\r\n});\r\n/**/" },
+	{ url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/en-us/library/windows/hardware/ff540213(l=en-us,v=vs.85).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027en-us\u0027;\n  var wtsp = \u0027_msdn_\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid = \"b60e7fd7-9bad-463f-8254-34765b370c79\";\n/**/" },
+	{ txt: "//\n\n            window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n            //" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Utilities,1:Rating,0:Topic,2:webtrendsscript,3:omni_rsid_MSDN,0:AppInsightsPerf,4:Toc,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Global/Content/Webtrends/resources:2,/Areas/Global/Content/Omniture/resources/MSDN:3,/Areas/Library/Content:4\u0026amp;hashKey=E30A1A0CC6FDDB5F310007D61EEFF421\u0026amp;v=3889A36C42E33DA1D66F572243476BCE" },
+	{ url: "http://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=MSDN\u0026loc=en-us\u0026Refinement=182\u0026focusOnInit=false\u0026iroot=windows%2fhardware\u0026emptyWatermark=true\u0026searchButtonTooltip=Search" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:TocDropDown,1:LibraryMemberFilter,2:Toc_Fixed,3:SelectLocaleFromPopUp,2:CodeSnippet,2:TopicNotInScope,2:CollapsibleArea,2:VersionSelector,2:SurveyBroker;/Areas/Epx/Themes/Windows/Content:0,/Areas/Library/Content:1,/Areas/Epx/Content/Scripts:2,/Areas/Epx/Themes/Base/Content:3\u0026amp;hashKey=381915F4A813F0695B76959FFC0211B1\u0026amp;v=3889A36C42E33DA1D66F572243476BCE" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script></body>
+</html>

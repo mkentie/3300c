@@ -1,0 +1,40 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Image
+ClassGUID={6bdd1fc6-810f-11d0-bec7-08002be2092f}
+Provider=%Mfg%
+DriverVer=08/29/2015,21.21.50.181
+CatalogFile=3300c.cat
+
+[SourceDisksFiles.amd64]
+microdriver.dll=1
+[SourceDisksNames.amd64]
+1=%Location%,,,
+
+[DestinationDirs]
+; By default, files will be copied to \windows\system32.
+DefaultDestDir=11
+
+[Manufacturer]
+%Mfg%=Models,NTamd64
+
+; This is the models section for the amd64 driver
+[Models.NTamd64]
+%WIASample.DeviceDesc% = WIASample.Scanner, USB\VID_03F0&PID_0205
+
+[WIASample.Scanner]
+Include=sti.inf
+Needs=STI.USBSection, STI.MICRODRIVERSection
+SubClass=StillImage
+DeviceType=1
+Capabilities=0x13
+
+[WIASample.Scanner.Services]
+Include=sti.inf
+Needs=STI.USBSection.Services
+
+[Strings]
+Mfg="Marijn Kentie"
+Location="Install Source"
+WIASample.DeviceDesc="HP ScanJet 3300C"
+

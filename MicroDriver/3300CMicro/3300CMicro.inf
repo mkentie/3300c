@@ -1,0 +1,48 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Image
+ClassGUID={6bdd1fc6-810f-11d0-bec7-08002be2092f}
+Provider=%Mfg%
+DriverVer=08/29/2015,1.0.0
+CatalogFile=3300CMicro.cat
+
+[SourceDisksFiles]
+3300CMicro.dll=1
+
+[SourceDisksNames]
+1=%Location%
+
+[Manufacturer]
+%Mfg%=Models,NT$ARCH$
+
+; This is the models section for the amd64 driver
+[Models.NT$ARCH$]
+%3300CMicro.DeviceDesc% = 3300CMicro.Scanner, USB\VID_03F0&PID_0205
+
+[3300CMicro.Scanner]
+Include=sti.inf
+Needs=STI.USBSection, STI.MICRODRIVERSection
+SubClass=StillImage
+DeviceType=1
+Events=Events
+DeviceData=DeviceData
+CopyFiles=CopyFiles
+
+[Events]
+
+[3300CMicro.Scanner.Services]
+Include=sti.inf
+Needs=STI.USBSection.Services
+
+[DeviceData]
+MicroDriver="3300CMicro.dll"
+Resolutions="150, 300, 600"
+
+[CopyFiles]
+3300CMicro.dll
+
+[Strings]
+Mfg="Marijn Kentie"
+Location="Install Source"
+3300CMicro.DeviceDesc="HP ScanJet 3300C"
+

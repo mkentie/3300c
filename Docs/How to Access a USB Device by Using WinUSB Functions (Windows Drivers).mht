@@ -1,0 +1,3797 @@
+Content-Type: multipart/related; start=<op.mhtml.1379259832419.e0d67a4477375862@192.168.220.1>; boundary=----------vVbMQVlozJoK0hWJw2nnNA
+Content-Location: http://msdn.microsoft.com/en-us/library/windows/hardware/ff540174(v=vs.85).aspx
+Subject: =?utf-8?Q?How=20to=20Access=20a=20USB=20Device=20by=20Using=20WinUSB=20Functions=20(Windows=20Drivers)?=
+MIME-Version: 1.0
+
+------------vVbMQVlozJoK0hWJw2nnNA
+Content-Disposition: inline; filename="ff540174(v=vs.85).htm"
+Content-Type: text/html; charset=utf-8; name="ff540174(v=vs.85).htm"
+Content-ID: <op.mhtml.1379259832419.e0d67a4477375862@192.168.220.1>
+Content-Location: http://msdn.microsoft.com/en-us/library/windows/hardware/ff540174(v=vs.85).aspx
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE html>
+
+<html dir=3D"ltr" xmlns=3D"http://www.w3.org/1999/xhtml" lang=3D"en">
+    <head><link rel=3D"canonical" href=3D"http://msdn.microsoft.com/en-u=
+s/library/windows/hardware/ff540174(v=3Dvs.85).aspx" />
+        <title>How to Access a USB Device by Using WinUSB Functions (Win=
+dows Drivers)</title>
+
+
+
+
+<meta name=3D"DCS.dcsuri" content=3D"/en-us/library/windows/hardware/ff5=
+40174(d=3Ddefault,l=3Den-us,v=3Dvs.85).aspx" />
+
+<meta name=3D"NormalizedUrl" content=3D"http://msdn.microsoft.com/en-us/=
+library/windows/hardware/ff540174(d=3Ddefault,l=3Den-us,v=3Dvs.85).aspx"=
+ />
+
+<meta name=3D"VotingContextUrl" content=3D"http://msdn.microsoft.com/en-=
+us/library/windows/hardware/ff540174(d=3Ddefault,l=3Den-us,v=3Dvs.85).as=
+px" />
+
+<meta name=3D"MN" content=3D"4B9B1F27-8:28:27 AM" />
+
+<meta name=3D"Search.ShortId" content=3D"ff540174" />
+
+<meta name=3D"Ms.Locale" content=3D"en-us" />
+
+
+
+
+
+
+
+        =
+
+    <link rel=3D"shortcut icon" href=3D"/Areas/Epx/Themes/Windows/Conten=
+t/Winlogo_favicon.ico" />
+
+    <link rel=3D"stylesheet" type=3D"text/css" href=3D"http://i3.msdn.mi=
+crosoft.com/Combined.css?resources=3D0:Topic,0:CodeSnippet,0:ExpandableC=
+ollapsibleArea,0:CommunityContent,0:TopicNotInScope,0:FeedViewerBasic,0:=
+ImageSprite,1:Header,1:sprite,2:Toc,2:LibraryMemberFilter,1:Footer,3:Det=
+ailedLinkList,3:LinkList,1:Windows;/Areas/Epx/Content/Css:0,/Areas/Epx/T=
+hemes/Windows/Content:1,/Areas/Epx/Library/Content:2,/Areas/Epx/Themes/B=
+ase/Content:3&amp;amp;hashKey=3D664AD2805B7DD802EE8A08021D8F6F11" /></he=
+ad>
+    <body class=3D"library Opera">
+        <div id=3D"page">
+            =
+
+            =
+
+  =
+
+            =
+
+    =
+
+    =
+
+    <div id=3D"ux-header" class=3D"Opera ltr">
+        <div id=3D"headerContainer">
+            <div id=3D"logoAndSearchBox">
+                <div id=3D"logo">
+                    <a href=3D"http://msdn.microsoft.com/windows/hardwar=
+e/" title=3D"Windows"><img alt=3D"Windows" src=3D"http://i.msdn.microsof=
+t.com/Areas/Epx/Themes/Windows/Content/Windows_logo.png"></img></a>     =
+  =
+
+                </div>
+              =
+
+        <div id=3D"selectedTab">
+            <a class=3D"dropDownToggle" href=3D"javascript:void(0);">Dev=
+ Center - Hardware</a>    =
+
+        </div>
+    <div id=3D"toclevel1_menu" style=3D"display: none;">
+        <ul>
+                <li><a href=3D"http://msdn.microsoft.com/windows/" title=
+=3D"Dev Center Home">Dev Center Home</a></li>
+                <li><a href=3D"http://msdn.microsoft.com/windows/apps/" =
+title=3D"Windows Store apps">Windows Store apps</a></li>
+                <li><a href=3D"http://msdn.microsoft.com/ie/" title=3D"I=
+nternet Explorer">Internet Explorer</a></li>
+                <li><a href=3D"http://msdn.microsoft.com/windows/desktop=
+/" title=3D"Desktop">Desktop</a></li>
+                <li><a href=3D"http://msdn.microsoft.com/windows/hardwar=
+e/" title=3D"Hardware">Hardware</a></li>
+        </ul>
+        <div style=3D"clear: both"></div>
+    </div> =
+
+
+                =
+
+                  =
+
+
+    =
+
+
+<div class=3D"SearchBox">
+              <form id=3D"HeaderSearchForm" name=3D"HeaderSearchForm" me=
+thod=3D"get" action=3D"http://social.msdn.microsoft.com/Search" onsubmit=
+=3D"return Epx.Controls.SearchBox.searchBoxOnSubmit(this, this.title);">=
+
+            <input id=3D"HeaderSearchTextBox" name=3D"query" type=3D"tex=
+t" maxlength=3D"200" onfocus=3D"Epx.Controls.SearchBox.watermarkFocus(th=
+is, this.title, 'SearchBoxOnFocus')" onblur=3D"Epx.Controls.SearchBox.wa=
+termarkBlur(this, this.title, 'SearchBoxOnFocus')" />
+            <input id=3D"RefinementId" name=3D"refinement" type=3D"hidde=
+n" value=3D"182" />
+            <button id=3D"HeaderSearchButton" value=3D"" type=3D"submit"=
+ class=3D"header-search-button"></button>
+        </form>
+        =
+
+    =
+
+</div>
+
+                <div class=3D"Clear"></div>
+            </div>
+            <div class=3D"Clear"></div>
+            <div class=3D"ux-internav">
+    <div class=3D"toclevel2"> =
+
+            <a class=3D"normal" href=3D"https://sysdev.microsoft.com/en-=
+us/hardware/" title=3D"Dashboard">Dashboard</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg507680" title=3D"Get Started ">Get Started </a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg462970" title=3D"Design">Design</a>
+            <a class=3D"active" href=3D"http://msdn.microsoft.com/window=
+s/hardware/ff960953" title=3D"Develop">Develop</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg463010" title=3D"Certify">Certify</a>
+    </div>
+    <div class=3D"clear"></div>
+
+            </div>
+            <div id=3D"signIn">
+<a class=3D"scarabLink" href=3D"https://login.live.com/login.srf?wa=3Dws=
+ignin1.0&amp;rpsnv=3D11&amp;ct=3D1379258907&amp;rver=3D6.0.5276.0&amp;wp=
+=3DMCLBI&amp;wlcxt=3DMSDN%24MSDN%24MSDN&amp;wreply=3Dhttp%3a%2f%2fmsdn.m=
+icrosoft.com%2fen-us%2flibrary%2fwindows%2fhardware%2fff540174%2528v%3dv=
+s.85%2529.aspx&amp;lc=3D1033&amp;id=3D254354&amp;mkt=3Den-US" title=3D"S=
+ign in">Sign in</a></div>
+        </div>  =
+
+        <div id=3D"blackBar">
+    <div class=3D"toclevel3"> =
+
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/librar=
+y/windows/hardware/gg454504" title=3D"Systems">Systems</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/librar=
+y/windows/hardware/gg454505" title=3D"Devices">Devices</a>
+            <a class=3D"active" href=3D"http://msdn.microsoft.com/librar=
+y/windows/hardware/ff557573" title=3D"Drivers">Drivers</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/librar=
+y/windows/hardware/ff551063(v=3Dvs.85).aspx" title=3D"Debugging">Debuggi=
+ng</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg454513" title=3D"Downloads">Downloads</a>
+            <a class=3D"normal" href=3D"http://code.msdn.microsoft.com/w=
+indowshardware" title=3D"Samples">Samples</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg454517" title=3D"Community">Community</a>
+            <a class=3D"normal" href=3D"http://msdn.microsoft.com/window=
+s/hardware/gg566938" title=3D"Archives">Archives</a>
+    </div>
+    <div class=3D"clear"></div>
+
+        </div>
+    </div>
+
+
+        =
+
+            <div id=3D"body">
+                =
+
+
+
+
+
+
+
+
+    <div id=3D"leftNav">
+
+
+
+<div id=3D"tocnav">
+            <div class=3D"toclevel0" data-toclevel=3D"0">
+<a data-tochassubtree=3D"true" href=3D"/en-us/library/windows/hardware/f=
+f557557(v=3Dvs.85).aspx" id=3D"ff576019_VS.85_en-us" mtpsaliasid=3D"" mt=
+psassetid=3D"1ef3e216-1322-42c3-b070-94cddfb2133c_VS.85_en-us" mtpsshort=
+id=3D"ff557557_VS.85_en-us" title=3D"Device and Driver Technologies">Dev=
+ice and Driver Technologies</a>            </div>
+            <div class=3D"toclevel0" data-toclevel=3D"0">
+<a data-tochassubtree=3D"true" href=3D"/en-us/library/windows/hardware/f=
+f557547(v=3Dvs.85).aspx" id=3D"hh440424_VS.85_en-us" mtpsaliasid=3D"" mt=
+psassetid=3D"5cefa114-cec1-4058-a7a9-08e0b13fe412_VS.85_en-us" mtpsshort=
+id=3D"ff557547_VS.85_en-us" title=3D"Bus and Port Drivers">Bus and Port =
+Drivers</a>            </div>
+            <div class=3D"toclevel0" data-toclevel=3D"0">
+<a data-tochassubtree=3D"true" href=3D"/en-us/library/windows/hardware/f=
+f538930(v=3Dvs.85).aspx" id=3D"dn303474_VS.85_en-us" mtpsaliasid=3D"" mt=
+psassetid=3D"45ba2638-b1b9-409d-bd23-78e75a3515be_VS.85_en-us" mtpsshort=
+id=3D"ff538930_VS.85_en-us" title=3D"Universal Serial Bus (USB)">Univers=
+al Serial Bus (USB)</a>            </div>
+            <div class=3D"toclevel1" data-toclevel=3D"1">
+<a data-tochassubtree=3D"true" href=3D"/en-us/library/windows/hardware/d=
+n303342(v=3Dvs.85).aspx" id=3D"hh948125_VS.85_en-us" mtpsaliasid=3D"" mt=
+psassetid=3D"B3F1A1A6-0908-4144-8454-76A2FB70619B_VS.85_en-us" mtpsshort=
+id=3D"dn303342_VS.85_en-us" title=3D"Developing Windows applications for=
+ USB devices">Developing Windows applications for USB devices</a>       =
+     </div>
+            <div class=3D"toclevel2" data-toclevel=3D"2">
+<a data-tochassubtree=3D"true" href=3D"/en-us/library/windows/hardware/d=
+n303355(v=3Dvs.85).aspx" id=3D"jj151904_VS.85_en-us" mtpsaliasid=3D"" mt=
+psassetid=3D"" mtpsshortid=3D"" title=3D"Windows Store app for a USB dev=
+ice">Windows Store app for a USB device</a>            </div>
+            <div class=3D"toclevel2 current" data-toclevel=3D"2">
+<a href=3D"/en-us/library/windows/hardware/ff540174(v=3Dvs.85).aspx" mtp=
+saliasid=3D"" mtpsassetid=3D"" mtpsshortid=3D"" title=3D"How to Access a=
+ USB Device by Using WinUSB Functions">How to Access a USB Device by Usi=
+ng WinUSB Functions</a>            </div>
+</div>
+        =
+
+
+        =
+
+
+        =
+
+
+        =
+
+    </div>
+<div id=3D"content" class=3D"content">
+
+
+
+
+
+
+
+        =
+
+
+<div class=3D"topic" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <h1 class=3D"title">How to Access a USB Device by Using WinUSB Functio=
+ns</h1>
+  =
+
+  <div id=3D"mainSection">
+<div class=3D"clsServerSDKContent">
+
+</div>
+<p>In this topic you'll learn about how an application can call <a href=3D=
+"http://msdn.microsoft.com/en-us/library/windows/hardware/ff540046(v=3Dv=
+s.85).aspx#winusb">WinUSB Functions</a> to communicate with a USB device=
+. This topic assumes that you have loaded <a href=3D"http://msdn.microso=
+ft.com/en-us/library/windows/hardware/ff540196(v=3Dvs.85).aspx">WinUSB</=
+a> (Winusb.sys) as the device's function driver. WinUSB in the device's =
+kernel-mode stack. This driver is included in Windows in the \Windows\Sy=
+stem32\drivers folder.  For instructions about installing this driver, s=
+ee <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/f=
+f540283(v=3Dvs.85).aspx">WinUSB (Winusb.sys) Installation</a>.</p>
+<p>If you are using Winusb.sys as a USB device's function driver, you ca=
+n call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardwa=
+re/ff540046(v=3Dvs.85).aspx#winusb">WinUSB Functions</a> from an applica=
+tion to communicate with the device. These functions, exposed by the use=
+r-mode DLL Winusb.dll, simplify the communication process. Instead of co=
+nstructing device I/O control requests to perform standard USB operation=
+s (such as configuring the device, sending control requests, and transfe=
+rring data to or from the device), applications call the equivalent WinU=
+SB function. </p>
+<p>Winusb.dll uses the application-supplied data  to construct the appro=
+priate device I/O control request, and then sends the request to Winusb.=
+sys for processing. To  communicate with the USB stack, the  WinUSB func=
+tion calls the <a href=3D"http://msdn.microsoft.com/en-us/library/window=
+s/hardware/aa363216(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/=
+1999/xhtml">DeviceIoControl</strong></a> function with the appropriate I=
+OCTL that correlates to the application's request. =
+
+ When the request is complete, the WinUSB function passes any informatio=
+n returned by Winusb.sys (such as data from a read request) back to the =
+calling process. If the call to <strong>DeviceIoControl</strong> is succ=
+essful, it returns a nonzero value. If the call fails or is pending (not=
+ processed immediately), <strong>DeviceIoControl</strong> returns a zero=
+ value.  In case of an error, the application can call <a href=3D"http:/=
+/msdn.microsoft.com/en-us/library/windows/hardware/ms679360(v=3Dvs.85).a=
+spx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">GetLastError</strong=
+></a> for a more detailed error message. </p>
+<p>It is simpler to use WinUSB functions to communicate with a device th=
+an it is to implement a driver. However,  note the following limitations=
+:</p>
+<ul>
+<li>WinUSB functions allow one application at a time to communicate with=
+ the device. If you require  more than one application to communicate co=
+ncurrently with a device, you must implement a function driver.</li>
+<li>WinUSB functions do not support streaming data to or from isochronou=
+s endpoints. Isochronous transfers require a kernel-mode function driver=
+.</li>
+<li>WinUSB functions do not support devices that already have kernel-mod=
+e support. Examples of such devices include modems and network adapters,=
+ which are supported by the telephony API (TAPI) and NDIS, respectively.=
+</li>
+<li>For multifunction devices, you can use the device's INF file to spec=
+ify either an in-box kernel-mode driver or Winusb.sys for each USB funct=
+ion separately. However, you can specify only one of these options for a=
+ particular function, not both.
+
+</li>
+</ul>
+<p>You can install Winusb.sys as the function driver for a function in a=
+ USB composite device. This requires certain hardware ID modifications i=
+n the INF. For more information, see "Writing an .Inf File for WinUSB In=
+stallation" in<a href=3D"http://msdn.microsoft.com/en-us/library/windows=
+/hardware/ff540283(v=3Dvs.85).aspx"> WinUSB (Winusb.sys) Installation</a=
+>.</p>
+<p>Winusb.sys is also a key part of the link between a UMDF function dri=
+ver and the associated device. Winusb.sys is installed in the device's k=
+ernel-mode stack as an upper filter driver. An application communicates =
+with the device's UMDF function driver to issue read, write, or device I=
+/O control requests. The driver interacts with the framework, which pass=
+es the request to Winusb.sys. Winusb.sys then processes the request and =
+passes it to the protocol drivers and ultimately to the device. Any resp=
+onse returns by the reverse path. Winusb.sys also serves as the device s=
+tack's Plug and Play and power owner (PPO).
+</p><p><strong>Note</strong>=C2=A0=C2=A0WinUSB functions require Windows=
+ XP or later. You can use these functions in your C/C++ application to c=
+ommunicate with your USB device. Microsoft does not provide a managed AP=
+I for WinUSB.</p>
+
+<p>This topic includes a detailed walkthrough of how to use WinUSB funct=
+ions to communicate with a USB device that is using Winusb.sys as its fu=
+nction driver. </p>
+<p>
+</p><ul>
+<li><a href=3D"#pre">Prerequisites</a></li>
+<li><a href=3D"#setup">Set up the Project</a></li>
+<li><a href=3D"#filehandle">Create a File Handle for the Device </a></li=
+>
+<li><a href=3D"#winusb">Get a WinUSB Interface Handle for the Device</a>=
+</li>
+<li><a href=3D"#query">Query the Device for USB Descriptors</a></li>
+<li><a href=3D"#control">Send Control Transfer to the Default Endpoint</=
+a></li>
+<li><a href=3D"#IO">Issue I/O Requests</a></li>
+<li><a href=3D"#release_the_device_handles">Release the Device Handles</=
+a></li>
+<li><a href=3D"#implement_main">Implement Main</a></li>
+<li><a href=3D"#related_topics">Related topics</a></li>
+</ul>
+
+<h3><a id=3D"pre"></a><a id=3D"PRE"></a>Prerequisites</h3>
+<p>The following items apply to this walkthrough:</p>
+<ul>
+<li>This information applies to Windows=C2=A07,
+	Windows Server=C2=A02008, Windows=C2=A0Vista, and
+	Windows=C2=A0XP
+versions of Windows.</li>
+<li>You have installed Winusb.sys as the device's function driver. For m=
+ore information about this process, see <a href=3D"http://msdn.microsoft=
+.com/en-us/library/windows/hardware/ff540283(v=3Dvs.85).aspx">WinUSB (Wi=
+nusb.sys) Installation</a>.</li>
+<li>You are familiar with SetupAPI routines  that are used for device en=
+umeration. For more information, see <a href=3D"http://msdn.microsoft.co=
+m/en-us/library/windows/hardware/ff550855(v=3Dvs.85).aspx">SetupAPI</a>.=
+</li>
+<li>The examples in this topic are based on the OSR USB FX2 Learning Kit=
+ device. You can use these examples to extend the procedures to other US=
+B devices. The following illustration shows the layout of the OSR USB FX=
+2 device.</li>
+</ul><img id=3D"osrfx2" alt=3D"Ff540174.osrfx2(en-us,VS.85).jpg" src=3D"=
+http://i.msdn.microsoft.com/dynimg/IC392119.jpg" title=3D"Ff540174.osrfx=
+2(en-us,VS.85).jpg" xmlns=3D"" /><h3><a id=3D"setup"></a><a id=3D"SETUP"=
+></a>Set up the Project</h3>
+<ol>
+<li>Include the following header files in your source file.
+<div id=3D"code-snippet-1" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_2ddefd0b-f=
+0ef-4b9f-a8e3-3acf81a7461b');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_2ddefd0b-f0ef-4b9f-a8e3-3acf=
+81a7461b" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+<span style=3D"color:Green;">// Include Windows headers</span>
+#include &lt;windows.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;tchar.h&gt;
+#include &lt;strsafe.h&gt;
+
+<span style=3D"color:Green;">// Include WinUSB headers</span>
+#include &lt;winusb.h&gt;
+#include &lt;Usb100.h&gt;
+#include &lt;Setupapi.h&gt;
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<p>The header files, Winusb.h, Usb100.h, and Setupapi.h are included wit=
+h the WDK under <em>&lt;install_path&gt;</em><strong>\WINDDK\</strong><e=
+m>build_number</em><strong>\inc\ddk</strong>.</p>
+</li>
+<li>Add the following libraries that are linked to your application.
+<div id=3D"code-snippet-2" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_b5b86f1e-8=
+7d6-4298-87f7-3628c80bfd1c');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_b5b86f1e-87d6-4298-87f7-3628=
+c80bfd1c" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+<span style=3D"color:Green;">// Linked libraries</span>
+#pragma comment (lib , <span style=3D"color:#A31515;">"setupapi.lib"</sp=
+an> )
+#pragma comment (lib , <span style=3D"color:#A31515;">"winusb.lib"</span=
+> )
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<p>The library Winusb.lib is included with the WDK. The version for Wind=
+ows=C2=A0XP is located under <em>&lt;install_path&gt;</em><strong>\WINDD=
+K\</strong><em>build_number</em><strong>\lib\wxp\i386</strong>. There ar=
+e separate versions of Winusb.lib for Windows=C2=A0Vista for each suppor=
+ted CPU architecture. They are located under the <em>&lt;install_path&gt=
+;</em><strong>\WINDDK\</strong><em>build_number</em><strong>\lib\wlh</st=
+rong> folder.</p>
+</li>
+<li>Declare a constant for the device interface identifier that you prov=
+ided in the INF file for installing Winusb.sys.
+<div id=3D"code-snippet-3" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_fc3ce6b2-2=
+8f6-4711-8269-bc20f05ebdd3');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_fc3ce6b2-28f6-4711-8269-bc20=
+f05ebdd3" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+<span style=3D"color:Green;">// Constant for {D696BFEB-1734-417d-8A04-86=
+D01071C512}</span>
+<span style=3D"color:Blue;">static</span> <span style=3D"color:Blue;">co=
+nst</span> GUID OSR_DEVICE_INTERFACE =3D =
+
+{ 0xd696bfeb, 0x1734, 0x417d, { 0x8a, 0x04, 0x86, 0xd0, 0x10, 0x71, 0xc5=
+, 0x12 } };
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+</li>
+</ol>
+<h3><a id=3D"filehandle"></a><a id=3D"FILEHANDLE"></a>Create a File Hand=
+le for the Device </h3>
+<p>To access a USB device, you need a valid file handle for the device. =
+You can create this handle by calling <strong>CreateFile</strong>. This =
+function requests Winusb.sys for a device handle that an application can=
+ use to communicate with the device. <strong>CreateFile</strong> require=
+s the device path for the device for which to request the handle. To obt=
+ain the device path, you need the device interface GUID that you specifi=
+ed in the INF file that was used to install Winusb.sys. By using the <a =
+href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff55085=
+5(v=3Dvs.85).aspx">SetupAPI</a> routines, you can  enumerate all devices=
+ in the specified device interface class and retrieve the device path of=
+  the device. </p>
+<p class=3D"proch"><img id=3D"wedge" alt=3D"Ff540174.wedge(en-us,VS.85).=
+gif" src=3D"http://i.msdn.microsoft.com/areas/global/content/clear.gif" =
+title=3D"Ff540174.wedge(en-us,VS.85).gif" xmlns=3D"" class=3D"cl_IC15369=
+6" /><strong>Use the following steps to create a file handle for the USB=
+ device.</strong></p>
+<ol>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff551072(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">SetupDiGetClassDevs</strong></a> to get a handle to the <em>device=
+ information set</em>, an array that contains information about all inst=
+alled devices that matched the specified device interface class. Each el=
+ement in the array called a <em>device interface</em> corresponds to a d=
+evice that is installed and registered with the system. The device inter=
+face class is identified by passing the device interface GUID that you d=
+efined in the INF file. The function returns an HDEVINFO handle to the d=
+evice information set.</li>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff551015(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">SetupDiEnumDeviceInterfaces</strong></a> to enumerate the device i=
+nterfaces in the device information set and obtain information about you=
+r device interface. <p>This call requires the following items:</p>
+<ul>
+<li>An initialized caller-allocated <a href=3D"http://msdn.microsoft.com=
+/en-us/library/windows/hardware/ff552342(v=3Dvs.85).aspx"><strong xmlns=3D=
+"http://www.w3.org/1999/xhtml">SP_DEVICE_INTERFACE_DATA</strong></a> str=
+ucture that has its <strong>cbSize</strong> member set to the size of th=
+e structure.</li>
+<li>The HDEVINFO handle from step 1.</li>
+<li>The device interface GUID that you defined in the INF file.</li>
+</ul>
+<p>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff55=
+1015(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">Set=
+upDiEnumDeviceInterfaces</strong></a> looks up the device information se=
+t array for the specified index of the device interface and fills the in=
+itialized <a href=3D"http://msdn.microsoft.com/en-us/library/windows/har=
+dware/ff552342(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/=
+xhtml">SP_DEVICE_INTERFACE_DATA</strong></a> structure with basic data a=
+bout  the interface. </p><p><strong>Note</strong>=C2=A0=C2=A0 To enumera=
+te all the device interfaces in the device information set, call <a href=
+=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff551015(v=3D=
+vs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">SetupDiEnumD=
+eviceInterfaces</strong></a> in  a loop until the function returns <stro=
+ng>FALSE</strong> and the error code for the failure is ERROR_NO_MORE_IT=
+EMS. The ERROR_NO_MORE_ITEMS error code can be retrieved by calling <str=
+ong>GetLastError</strong>. With each iteration, increment the member ind=
+ex. </p><p class=3D"note">Alternately, you can call <a href=3D"http://ms=
+dn.microsoft.com/en-us/library/windows/hardware/ff551010(v=3Dvs.85).aspx=
+"><strong xmlns=3D"http://www.w3.org/1999/xhtml">SetupDiEnumDeviceInfo</=
+strong></a> that enumerates the device information set and returns infor=
+mation about device interface elements, specified by the index, in a cal=
+ler-allocated <a href=3D"http://msdn.microsoft.com/en-us/library/windows=
+/hardware/ff552344(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1=
+999/xhtml">SP_DEVINFO_DATA</strong></a> structure. You can then pass a r=
+eference to this structure in the <em>DeviceInfoData</em>  parameter of =
+the <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/=
+ff551015(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml"=
+>SetupDiEnumDeviceInterfaces</strong></a> function.</p>
+
+
+</li>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff551120(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">SetupDiGetDeviceInterfaceDetail</strong></a> to get detailed data =
+for the device interface. The information is returned in a <a href=3D"ht=
+tp://msdn.microsoft.com/en-us/library/windows/hardware/ff552343(v=3Dvs.8=
+5).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">SP_DEVICE_INTERF=
+ACE_DETAIL_DATA</strong></a> structure.
+Because the size of the <strong>SP_DEVICE_INTERFACE_DETAIL_DATA</strong>=
+ structure varies, you need to call <strong>SetupDiGetDeviceInterfaceDet=
+ail</strong> two times. The first call gets the buffer size to allocate =
+for the <strong>SP_DEVICE_INTERFACE_DETAIL_DATA</strong> structure. The =
+second call fills the allocated buffer with detailed information about t=
+he interface.<ol>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff551120(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">SetupDiGetDeviceInterfaceDetail</strong></a> with <em>DeviceInterf=
+aceDetailData</em> parameter set to <strong>NULL</strong>.
+The function returns the correct buffer size in the <em>requiredlength</=
+em> parameter. This call fails with the ERROR_INSUFFICIENT_BUFFER error =
+code. This error code is expected.</li>
+<li>Allocate memory for a <a href=3D"http://msdn.microsoft.com/en-us/lib=
+rary/windows/hardware/ff552343(v=3Dvs.85).aspx"><strong xmlns=3D"http://=
+www.w3.org/1999/xhtml">SP_DEVICE_INTERFACE_DETAIL_DATA</strong></a> stru=
+cture based on the correct buffer size that is retrieved in the <em>requ=
+iredlength</em> parameter.</li>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff551120(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">SetupDiGetDeviceInterfaceDetail</strong></a> again and pass it a r=
+eference to the initialized structure in the <em>DeviceInterfaceDetailDa=
+ta</em> parameter. When the function returns, the structure is filled wi=
+th detailed information about the interface. The device path is in the <=
+a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff552=
+343(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">SP_D=
+EVICE_INTERFACE_DETAIL_DATA</strong></a> structure's <strong>DevicePath<=
+/strong> member.
+</li>
+</ol>
+</li>
+<li>Call <strong>CreateFile</strong> to create a file handle for the dev=
+ice. For this step, you need a  null-terminated string that contains the=
+ device path that was received in the  <a href=3D"http://msdn.microsoft.=
+com/en-us/library/windows/hardware/ff552343(v=3Dvs.85).aspx"><strong xml=
+ns=3D"http://www.w3.org/1999/xhtml">SP_DEVICE_INTERFACE_DETAIL_DATA</str=
+ong></a> structure's <strong>DevicePath</strong> member.
+Pass the device path to <strong>CreateFile</strong> to obtain a file han=
+dle for the device. Make sure that you set the FILE_FLAG_OVERLAPPED flag=
+ because WinUSB depends on this setting.</li>
+</ol>
+<p>The following example code creates a file handle that supports synchr=
+onous read and write access to the device. For more information about ho=
+w to open a file handle for asynchronous I/O, see the Remarks section in=
+ <strong>CreateFile</strong>.</p>
+
+<div id=3D"code-snippet-4" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_7f22c9a4-d=
+404-4cc8-92c3-0864506742e8');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_7f22c9a4-d404-4cc8-92c3-0864=
+506742e8" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+
+BOOL GetDeviceHandle (GUID guidDeviceInterface, PHANDLE hDeviceHandle)
+{
+    <span style=3D"color:Blue;">if</span> (guidDeviceInterface=3D=3DGUID=
+_NULL)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+    HDEVINFO hDeviceInfo;
+    SP_DEVINFO_DATA DeviceInfoData;
+
+    SP_DEVICE_INTERFACE_DATA deviceInterfaceData;
+    PSP_DEVICE_INTERFACE_DETAIL_DATA pInterfaceDetailData =3D NULL;
+
+    ULONG requiredLength=3D0;
+
+    LPTSTR lpDevicePath =3D NULL;
+
+    DWORD index =3D 0;
+
+    <span style=3D"color:Green;">// Get information about all the instal=
+led devices for the specified</span>
+    <span style=3D"color:Green;">// device interface class.</span>
+    hDeviceInfo =3D SetupDiGetClassDevs( =
+
+        &amp;guidDeviceInterface,
+        NULL, =
+
+        NULL,
+        DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
+
+    <span style=3D"color:Blue;">if</span> (hDeviceInfo =3D=3D INVALID_HA=
+NDLE_VALUE) =
+
+    { =
+
+        <span style=3D"color:Green;">// ERROR </span>
+        printf(<span style=3D"color:#A31515;">"Error SetupDiGetClassDevs=
+: %d.\n"</span>, GetLastError());
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    <span style=3D"color:Green;">//Enumerate all the device interfaces i=
+n the device information set.</span>
+    DeviceInfoData.cbSize =3D <span style=3D"color:Blue;">sizeof</span>(=
+SP_DEVINFO_DATA);
+
+    <span style=3D"color:Blue;">for</span> (index =3D 0; SetupDiEnumDevi=
+ceInfo(hDeviceInfo, index, &amp;DeviceInfoData); index++)
+    {
+        <span style=3D"color:Green;">//Reset for this iteration</span>
+        <span style=3D"color:Blue;">if</span> (lpDevicePath)
+        {
+            LocalFree(lpDevicePath);
+        }
+        <span style=3D"color:Blue;">if</span> (pInterfaceDetailData)
+        {
+            LocalFree(pInterfaceDetailData);
+        }
+
+        deviceInterfaceData.cbSize =3D <span style=3D"color:Blue;">sizeo=
+f</span>(SP_INTERFACE_DEVICE_DATA);
+
+        <span style=3D"color:Green;">//Get information about the device =
+interface.</span>
+        bResult =3D SetupDiEnumDeviceInterfaces( =
+
+           hDeviceInfo,
+           &amp;DeviceInfoData,
+           &amp;guidDeviceInterface,
+           0, =
+
+           &amp;deviceInterfaceData);
+
+        <span style=3D"color:Green;">// Check if last item</span>
+        <span style=3D"color:Blue;">if</span> (GetLastError () =3D=3D ER=
+ROR_NO_MORE_ITEMS)
+        {
+            <span style=3D"color:Blue;">break</span>;
+        }
+
+        <span style=3D"color:Green;">//Check for some other error</span>=
+
+        <span style=3D"color:Blue;">if</span> (!bResult) =
+
+        {
+            printf(<span style=3D"color:#A31515;">"Error SetupDiEnumDevi=
+ceInterfaces: %d.\n"</span>, GetLastError());
+            <span style=3D"color:Blue;">goto</span> done;
+        }
+
+        <span style=3D"color:Green;">//Interface data is returned in SP_=
+DEVICE_INTERFACE_DETAIL_DATA</span>
+        <span style=3D"color:Green;">//which we need to allocate, so we =
+have to call this function twice.</span>
+        <span style=3D"color:Green;">//First to get the size so that we =
+know how much to allocate</span>
+        <span style=3D"color:Green;">//Second, the actual call with the =
+allocated buffer</span>
+        =
+
+        bResult =3D SetupDiGetDeviceInterfaceDetail(
+            hDeviceInfo,
+            &amp;deviceInterfaceData,
+            NULL, 0,
+            &amp;requiredLength,
+            NULL);
+
+
+        <span style=3D"color:Green;">//Check for some other error</span>=
+
+        <span style=3D"color:Blue;">if</span> (!bResult) =
+
+        {
+            <span style=3D"color:Blue;">if</span> ((ERROR_INSUFFICIENT_B=
+UFFER=3D=3DGetLastError()) &amp;&amp; (requiredLength&gt;0))
+            {
+                <span style=3D"color:Green;">//we got the size, allocate=
+ buffer</span>
+                pInterfaceDetailData =3D (PSP_DEVICE_INTERFACE_DETAIL_DA=
+TA)LocalAlloc(LPTR, requiredLength);
+                =
+
+                <span style=3D"color:Blue;">if</span> (!pInterfaceDetail=
+Data) =
+
+                { =
+
+                    <span style=3D"color:Green;">// ERROR </span>
+                    printf(<span style=3D"color:#A31515;">"Error allocat=
+ing memory for the device detail buffer.\n"</span>);
+                    <span style=3D"color:Blue;">goto</span> done;
+                }
+            }
+            <span style=3D"color:Blue;">else</span>
+            {
+                printf(<span style=3D"color:#A31515;">"Error SetupDiEnum=
+DeviceInterfaces: %d.\n"</span>, GetLastError());
+                <span style=3D"color:Blue;">goto</span> done;
+            }
+        }
+
+        <span style=3D"color:Green;">//get the interface detailed data</=
+span>
+        pInterfaceDetailData-&gt;cbSize =3D <span style=3D"color:Blue;">=
+sizeof</span>(SP_DEVICE_INTERFACE_DETAIL_DATA);
+
+        <span style=3D"color:Green;">//Now call it with the correct size=
+ and allocated buffer</span>
+        bResult =3D SetupDiGetDeviceInterfaceDetail(
+                hDeviceInfo,
+                &amp;deviceInterfaceData,
+                pInterfaceDetailData,
+                requiredLength,
+                NULL,
+                &amp;DeviceInfoData);
+        =
+
+        <span style=3D"color:Green;">//Check for some other error</span>=
+
+        <span style=3D"color:Blue;">if</span> (!bResult) =
+
+        {
+            printf(<span style=3D"color:#A31515;">"Error SetupDiGetDevic=
+eInterfaceDetail: %d.\n"</span>, GetLastError());
+            <span style=3D"color:Blue;">goto</span> done;
+        }
+
+        <span style=3D"color:Green;">//copy device path</span>
+                =
+
+        size_t nLength =3D wcslen (pInterfaceDetailData-&gt;DevicePath) =
++ 1;  =
+
+        lpDevicePath =3D (TCHAR *) LocalAlloc (LPTR, nLength * <span sty=
+le=3D"color:Blue;">sizeof</span>(TCHAR));
+        StringCchCopy(lpDevicePath, nLength, pInterfaceDetailData-&gt;De=
+vicePath);
+        lpDevicePath[nLength-1] =3D 0;
+                        =
+
+        printf(<span style=3D"color:#A31515;">"Device path:  %s\n"</span=
+>, lpDevicePath);
+
+    }
+
+    <span style=3D"color:Blue;">if</span> (!lpDevicePath)
+    {
+        <span style=3D"color:Green;">//Error.</span>
+        printf(<span style=3D"color:#A31515;">"Error %d."</span>, GetLas=
+tError());
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    <span style=3D"color:Green;">//Open the device</span>
+    *hDeviceHandle =3D CreateFile (
+        lpDevicePath,
+        GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,
+        OPEN_EXISTING,
+        FILE_FLAG_OVERLAPPED,
+        NULL);
+
+    <span style=3D"color:Blue;">if</span> (*hDeviceHandle =3D=3D INVALID=
+_HANDLE_VALUE)
+    {
+        <span style=3D"color:Green;">//Error.</span>
+        printf(<span style=3D"color:#A31515;">"Error %d."</span>, GetLas=
+tError());
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+
+
+done:
+    LocalFree(lpDevicePath);
+    LocalFree(pInterfaceDetailData);    =
+
+    bResult =3D SetupDiDestroyDeviceInfoList(hDeviceInfo);
+    =
+
+    <span style=3D"color:Blue;">return</span> bResult;
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"winusb"></a><a id=3D"WINUSB"></a>Get a WinUSB Interface Han=
+dle for the Device</h3>
+<p>Next, using the file handle for the device, create a WinUSB interface=
+ handle to the first (default) interface on the device. WinUSB routines =
+use this handle to identify the target device instead of the file handle=
+. To obtain a WinUSB interface handle, call <a href=3D"http://msdn.micro=
+soft.com/en-us/library/windows/hardware/ff540277(v=3Dvs.85).aspx"><stron=
+g xmlns=3D"http://www.w3.org/1999/xhtml">WinUsb_Initialize</strong></a> =
+by passing the file handle created in <a href=3D"#filehandle">Create a F=
+ile Handle for the Device</a>. Use the received handle in the subsequent=
+ calls to get information from the device, and to send I/O requests to t=
+he device.</p>
+<p>The following example code initializes WinUSB with the file handle th=
+at was created in the previous step and retrieves a pointer to the WinUS=
+B interface handle for the device interface.</p>
+
+<div id=3D"code-snippet-5" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_1f195b7d-c=
+19f-498f-b964-5f6d1d2d9b79');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_1f195b7d-c19f-498f-b964-5f6d=
+1d2d9b79" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+BOOL GetWinUSBHandle(HANDLE hDeviceHandle, PWINUSB_INTERFACE_HANDLE phWi=
+nUSBHandle)
+{
+    <span style=3D"color:Blue;">if</span> (hDeviceHandle =3D=3D INVALID_=
+HANDLE_VALUE)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D WinUsb_Initialize(hDeviceHandle, phWinUSBHandle);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Green;">//Error.</span>
+        printf(<span style=3D"color:#A31515;">"WinUsb_Initialize Error %=
+d."</span>, GetLastError());
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    <span style=3D"color:Blue;">return</span> bResult;
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"query"></a><a id=3D"QUERY"></a>Query the Device for USB Des=
+criptors</h3>
+<p>Next, query the device for USB-specific information such as device sp=
+eed, interface descriptors, related endpoints, and their pipes. The proc=
+edure is similar to the one that USB device drivers use. However, the ap=
+plication completes device queries by calling WinUSB functions instead o=
+f the WDF framework libraries or any of the Windows WDM USB client suppo=
+rt routines.</p>
+<p>The following list shows the WinUSB functions that you can call to ge=
+t USB-specific information:</p>
+<ul>
+<li>Device descriptor<p>Call <a href=3D"http://msdn.microsoft.com/en-us/=
+library/windows/hardware/ff540290(v=3Dvs.85).aspx"><strong xmlns=3D"http=
+://www.w3.org/1999/xhtml">WinUsb_QueryDeviceInformation</strong></a> to =
+request information from the device descriptors for the device. To get t=
+he device's speed, set DEVICE_SPEED (0x01) in the <em>InformationType</e=
+m> parameter. The function returns LowSpeed (0x01) or HighSpeed (0x03).
+</p>
+</li>
+<li>Interface descriptors<p>Call <a href=3D"http://msdn.microsoft.com/en=
+-us/library/windows/hardware/ff540292(v=3Dvs.85).aspx"><strong xmlns=3D"=
+http://www.w3.org/1999/xhtml">WinUsb_QueryInterfaceSettings</strong></a>=
+ and pass the device's interface handles to obtain the corresponding int=
+erface descriptors. The WinUSB interface handle corresponds to the first=
+ interface. Some USB devices, such as the OSR Fx2 device, support only o=
+ne interface without any alternative setting. Therefore, for these devic=
+es the  <em>AlternateSettingNumber</em> parameter is set to zero and the=
+ function is called only one time. <strong>WinUsb_QueryInterfaceSettings=
+</strong> fills the  caller-allocated <a href=3D"http://msdn.microsoft.c=
+om/en-us/library/windows/hardware/ff540065(v=3Dvs.85).aspx"><strong xmln=
+s=3D"http://www.w3.org/1999/xhtml">USB_INTERFACE_DESCRIPTOR</strong></a>=
+ structure (passed in the  <em>UsbAltInterfaceDescriptor</em> parameter)=
+ with information about the interface. For example, the number of endpoi=
+nts in the interface is set in the <strong>bNumEndpoints</strong> member=
+  of <strong>USB_INTERFACE_DESCRIPTOR</strong>.
+</p>
+<p>For devices that support multiple interfaces, call <a href=3D"http://=
+msdn.microsoft.com/en-us/library/windows/hardware/ff540245(v=3Dvs.85).as=
+px"><strong xmlns=3D"http://www.w3.org/1999/xhtml">WinUsb_GetAssociatedI=
+nterface</strong></a> to obtain interface handles for associated interfa=
+ces by specifying the alternative settings in the <em>AssociatedInterfac=
+eIndex</em> parameter.
+</p>
+</li>
+<li>Endpoints<p>Call <a href=3D"http://msdn.microsoft.com/en-us/library/=
+windows/hardware/ff540293(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w=
+3.org/1999/xhtml">WinUsb_QueryPipe</strong></a> to obtain information ab=
+out each endpoint on each interface. <strong>WinUsb_QueryPipe</strong> p=
+opulates the caller-allocated <a href=3D"http://msdn.microsoft.com/en-us=
+/library/windows/hardware/ff540285(v=3Dvs.85).aspx"><strong xmlns=3D"htt=
+p://www.w3.org/1999/xhtml">WINUSB_PIPE_INFORMATION</strong></a> structur=
+e with information about the specified endpoint's pipe. The endpoints' p=
+ipes are identified by a zero-based index, and must be less than the val=
+ue in the <strong>bNumEndpoints</strong> member of the interface descrip=
+tor that is retrieved in the previous call to <a href=3D"http://msdn.mic=
+rosoft.com/en-us/library/windows/hardware/ff540292(v=3Dvs.85).aspx"><str=
+ong xmlns=3D"http://www.w3.org/1999/xhtml">WinUsb_QueryInterfaceSettings=
+</strong></a>.
+The OSR Fx2 device has one interface that has three endpoints. For this =
+device, the function's <em>AlternateInterfaceNumber</em> parameter is se=
+t to 0, and the value of the <em>PipeIndex</em> parameter varies from 0 =
+to 2.</p>
+<p> To determine the pipe type, examine the <a href=3D"http://msdn.micro=
+soft.com/en-us/library/windows/hardware/ff540285(v=3Dvs.85).aspx"><stron=
+g xmlns=3D"http://www.w3.org/1999/xhtml">WINUSB_PIPE_INFORMATION</strong=
+></a> structure's <strong>PipeInfo</strong> member. This member is set t=
+o one of the <a href=3D"http://msdn.microsoft.com/en-us/library/windows/=
+hardware/ff539119(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/19=
+99/xhtml">USBD_PIPE_TYPE</strong></a> enumeration values: UsbdPipeTypeCo=
+ntrol, UsbdPipeTypeIsochronous, UsbdPipeTypeBulk, or UsbdPipeTypeInterru=
+pt.
+The OSR USB FX2 device supports an interrupt pipe, a bulk-in pipe, and a=
+ bulk-out pipe, so <strong>PipeInfo</strong> is set to either UsbdPipeTy=
+peInterrupt or UsbdPipeTypeBulk.
+The UsbdPipeTypeBulk value identifies bulk pipes, but does not provide t=
+he pipe's direction. The direction information is encoded in the high bi=
+t of the pipe address, which is stored in the <strong>WINUSB_PIPE_INFORM=
+ATION</strong> structure's <strong>PipeId</strong> member. The simplest =
+way to determine the direction of the pipe is to pass the <strong>PipeId=
+</strong> value to one of the following macros from Usb100.h:</p><ul>
+<li>The <code>USB_ENDPOINT_DIRECTION_IN (PipeId)</code> macro returns <s=
+trong>TRUE</strong> if the direction is in.</li>
+<li>The <code>USB_ENDPOINT_DIRECTION_OUT(PipeId)</code> macro returns <s=
+trong>TRUE</strong> if the direction is out.</li>
+</ul>
+The application uses the <strong>PipeId</strong> value to identify which=
+ pipe to use for data transfer in calls to WinUSB functions, such as <a =
+href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54029=
+7(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">WinUsb=
+_ReadPipe</strong></a> (described in the "Issue I/O Requests" section of=
+ this topic), so the example stores all three <strong>PipeId</strong> va=
+lues for later use.
+</li>
+</ul>
+<p>The following example code gets the speed of the device that is speci=
+fied by the WinUSB interface handle. </p>
+
+<div id=3D"code-snippet-6" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_48e4cf03-e=
+34b-4c8a-9393-e54aaf6173ab');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_48e4cf03-e34b-4c8a-9393-e54a=
+af6173ab" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+BOOL GetUSBDeviceSpeed(WINUSB_INTERFACE_HANDLE hDeviceHandle, UCHAR* pDe=
+viceSpeed)
+{
+    <span style=3D"color:Blue;">if</span> (!pDeviceSpeed || hDeviceHandl=
+e=3D=3DINVALID_HANDLE_VALUE)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+
+    ULONG length =3D <span style=3D"color:Blue;">sizeof</span>(UCHAR);
+
+    bResult =3D WinUsb_QueryDeviceInformation(hDeviceHandle, DEVICE_SPEE=
+D, &amp;length, pDeviceSpeed);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        printf(<span style=3D"color:#A31515;">"Error getting device spee=
+d: %d.\n"</span>, GetLastError());
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    <span style=3D"color:Blue;">if</span>(*pDeviceSpeed =3D=3D LowSpeed)=
+
+    {
+        printf(<span style=3D"color:#A31515;">"Device speed: %d (Low spe=
+ed).\n"</span>, *pDeviceSpeed);
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+    <span style=3D"color:Blue;">if</span>(*pDeviceSpeed =3D=3D FullSpeed=
+)
+    {
+        printf(<span style=3D"color:#A31515;">"Device speed: %d (Full sp=
+eed).\n"</span>, *pDeviceSpeed);
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+    <span style=3D"color:Blue;">if</span>(*pDeviceSpeed =3D=3D HighSpeed=
+)
+    {
+        printf(<span style=3D"color:#A31515;">"Device speed: %d (High sp=
+eed).\n"</span>, *pDeviceSpeed);
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+done:
+    <span style=3D"color:Blue;">return</span> bResult;
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<p>The following example code queries the various descriptors for the US=
+B device that is specified by the WinUSB interface handle. The example f=
+unction retrieves the types of supported endpoints and their pipe identi=
+fiers. The example stores all three PipeId values for later use. </p>
+
+<div id=3D"code-snippet-7" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_aa8e62b3-5=
+83b-4ff7-a64d-5fe9488c7144');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_aa8e62b3-583b-4ff7-a64d-5fe9=
+488c7144" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+<span style=3D"color:Blue;">struct</span> PIPE_ID
+{
+    UCHAR  PipeInId;
+    UCHAR  PipeOutId;
+};
+
+BOOL QueryDeviceEndpoints (WINUSB_INTERFACE_HANDLE hDeviceHandle, PIPE_I=
+D* pipeid)
+{
+    <span style=3D"color:Blue;">if</span> (hDeviceHandle=3D=3DINVALID_HA=
+NDLE_VALUE)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+
+    USB_INTERFACE_DESCRIPTOR InterfaceDescriptor;
+    ZeroMemory(&amp;InterfaceDescriptor, <span style=3D"color:Blue;">siz=
+eof</span>(USB_INTERFACE_DESCRIPTOR));
+
+    WINUSB_PIPE_INFORMATION  Pipe;
+    ZeroMemory(&amp;Pipe, <span style=3D"color:Blue;">sizeof</span>(WINU=
+SB_PIPE_INFORMATION));
+
+    =
+
+    bResult =3D WinUsb_QueryInterfaceSettings(hDeviceHandle, 0, &amp;Int=
+erfaceDescriptor);
+
+    <span style=3D"color:Blue;">if</span> (bResult)
+    {
+        <span style=3D"color:Blue;">for</span> (<span style=3D"color:Blu=
+e;">int</span> index =3D 0; index &lt; InterfaceDescriptor.bNumEndpoints=
+; index++)
+        {
+            bResult =3D WinUsb_QueryPipe(hDeviceHandle, 0, index, &amp;P=
+ipe);
+
+            <span style=3D"color:Blue;">if</span> (bResult)
+            {
+                <span style=3D"color:Blue;">if</span> (Pipe.PipeType =3D=
+=3D UsbdPipeTypeControl)
+                {
+                    printf(<span style=3D"color:#A31515;">"Endpoint inde=
+x: %d Pipe type: Control Pipe ID: %d.\n"</span>, index, Pipe.PipeType, P=
+ipe.PipeId);
+                }
+                <span style=3D"color:Blue;">if</span> (Pipe.PipeType =3D=
+=3D UsbdPipeTypeIsochronous)
+                {
+                    printf(<span style=3D"color:#A31515;">"Endpoint inde=
+x: %d Pipe type: Isochronous Pipe ID: %d.\n"</span>, index, Pipe.PipeTyp=
+e, Pipe.PipeId);
+                }
+                <span style=3D"color:Blue;">if</span> (Pipe.PipeType =3D=
+=3D UsbdPipeTypeBulk)
+                {
+                    <span style=3D"color:Blue;">if</span> (USB_ENDPOINT_=
+DIRECTION_IN(Pipe.PipeId))
+                    {
+                        printf(<span style=3D"color:#A31515;">"Endpoint =
+index: %d Pipe type: Bulk Pipe ID: %c.\n"</span>, index, Pipe.PipeType, =
+Pipe.PipeId);
+                        pipeid-&gt;PipeInId =3D Pipe.PipeId;
+                    }
+                    <span style=3D"color:Blue;">if</span> (USB_ENDPOINT_=
+DIRECTION_OUT(Pipe.PipeId))
+                    {
+                        printf(<span style=3D"color:#A31515;">"Endpoint =
+index: %d Pipe type: Bulk Pipe ID: %c.\n"</span>, index, Pipe.PipeType, =
+Pipe.PipeId);
+                        pipeid-&gt;PipeOutId =3D Pipe.PipeId;
+                    }
+
+                }
+                <span style=3D"color:Blue;">if</span> (Pipe.PipeType =3D=
+=3D UsbdPipeTypeInterrupt)
+                {
+                    printf(<span style=3D"color:#A31515;">"Endpoint inde=
+x: %d Pipe type: Interrupt Pipe ID: %d.\n"</span>, index, Pipe.PipeType,=
+ Pipe.PipeId);
+                }
+            }
+            <span style=3D"color:Blue;">else</span>
+            {
+                <span style=3D"color:Blue;">continue</span>;
+            }
+        }
+    }
+
+done:
+    <span style=3D"color:Blue;">return</span> bResult;
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"control"></a><a id=3D"CONTROL"></a>Send Control Transfer to=
+ the Default Endpoint</h3>
+<p>Next, communicate with the device by issuing control request to the d=
+efault endpoint. </p>
+<p>All USB devices have a default endpoint in addition to the endpoints =
+that are associated with interfaces. The primary purpose of the default =
+endpoint is to provide the host with information that it can use to conf=
+igure the device. However, devices can also use the default endpoint for=
+ device-specific purposes. For example, the OSR USB FX2 device uses the =
+default endpoint to control the light bar and seven-segment digital disp=
+lay.</p>
+<p>Control commands consist of an 8-byte setup packet, which includes a =
+request code that specifies the particular request, and an optional data=
+ buffer. The request codes and buffer formats are vendor defined. In thi=
+s example, the application sends data to the device to control the light=
+ bar. The code to set the light bar is 0xD8, which is defined for conven=
+ience as SET_BARGRAPH_DISPLAY. For this request, the device requires a 1=
+-byte data buffer that specifies which elements should be lit by setting=
+ the appropriate bits. </p>
+<p>The application can set this through the user interface (UI), such as=
+ by providing a set of eight check box controls to specify which element=
+s of the light bar should be lit. The specified elements correspond to t=
+he appropriate bits in the buffer.
+To avoid UI code, the example code in this section sets the bits so that=
+ alternate lights get lit up.</p>
+<p>
+</p><p class=3D"proch"><img id=3D"wedge" alt=3D"Ff540174.wedge(en-us,VS.=
+85).gif" src=3D"http://i.msdn.microsoft.com/areas/global/content/clear.g=
+if" title=3D"Ff540174.wedge(en-us,VS.85).gif" xmlns=3D"" class=3D"cl_IC1=
+53696" /><strong>Use the following steps to issue a control request.</st=
+rong></p>
+<ol>
+<li>Allocate a 1-byte data buffer and load the data into the buffer that=
+ specifies the elements that should be lit by setting the appropriate bi=
+ts. </li>
+<li>Construct a setup packet in a caller-allocated <a href=3D"http://msd=
+n.microsoft.com/en-us/library/windows/hardware/ff540313(v=3Dvs.85).aspx"=
+><strong xmlns=3D"http://www.w3.org/1999/xhtml">WINUSB_SETUP_PACKET</str=
+ong></a> structure. Initialize the members to represent the request type=
+ and data as follows:<ul>
+<li>The <strong>RequestType</strong> member specifies request direction.=
+ It is set to 0, which indicates host-to-device data transfer. For devic=
+e-to-host transfers, set RequestType to 1.</li>
+<li>The <strong>Request</strong> member is set to the vendor-defined cod=
+e for this request, 0xD8. It is defined for convenience as SET_BARGRAPH_=
+DISPLAY.</li>
+<li>The <strong>Length</strong> member is set to the size of the data bu=
+ffer.
+
+</li>
+<li>The <strong>Index</strong> and <strong>Value</strong> members are no=
+t required for this request, so they are set to zero.</li>
+</ul>
+</li>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff540219(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">WinUsb_ControlTransfer</strong></a> to transmit the  request to th=
+e default endpoint by passing the device's WinUSB interface handle, the =
+setup packet, and the data buffer. The function receives the number of b=
+ytes that were transferred to the device in the <em>LengthTransferred</e=
+m> parameter.
+</li>
+</ol>
+
+<p>The following  code example sends a control request to the specified =
+USB device to control the lights on the light bar.</p>
+
+<div id=3D"code-snippet-8" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_be73efaf-2=
+1f1-4a34-922f-99e5fbe41f56');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_be73efaf-21f1-4a34-922f-99e5=
+fbe41f56" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+
+BOOL SendDatatoDefaultEndpoint(WINUSB_INTERFACE_HANDLE hDeviceHandle)
+{
+    <span style=3D"color:Blue;">if</span> (hDeviceHandle=3D=3DINVALID_HA=
+NDLE_VALUE)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+
+    =
+
+    UCHAR bars =3D 0;
+
+    WINUSB_SETUP_PACKET SetupPacket;
+    ZeroMemory(&amp;SetupPacket, <span style=3D"color:Blue;">sizeof</spa=
+n>(WINUSB_SETUP_PACKET));
+    ULONG cbSent =3D 0;
+
+    <span style=3D"color:Green;">//Set bits to light alternate bars</spa=
+n>
+    <span style=3D"color:Blue;">for</span> (<span style=3D"color:Blue;">=
+short</span> i =3D 0; i &lt; 7; i+=3D 2)
+    {
+        bars +=3D 1 &lt;&lt; i;
+    }
+
+    <span style=3D"color:Green;">//Create the setup packet</span>
+    SetupPacket.RequestType =3D 0;
+    SetupPacket.Request =3D 0xD8;
+    SetupPacket.Value =3D 0;
+    SetupPacket.Index =3D 0; =
+
+    SetupPacket.Length =3D <span style=3D"color:Blue;">sizeof</span>(UCH=
+AR);
+
+    bResult =3D WinUsb_ControlTransfer(hDeviceHandle, SetupPacket, &amp;=
+bars, <span style=3D"color:Blue;">sizeof</span>(UCHAR), &amp;cbSent, 0);=
+
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    printf(<span style=3D"color:#A31515;">"Data sent: %d \nActual data t=
+ransferred: %d.\n"</span>, <span style=3D"color:Blue;">sizeof</span>(bar=
+s), cbSent);
+
+
+done:
+    <span style=3D"color:Blue;">return</span> bResult;
+
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"IO"></a><a id=3D"io"></a>Issue I/O Requests</h3>
+<p>Next, send data to the device's bulk-in and bulk-out endpoints that c=
+an be used for read and write requests, respectively. On the OSR USB FX2=
+ device, these two endpoints are configured for loopback, so the device =
+moves data from the bulk-in endpoint to the bulk-out endpoint. It does n=
+ot change the value of the data or add any new data. For loopback config=
+uration, a read request reads the data that was sent by the most recent =
+write request. WinUSB provides the following functions for sending write=
+ and read requests: </p><ul>
+<li>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0322(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">Win=
+Usb_WritePipe</strong></a>
+</li>
+<li>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0297(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">Win=
+Usb_ReadPipe</strong></a>
+</li>
+</ul>
+<p class=3D"proch"><img id=3D"wedge" alt=3D"Ff540174.wedge(en-us,VS.85).=
+gif" src=3D"http://i.msdn.microsoft.com/areas/global/content/clear.gif" =
+title=3D"Ff540174.wedge(en-us,VS.85).gif" xmlns=3D"" class=3D"cl_IC15369=
+6" /><strong>To send a write request</strong></p>
+<ol>
+<li>Allocate a buffer and fill it with the data that you want to write t=
+o the device. There is no limitation on the buffer size if the applicati=
+on does not set RAW_IO as the pipe's policy type. WinUSB divides the buf=
+fer into appropriately sized chunks, if necessary. If RAW_IO is set, the=
+ size of the buffer is limited by the maximum transfer size supported by=
+ WinUSB. </li>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff540322(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">WinUsb_WritePipe</strong></a> to write the buffer to the device. P=
+ass the WinUSB interface handle for the device, the pipe identifier for =
+the bulk-out pipe (as described in the <a href=3D"#query">Query the Devi=
+ce for USB Descriptors</a> section of this topic), and the buffer. The f=
+unction returns the number of bytes that are actually written to the dev=
+ice in the <em>bytesWritten</em> parameter.
+The <em>Overlapped</em>   parameter is set to <strong>NULL</strong> to r=
+equest a synchronous operation. To perform an asynchronous write request=
+, set <em>Overlapped</em> to a pointer to an <strong>OVERLAPPED</strong>=
+ structure.
+</li>
+</ol>Write requests that contain zero-length data are forwarded down the=
+ USB stack. If the transfer length is greater than a maximum transfer le=
+ngth, WinUSB divides the request into smaller requests of maximum transf=
+er length and submits them serially.
+<p>The following  code example allocates a string and sends it  to the b=
+ulk-out endpoint of the device.
+</p>
+
+<div id=3D"code-snippet-9" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_3527e183-f=
+f86-49a4-847f-2c3e61d9dd73');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_3527e183-ff86-49a4-847f-2c3e=
+61d9dd73" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+BOOL WriteToBulkEndpoint(WINUSB_INTERFACE_HANDLE hDeviceHandle, UCHAR* p=
+ID, ULONG* pcbWritten)
+{
+    <span style=3D"color:Blue;">if</span> (hDeviceHandle=3D=3DINVALID_HA=
+NDLE_VALUE || !pID || !pcbWritten)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+
+    UCHAR szBuffer[] =3D <span style=3D"color:#A31515;">"Hello World"</s=
+pan>;
+    ULONG cbSize =3D strlen(szBuffer);
+    ULONG cbSent =3D 0;
+
+    bResult =3D WinUsb_WritePipe(hDeviceHandle, *pID, szBuffer, cbSize, =
+&amp;cbSent, 0);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    printf(<span style=3D"color:#A31515;">"Wrote to pipe %d: %s \nActual=
+ data transferred: %d.\n"</span>, *pID, szBuffer, cbSent);
+    *pcbWritten =3D cbSent;
+
+
+done:
+    <span style=3D"color:Blue;">return</span> bResult;
+
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<p>
+</p><p class=3D"proch"><img id=3D"wedge" alt=3D"Ff540174.wedge(en-us,VS.=
+85).gif" src=3D"http://i.msdn.microsoft.com/areas/global/content/clear.g=
+if" title=3D"Ff540174.wedge(en-us,VS.85).gif" xmlns=3D"" class=3D"cl_IC1=
+53696" /><strong>To send a read request</strong></p>
+<ul>
+<li>Call <a href=3D"http://msdn.microsoft.com/en-us/library/windows/hard=
+ware/ff540297(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/x=
+html">WinUsb_ReadPipe</strong></a> to read data from the bulk-in endpoin=
+t of the device. Pass the WinUSB interface handle of the device, the pip=
+e identifier for the bulk-in endpoint, and an appropriately sized empty =
+buffer. When the function returns, the buffer contains the data that was=
+ read from the device. The number of bytes that were read is returned in=
+ the function's <em>bytesRead</em> parameter. For read requests, the buf=
+fer must be a multiple of the maximum packet size.
+</li>
+</ul>Zero-length read requests complete immediately with success and are=
+ not sent down the stack. If the transfer length is greater than a maxim=
+um transfer length, WinUSB divides the request into smaller requests of =
+maximum transfer length and submits them serially. If the transfer lengt=
+h is not a multiple of the endpoint's <strong>MaxPacketSize</strong>, Wi=
+nUSB increases the size of the transfer to the next multiple of MaxPacke=
+tSize. If a device returns more data than was requested, WinUSB saves th=
+e excess data. If data remains from a previous read request, WinUSB copi=
+es it to the beginning of the next read request and completes the reques=
+t, if necessary.
+<p>The following  code example reads data from the bulk-in endpoint of t=
+he device.</p>
+
+<div id=3D"code-snippet-10" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_e32e4361-2=
+8d5-4fb6-a651-e0b21113b66d');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_e32e4361-28d5-4fb6-a651-e0b2=
+1113b66d" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+BOOL ReadFromBulkEndpoint(WINUSB_INTERFACE_HANDLE hDeviceHandle, UCHAR* =
+pID, ULONG cbSize)
+{
+    <span style=3D"color:Blue;">if</span> (hDeviceHandle=3D=3DINVALID_HA=
+NDLE_VALUE)
+    {
+        <span style=3D"color:Blue;">return</span> FALSE;
+    }
+
+    BOOL bResult =3D TRUE;
+
+    UCHAR* szBuffer =3D (UCHAR*)LocalAlloc(LPTR, <span style=3D"color:Bl=
+ue;">sizeof</span>(UCHAR)*cbSize);
+    =
+
+    ULONG cbRead =3D 0;
+
+    bResult =3D WinUsb_ReadPipe(hDeviceHandle, *pID, szBuffer, cbSize, &=
+amp;cbRead, 0);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    printf(<span style=3D"color:#A31515;">"Read from pipe %d: %s \nActua=
+l data read: %d.\n"</span>, *pID, szBuffer, cbRead);
+
+
+done:
+    LocalFree(szBuffer);
+    <span style=3D"color:Blue;">return</span> bResult;
+
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"Release_the_Device_Handles"></a><a id=3D"release_the_device=
+_handles"></a><a id=3D"RELEASE_THE_DEVICE_HANDLES"></a>Release the Devic=
+e Handles</h3>
+<p>After you have completed all the required calls to the device, releas=
+e the file handle and the WinUSB interface handle for the device. =
+
+
+For this, call the following functions:</p>
+<ul>
+<li><strong>CloseHandle</strong> to release the handle that was created =
+by <strong>CreateFile</strong>, as described in the <a href=3D"#filehand=
+le">Create a File Handle for the Device</a> section of this walkthrough.=
+</li>
+<li>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0233(v=3Dvs.85).aspx"><strong xmlns=3D"http://www.w3.org/1999/xhtml">Win=
+Usb_Free</strong></a> to release the WinUSB interface handle for the dev=
+ice, which is returned by <a href=3D"http://msdn.microsoft.com/en-us/lib=
+rary/windows/hardware/ff540277(v=3Dvs.85).aspx"><strong xmlns=3D"http://=
+www.w3.org/1999/xhtml">WinUsb_Initialize</strong></a>. </li>
+</ul>
+<h3><a id=3D"Implement_Main"></a><a id=3D"implement_main"></a><a id=3D"I=
+MPLEMENT_MAIN"></a>Implement Main</h3>
+<p>The following code example shows the main function of your console ap=
+plication.</p>
+
+<div id=3D"code-snippet-11" class=3D"codeSnippetContainer" xmlns=3D"">
+    <div class=3D"codeSnippetContainerTabs">
+        <div class=3D"codeSnippetContainerTabSingle" dir=3D"ltr"><a>C++<=
+/a></div>
+    </div>
+    <div class=3D"codeSnippetContainerCodeContainer">
+        <div class=3D"codeSnippetToolBar">
+            <div class=3D"codeSnippetToolBarText">
+                <a name=3D"CodeSnippetCopyLink" style=3D"display: none;"=
+ title=3D"Copy to clipboard." href=3D"javascript:if (window.epx.codeSnip=
+pet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_6278fb65-1=
+e05-4b0d-bfcc-29ad4c5d812d');">Copy</a>
+            </div>
+        </div>
+        <div id=3D"CodeSnippetContainerCode_6278fb65-1e05-4b0d-bfcc-29ad=
+4c5d812d" class=3D"codeSnippetContainerCode" dir=3D"ltr">
+            <div style=3D"color:Black;"><pre>
+
+
+<span style=3D"color:Blue;">int</span> _tmain(<span style=3D"color:Blue;=
+">int</span> argc, _TCHAR* argv[])
+{
+
+    GUID guidDeviceInterface =3D OSR_DEVICE_INTERFACE; <span style=3D"co=
+lor:Green;">//in the INF file</span>
+
+    BOOL bResult =3D TRUE;
+
+    PIPE_ID PipeID;
+
+    HANDLE hDeviceHandle =3D INVALID_HANDLE_VALUE;
+    WINUSB_INTERFACE_HANDLE hWinUSBHandle =3D INVALID_HANDLE_VALUE;
+    =
+
+    UCHAR DeviceSpeed;
+    ULONG cbSize =3D 0;
+
+    bResult =3D GetDeviceHandle(guidDeviceInterface, &amp;hDeviceHandle)=
+;
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D GetWinUSBHandle(hDeviceHandle, &amp;hWinUSBHandle);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D GetUSBDeviceSpeed(hWinUSBHandle, &amp;DeviceSpeed);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D QueryDeviceEndpoints(hWinUSBHandle, &amp;PipeID);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D SendDatatoDefaultEndpoint(hWinUSBHandle);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D WriteToBulkEndpoint(hWinUSBHandle, &amp;PipeID.PipeOutId=
+, &amp;cbSize);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+    bResult =3D ReadFromBulkEndpoint(hWinUSBHandle, &amp;PipeID.PipeInId=
+, cbSize);
+    <span style=3D"color:Blue;">if</span>(!bResult)
+    {
+        <span style=3D"color:Blue;">goto</span> done;
+    }
+
+
+    system(<span style=3D"color:#A31515;">"PAUSE"</span>);
+
+done:
+    CloseHandle(hDeviceHandle);
+    WinUsb_Free(hWinUSBHandle);
+
+    <span style=3D"color:Blue;">return</span> 0;
+}
+
+
+</pre></div>
+            =
+
+        </div>
+    </div>
+</div>
+
+<h3><a id=3D"related_topics"></a>Related topics</h3>
+<dl>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0196(v=3Dvs.85).aspx">WinUSB</a>
+</dt>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0207(v=3Dvs.85).aspx">WinUSB Architecture and Modules</a>
+</dt>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0215(v=3Dvs.85).aspx">Choosing a driver model for developing a USB clien=
+t driver</a>
+</dt>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff54=
+0283(v=3Dvs.85).aspx">WinUSB (Winusb.sys) Installation</a>
+</dt>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff72=
+8833(v=3Dvs.85).aspx">WinUSB Functions for Pipe Policy Modification</a>
+</dt>
+<dt>
+<a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/ff72=
+8834(v=3Dvs.85).aspx">WinUSB Power Management</a>
+</dt>
+<dt><a href=3D"http://msdn.microsoft.com/en-us/library/windows/hardware/=
+ff540046(v=3Dvs.85).aspx#winusb">WinUSB Functions</a></dt>
+</dl>
+<p>=C2=A0</p>
+<p>=C2=A0</p>
+<p><a href=3D"mailto:wsddocfb@microsoft.com?subject=3DDocumentation%20fe=
+edback [usbcon\buses]:%20How to Access a USB Device by Using WinUSB Func=
+tions%20 RELEASE:%20(7/26/2013)&amp;body=3D%0A%0APRIVACY STATEMENT%0A%0A=
+We use your feedback to improve the documentation. We don't use your ema=
+il address for any other purpose, and we'll remove your email address fr=
+om our system after the issue that you're reporting is fixed. While we'r=
+e working to fix this issue, we might send you an email message to ask f=
+or more info. Later, we might also send you an email message to let you =
+know that we've addressed your feedback.%0A%0AFor more info about Micros=
+oft's privacy policy, see http://privacy.microsoft.com/en-us/default.asp=
+x." title=3D"Send comments about this topic to Microsoft">Send comments =
+about this topic to Microsoft</a></p>
+<p>Build date: 7/26/2013</p>
+</div>
+</div>
+
+    =
+
+
+
+
+
+<div class=3D"libraryMemberFilter">
+    <div class=3D"filterContainer">
+        <span>Show:</span>
+        <label>
+            <input type=3D"checkbox" class=3D"libraryFilterInherited" ch=
+ecked=3D"checked" value=3D"Inherit" />Inherited
+        </label>
+        <label>
+            <input type=3D"checkbox" class=3D"libraryFilterProtected" ch=
+ecked=3D"checked" value=3D"Protected" />Protected
+        </label>
+    </div>
+</div>
+    =
+
+<input type=3D"hidden" id=3D"libraryMemberFilterEmptyWarning" value=3D"T=
+here are no members available with your current filter settings." />
+
+
+ =
+
+</div>
+
+
+
+            </div>
+            <div class=3D"clear"></div>
+        =
+
+            =
+
+    =
+
+<input name=3D"__RequestVerificationToken" type=3D"hidden" value=3D"EeH-=
+LHiTE3oZpm4ksloOqqREvL05r-Y4PgJ6Pnm3kh-FwnPtoIDClTbh3QCIZV6YPQnOjLmxug_4=
+54zrRq4_PoVikb5cBmc9rwnhu-lf0ABVVvs3zEoO31EO4HmqAKo878T7Dw2" />
+<input id=3D"ratingSubmitUrl" type=3D"hidden" value=3D"http://msdn.micro=
+soft.com/en-us/library/feedback/add/ff540174(v=3Dvs.85).aspx" />
+<input id=3D"isTopicRated" type=3D"hidden" value=3D"false" />
+
+
+
+
+    =
+
+
+
+    <div id=3D"ux-footer" class=3D"Opera ltr">
+        =
+
+            <div id=3D"footerSock">
+                <div id=3D"footerSockInner">
+                    <a name=3D"feedback"></a>
+                    <div data-fragmentName=3D"Survey" id=3D"Fragment_Sur=
+vey" xmlns=3D"http://www.w3.org/1999/xhtml">
+  =
+
+  <div class=3D"DetailedLink">
+    <div class=3D"Content">
+      <div class=3D"title">Help us help you</div>
+      <div class=3D"RichText">Answer questions that we=E2=80=99ll use to=
+ make the Dev Center better.</div>
+      <div class=3D"link">
+        <a href=3D"http://go.microsoft.com/fwlink/?LinkId=3D316293" targ=
+et=3D"_blank" id=3D"Survey_35509_1" xmlns=3D"http://www.w3.org/1999/xhtm=
+l">Take the survey</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=3D"rating">
+    <div id=3D"ratingSection1">
+        <div class=3D"title">
+            Was this page helpful?
+        </div>
+        <div class=3D"description">
+            Your feedback about this content is important.<br />Let us k=
+now what you think.
+        </div>
+        <div class=3D"buttons">
+            <button id=3D"ratingYes">Yes</button>
+            <button id=3D"ratingNo">No</button>
+        </div>
+        <input id=3D"ratingValue" type=3D"hidden" value=3D"" />
+    </div>
+    <div id=3D"ratingSection2">
+        <div class=3D"title">
+            Additional feedback?
+        </div>
+        <textarea id=3D"ratingText" rows=3D"6" cols=3D""></textarea>
+        <div class=3D"buttons">
+            <button id=3D"ratingSubmit">Submit</button>
+            <button id=3D"ratingSkipThis">Skip this</button>
+        </div>
+    </div>
+    <div id=3D"ratingSection3">
+        <div class=3D"title">
+            Thank you!
+        </div>
+        <div class=3D"description">
+            We appreciate your feedback.
+        </div>
+    </div>
+    =
+
+    =
+
+    <div id=3D"contentFeedbackQAContainer" style=3D"display: none;"></di=
+v>
+</div>
+
+
+                    <div data-fragmentName=3D"SockLinks" id=3D"Fragment_=
+SockLinks" xmlns=3D"http://www.w3.org/1999/xhtml">
+  =
+
+  <div class=3D"LinkList">
+    <div class=3D"Links">
+      <ul class=3D"LinkColumn" style=3D"width: 100%">
+        <li>
+          <a href=3D"http://go.microsoft.com/fwlink/p/?LinkId=3D317805" =
+id=3D"SockLinks_727_11" xmlns=3D"http://www.w3.org/1999/xhtml">Find us o=
+n Facebook</a>
+        </li>
+        <li>
+          <a href=3D"http://go.microsoft.com/fwlink/p/?LinkId=3D317806" =
+id=3D"SockLinks_727_12" xmlns=3D"http://www.w3.org/1999/xhtml">Follow us=
+ on Twitter</a>
+        </li>
+        <li>
+          <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285656" =
+id=3D"SockLinks_727_40" xmlns=3D"http://www.w3.org/1999/xhtml">Get the n=
+ewsletter</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+                    <div class=3D"clear"></div>
+                </div>
+            </div>
+        <div id=3D"footerContainer">
+            <div id=3D"fourColumnFooter">
+                <div data-fragmentName=3D"Column1" id=3D"Fragment_Column=
+1" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <div class=3D"ListOfLinkLists">
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Centers</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://msdn.microsoft.com/windows" id=3D"Column1_=
+727_13" xmlns=3D"http://www.w3.org/1999/xhtml">Dev Center Home</a>
+          </li>
+          <li>
+            <a href=3D"http://msdn.microsoft.com/windows/apps" id=3D"Col=
+umn1_727_14" xmlns=3D"http://www.w3.org/1999/xhtml">Windows Store apps</=
+a>
+          </li>
+          <li>
+            <a href=3D"http://msdn.microsoft.com/ie" id=3D"Column1_727_1=
+5" xmlns=3D"http://www.w3.org/1999/xhtml">Internet Explorer</a>
+          </li>
+          <li>
+            <a href=3D"http://msdn.microsoft.com/windows/desktop" id=3D"=
+Column1_727_16" xmlns=3D"http://www.w3.org/1999/xhtml">Desktop</a>
+          </li>
+          <li>
+            <a href=3D"http://msdn.microsoft.com/windows/hardware" id=3D=
+"Column1_727_17" xmlns=3D"http://www.w3.org/1999/xhtml">Hardware</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              =
+
+                <div data-fragmentName=3D"Column2" id=3D"Fragment_Column=
+2" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <div class=3D"ListOfLinkLists">
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Related developer sites</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285634=
+" id=3D"Column2_727_18" xmlns=3D"http://www.w3.org/1999/xhtml">Microsoft=
+ Connect</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285635=
+" id=3D"Column2_727_19" xmlns=3D"http://www.w3.org/1999/xhtml">OSR Onlin=
+e</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D280293=
+" id=3D"Column2_727_20" xmlns=3D"http://www.w3.org/1999/xhtml">Windows P=
+hone</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Other Windows sites</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285636=
+" id=3D"Column2_727_21" xmlns=3D"http://www.w3.org/1999/xhtml">Enterpris=
+e</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285637=
+" id=3D"Column2_727_22" xmlns=3D"http://www.w3.org/1999/xhtml">Small bus=
+iness</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285638=
+" id=3D"Column2_727_23" xmlns=3D"http://www.w3.org/1999/xhtml">Students<=
+/a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285639=
+" id=3D"Column2_727_24" xmlns=3D"http://www.w3.org/1999/xhtml">Home user=
+s</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              =
+
+                <div data-fragmentName=3D"Column3" id=3D"Fragment_Column=
+3" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <div class=3D"ListOfLinkLists">
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Downloads</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285645=
+" id=3D"Column3_727_25" xmlns=3D"http://www.w3.org/1999/xhtml">Windows D=
+river Kit</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285646=
+" id=3D"Column3_727_26" xmlns=3D"http://www.w3.org/1999/xhtml">Windows A=
+ssessment and Deployment Kit</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285647=
+" id=3D"Column3_727_27" xmlns=3D"http://www.w3.org/1999/xhtml">Windows H=
+ardware Certification Kit</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285648=
+" id=3D"Column3_727_28" xmlns=3D"http://www.w3.org/1999/xhtml">Visual St=
+udio Professional 2012</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D313298=
+" id=3D"Column3_727_29" xmlns=3D"http://www.w3.org/1999/xhtml">Visual St=
+udio Professional 2013</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285649=
+" id=3D"Column3_727_30" xmlns=3D"http://www.w3.org/1999/xhtml">More down=
+loads</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Essentials</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285650=
+" id=3D"Column3_727_31" xmlns=3D"http://www.w3.org/1999/xhtml">Recently =
+published</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285651=
+" id=3D"Column3_727_32" xmlns=3D"http://www.w3.org/1999/xhtml">Debugging=
+</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285652=
+" id=3D"Column3_727_33" xmlns=3D"http://www.w3.org/1999/xhtml">Samples</=
+a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285653=
+" id=3D"Column3_727_34" xmlns=3D"http://www.w3.org/1999/xhtml">Hardware =
+dashboard</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D317804=
+" id=3D"Column3_727_41" xmlns=3D"http://www.w3.org/1999/xhtml">Partner w=
+ith Microsoft</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              =
+
+                <div data-fragmentName=3D"Column4" id=3D"Fragment_Column=
+4" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <div class=3D"ListOfLinkLists">
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Stay connected</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li></li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285658=
+" id=3D"Column4_727_36" xmlns=3D"http://www.w3.org/1999/xhtml">Microsoft=
+ events</a>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D313299=
+" id=3D"Column4_727_37" xmlns=3D"http://www.w3.org/1999/xhtml">Windows A=
+pp Builder Blog</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    =
+
+    <div class=3D"LinkList" xmlns=3D"http://www.w3.org/1999/xhtml">
+      <div class=3D"LinkListTitle">Support</div>
+      <div class=3D"LinkListDescription"></div>
+      <div class=3D"Links">
+        <ul class=3D"LinkColumn" style=3D"width: 100%">
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285664=
+" id=3D"Column4_727_38" xmlns=3D"http://www.w3.org/1999/xhtml">Forums</a=
+>
+          </li>
+          <li>
+            <a href=3D"http://go.microsoft.com/fwlink/p/?linkid=3D285663=
+" id=3D"Column4_727_39" xmlns=3D"http://www.w3.org/1999/xhtml">More supp=
+ort resources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              =
+
+            </div>
+
+            <div id=3D"baseFooterLogos">
+                <span class=3D"microsoftlogo" title=3D"Microsoft"></span=
+>
+                <a href=3D"http://msdn.microsoft.com/en-us" class=3D"msd=
+nlogo" title=3D"MSDN"></a>
+            </div>
+        =
+
+            <div id=3D"baseFooter">
+                <div id=3D"FooterCopyright">=C2=A9 2013 Microsoft</div>
+                <div data-fragmentName=3D"BaseFooterContent" id=3D"Fragm=
+ent_BaseFooterContent" xmlns=3D"http://www.w3.org/1999/xhtml">
+  <div xmlns=3D"http://www.w3.org/1999/xhtml">
+    <div xmlns:mtps=3D"http://msdn2.microsoft.com/mtps">
+      <div data-fragmentName=3D"BaseFooter" id=3D"Fragment_BaseFooter">
+        =
+
+        <div class=3D"LinkList">
+          <div class=3D"LinkListDescription"></div>
+          <div class=3D"Links">
+            <ul class=3D"LinkColumn horizontal">
+              <li>
+                <a href=3D"http://msdn.microsoft.com/windows/apps/cc3003=
+89" id=3D"BaseFooter_35351_1" xmlns=3D"http://www.w3.org/1999/xhtml">Ter=
+ms of Use</a>
+              </li>
+              <li>
+                <a href=3D"http://www.microsoft.com/library/toolbar/3.0/=
+trademarks/en-us.mspx" id=3D"BaseFooter_35351_2" xmlns=3D"http://www.w3.=
+org/1999/xhtml">Trademarks</a>
+              </li>
+              <li>
+                <a href=3D"http://www.microsoft.com/info/privacy.mspx" i=
+d=3D"BaseFooter_35351_3" xmlns=3D"http://www.w3.org/1999/xhtml">Privacy =
+and Cookies</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div data-fragmentName=3D"HelloText" id=3D"Fragment_HelloText">Hel=
+lo from Seattle.
+</div>
+    </div>
+  </div>
+</div>  =
+
+                =
+
+    <form class=3D"selectLocale" id=3D"selectLocaleForm" action=3D"http:=
+//msdn.microsoft.com/en-us/windows/hardware/SelectLocale">
+        <input type=3D"hidden" name=3D"fromPage" value=3D"http%3a%2f%2fm=
+sdn.microsoft.com%2fen-us%2flibrary%2fwindows%2fhardware%2fff540174(v%3d=
+vs.85).aspx" />
+        <a href=3D"#" onclick=3D"$('#selectLocaleForm').submit();return =
+false;" title=3D"Change your language">United States (English)</a>
+    </form>    =
+
+
+
+                <div class=3D"clear"></div>
+            </div>
+        </div>
+    </div> =
+
+
+
+            <div class=3D"footerPrintView">
+                <div class=3D"footerCopyrightPrintView">=C2=A9 2013 Micr=
+osoft. All rights reserved.</div>
+            </div>
+
+            =
+
+            =
+
+    =
+
+
+
+        =
+
+            <input id=3D"MtpsDevice" type=3D"hidden" value=3D"Lightweigh=
+t" />
+
+
+<![CDATA[ Third party scripts and code linked to or referenced from this=
+ website are licensed to you by the parties that own such code, not by M=
+icrosoft.  See ASP.NET Ajax CDN Terms of Use =E2=80=93 http://www.asp.ne=
+t/ajaxlibrary/CDN.ashx. ]]>
+        =
+
+            =
+
+            =
+
+            =
+
+            =
+
+            =
+
+        =
+
+
+
+
+
+
+<noscript><div><img alt=3D"DCSIMG" id=3D"Img1" width=3D"1" height=3D"1" =
+src=3D"http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcs=
+uri=3D/nojavascript&amp;WT.js=3DNo" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  <a href=3D"http://www.omniture.com" title=3D"Web Analytics">
+    <img src=3D"//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2-=
+-NS/0" height=3D"1" width=3D"1" border=3D"0" alt=3D"" />
+  </a>
+</noscript>
+
+
+
+
+<div id=3D"globalRequestVerification">
+    <input name=3D"__RequestVerificationToken" type=3D"hidden" value=3D"=
+qFF1_aYIAi_RAJPHyCO307vVKTl5J4AVIYRjv1R1uDsw2yUFMc4JNuj6SjLF5dgElqxexZY3=
+JedurxfNcmBXYClctVttwpc9gPK4a6GMJbGINYCEzQav2fTY6RCNii17N0EWNQ2" />
+</div>
+
+
+        </div>
+    <script type=3D"text/javascript" class=3D"mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(va=
+r result=3D[],script,e,i=3D0;i<scripts.length;i++)script=3Dscripts[i],sc=
+ript.hasOwnProperty("url")&&(e=3Ddocument.createElement("script"),e.src=3D=
+script.url,script.throwaway=3De),result.push(script);return result}funct=
+ion inject(scripts,index){var script,elem;if(index>=3Dscripts.length){de=
+lete mtps.injectScripts;return}script=3Dscripts[index];elem=3Ddocument.c=
+reateElement("script");elem.className=3D"mtps-injected";elem.async=3D!1;=
+var isLoaded=3D!1,timeoutId=3D0,injectNextFnName=3D"",injectNext=3Delem.=
+onerror=3Dfunction(){isLoaded||(isLoaded=3D!0,inject(scripts,index+1),wi=
+ndow.clearTimeout(timeoutId),elem.onload=3Delem.onerror=3Delem.onreadyst=
+atechange=3Dnull,injectNextFnName&&delete mtps[injectNextFnName],elem.re=
+moveEventListener&&elem.removeEventListener("load",injectNext,!1))};elem=
+.addEventListener?elem.addEventListener("load",injectNext,!1):elem.ready=
+State=3D=3D=3D"uninitialized"?elem.onreadystatechange=3Dfunction(){(this=
+.readyState=3D=3D=3D"loaded"||this.readyState=3D=3D=3D"complete")&&injec=
+tNext()}:elem.onload=3DinjectNext;script.hasOwnProperty("url")?(timeoutI=
+d=3Dwindow.setTimeout(injectNext,12e4),elem.src=3Dscript.url):(injectNex=
+tFnName=3D"_injectNextScript_"+index,mtps[injectNextFnName]=3DinjectNext=
+,timeoutId=3Dwindow.setTimeout(injectNext,2e3),elem.text=3D"try {\n"+scr=
+ipt.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnN=
+ame+"(); }");parent.appendChild(elem)}var mtps=3Dwindow.MTPS||(window.MT=
+PS=3D{}),parent=3Ddocument.getElementsByTagName("head")[0];mtps.injectSc=
+ripts=3Dfunction(scripts){inject(preload(scripts),0)}})(window,document)=
+;
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS =3D {})).cdnDomains || (wi=
+ndow.MTPS.cdnDomains =3D { \r\n\t\"image\": \"http://i.msdn.microsoft.co=
+m\", \r\n\t\"js\": \"http://i2.msdn.microsoft.com\", \r\n\t\"css\": \"ht=
+tp://i3.msdn.microsoft.com\"\r\n});\r\n/**/" },
+	{ url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl =3D \u0027/en-us/library/windows=
+/hardware/ff540174(d=3Ddefault,l=3Den-us,v=3Dvs.85).aspx\u0027;\n  var w=
+t_nvr_ru =3D \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom =3D \u0027.microsof=
+t.com\u0027;\n  var wt_domlist =3D \u0027msdn.microsoft.com\u0027;\n  va=
+r wt_pathlist =3D \u0027\u0027;\n  var wt_paramlist =3D \u0027DCSext.mtp=
+s_devcenter\u0027;\n  var wt_siteid =3D \u0027MSDN\u0027;\n  var gDomain=
+ =3D \u0027m.webtrends.com\u0027;\n  var gDcsId =3D \u0027dcsmgru7m99k7m=
+qmgrhudo0k8_8c6m\u0027;\n  var gFpc =3D \u0027WT_FPC\u0027;\n\n\n\n  if =
+(document.cookie.indexOf(gFpc + \"=3D\") =3D=3D -1) {\n    var wtidJs =3D=
+ document.createElement(\"script\");\n    wtidJs.src =3D \"//\" + gDomai=
+n + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"=
+head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale =3D \u0=
+027en-us\u0027;\n  var wtsp =3D \u0027_msdn_\u0027;\n  var gTrackEvents =
+=3D \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid =3D \"173a281a-b62e-4f1b-bafc-b08892c68e4=
+9\";\n/**/" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=3D0:Utilitie=
+s,0:Topic,1:webtrendsscript,2:omni_rsid_MSDN,3:SearchBox;/Areas/Epx/Cont=
+ent/Scripts:0,/Areas/Global/Content/Webtrends/resources:1,/Areas/Global/=
+Content/Omniture/resources/MSDN:2,/Areas/Epx/Themes/Base/Content:3\u0026=
+amp;hashKey=3D6ABDE8E67ADC170DEBAFFB6784B08F51" },
+	{ url: "http://i4.services.social.microsoft.com/search/Widgets/SearchBo=
+x.jss?boxid=3DHeaderSearchTextBox\u0026btnid=3DHeaderSearchButton\u0026b=
+rand=3DMSDN\u0026loc=3Den-us\u0026Refinement=3D182\u0026focusOnInit=3Dfa=
+lse\u0026iroot=3Dwindows%2fhardware\u0026emptyWatermark=3Dtrue\u0026sear=
+chButtonTooltip=3DSearch" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=3D0:Header,1=
+:Toc,1:LibraryMemberFilter,1:Toc_Fixed,2:Rating,3:CodeSnippet,3:TopicNot=
+InScope,3:CollapsibleArea,3:VersionSelector,3:SurveyBroker;/Areas/Epx/Th=
+emes/Windows/Content:0,/Areas/Epx/Library/Content:1,/Areas/Epx/Themes/Ba=
+se/Content:2,/Areas/Epx/Content/Scripts:3\u0026amp;hashKey=3DBC9FD24AB92=
+A36E87985B0905B9E0158" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var =
+token =3D $(\"#globalRequestVerification input[name=3D\u0027__RequestVer=
+ificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").=
+append(token);\n        } catch(err) {\n            \n        }\n    });=
+" }
+]);
+
+/*]]>*/
+</script></body>
+</html>
+------------vVbMQVlozJoK0hWJw2nnNA
+Content-Disposition: inline; filename=Winlogo_favicon.ico
+Content-Type: image/x-icon; name=Winlogo_favicon.ico
+Content-Location: http://msdn.microsoft.com/Areas/Epx/Themes/Windows/Content/Winlogo_favicon.ico
+Content-Transfer-Encoding: Base64
+
+AAABAAoAQEAAAAEACAAoFgAApgAAADAwAAABAAgAqA4AAM4WAAAgIAAAAQAIAKgI
+AAB2JQAAGBgAAAEACADIBgAAHi4AABAQAAABAAgAaAUAAOY0AABAQAAAAQAgAChC
+AABOOgAAMDAAAAEAIACoJQAAdnwAACAgAAABACAAqBAAAB6iAAAYGAAAAQAgAIgJ
+AADGsgAAEBAAAAEAIABoBAAATrwAACgAAABAAAAAgAAAAAEACAAAAAAAABAAAAAA
+AAAAAAAAAAEAAAABAAAAAAAA/8khAP/LLAD/zzsA/9ROAP/ZYwD/3ngA/+OPAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAgAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcG
+BQQDAgEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAcGBQQDAgEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAcGBQQDAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQQDAgEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHBgUEAwIAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAHBgUE
+AwIBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAHBgUEAwIBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAAEAwIBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAQDAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAAAAAAABwYFBAMCAQEBAQEBAQEBAQEBAQEAAAEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAHBgUE
+AwIBAQEBAQEBAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAgAAAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUEAwIB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAcGBQQDAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwYFBAMCAQEB
+AQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAHBgUEAwIBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAgAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//
+//////////////////////////////////////4H////////AAf//////4AAB///
+///AAAAH////+AAAAAf///gYAAAAB//8ABgAAAAH/gAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH/////////////////////+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAf+AAAYAAAAB//8
+ABgAAAAH///4GAAAAAf////4AAAAB//////AAAAH//////+AAAf///////8AB///
+//////4H////////////////////////////////KAAAADAAAABgAAAAAQAIAAAA
+AAAACQAAAAAAAAAAAAAAAQAAAAEAAAAAAAD/ySEA/8ssAP/POwD/1E4A/9ljAP/e
+eAD/448AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwYFBAMCAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAHBgUEAwIBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAABQQDAgEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAABwYFBAMCAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAHBgUE
+AwIBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAEAwIBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAABAQEBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAEAwIBAQEB
+AQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAABwYF
+BAMCAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAcGBQQDAgAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAABgUEAwIBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAABwYFBAMCAQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAgEBAQEAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHBgUAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////8AAP//
+/////wAA////////AAD//////4cAAP/////ABwAA////4AAHAAD///wAAAcAAP/4
+DAAABwAA/AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA////////AAD///////8AAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAAD+AAwAAAcAAP/8DAAABwAA///8AAAHAAD////wAAcAAP//
+///gBwAA///////HAAD///////8AAP///////wAA////////AAAoAAAAIAAAAEAA
+AAABAAgAAAAAAAAEAAAAAAAAAAAAAAABAAAAAQAAAAAAAP/JIQD/zC4A/842AP/V
+UwD/3HEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////AAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQQDAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAUEAwEBAQEBAQEAAAAAAAAAAAAAAAAAAAAFBAABAQEBAQEBAQEBAQEBAQAAAAAA
+AAAABQQDAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAEBAQEBAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAQEBAQIAAQEB
+AQEBAQEBAQEBAQEAAAAAAAABAQEBAQEBAQEBAgABAQEBAQEBAQEBAQEBAQAAAAAA
+AAAABQQDAQEBAQECAAEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAABQQAAQEB
+AQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQQDAQEBAQEBAQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQQDAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAD////////////////////H///gB//yAAf4AgAH4AIAB+AC
+AAfgAgAH4AIAB+ACAAfgAgAH4AIAB+ACAAf/////4AIAB+ACAAfgAgAH4AIAB+AC
+AAfgAgAH4AIAB+ACAAf4AgAH//IAB///4Af////H/////////////////////ygA
+AAAYAAAAMAAAAAEACAAAAAAAQAIAAAAAAAAAAAAAAAEAAAABAAAAAAAA/8khAP/L
+LAD/zzsA/9ROAP/ZYwD/3ngA/+OPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAAAAAAAAAAAAAAAABwAFBAMCAQEB
+AQEBAAAAAAAHBgUEAwIBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAABAQEBAQEBAQABAQEBAQEBAQEBAAAAAAABAQEBAQEBAQABAQEBAQEB
+AQEBAAAAAAAHBgUEAwIBAQABAQEBAQEBAQEBAAAAAAAAAAAAAAAABwAFBAMCAQEB
+AQEBAAAAAAAAAAAAAAAAAAAAAAAAAAcGBQQDAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA////AP///wD//wcA/6AHAMAgBwDAIAcAwCAHAMAgBwDAIAcAwCAHAMAg
+BwD///8AwCAHAMAgBwDAIAcAwCAHAMAgBwDAIAcAwCAHAP+gBwD//wcA////AP//
+/wD///8AKAAAABAAAAAgAAAAAQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAA
+AAD/ySEA/9JJAP/TTAD/11wA/9lmAP/eeAD/4osA/+OPAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgGBAIAAAAA
+AAgFAgABAQEBAQEBAAAAAQEBAQEAAQEBAQEBAQAAAAEBAQEBAAEBAQEBAQEAAAAB
+AQEBAQABAQEBAQEBAAAAAQEBAQEAAQEBAQEBAQAAAAAAAAAAAAAAAAAAAAAAAAAB
+AQEBAQABAQEBAQEBAAAAAQEBAQEAAQEBAQEBAQAAAAEBAQEBAAEBAQEBAQEAAAAB
+AQEBAQABAQEBAQEBAAAAAAAIBQIAAQEBAQEBAQAAAAAAAAAAAAAAAAgGBAIAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP/DAADiAwAAggMAAIID
+AACCAwAAggMAAP//AACCAwAAggMAAIIDAACCAwAA4gMAAP/DAAD//wAA//8AACgA
+AABAAAAAgAAAAAEAIAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/J
+IQ3/ySEf/8khNP/JIUz/ySFm/8khgP/JIZr/ySGz/8khy//JIeD/ySHyAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/J
+IUz/ySFm/8khgP/JIZr/ySGz/8khy//JIeD/ySHy/8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/JIU3/ySFm/8khgP/J
+IZr/ySGz/8khy//JIeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP/JIQ3/ySEf/8khNv/JIU3/ySFm/8khgP/JIZr/ySGz/8khy//J
+IeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySEN/8khH//JITT/ySFMAAAAAAAAAAD/ySGz/8khy//JIeD/ySHy/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khH//J
+ITT/ySFM/8khZf/JIYD/ySGa/8khs//JIcv/ySHg/8kh8gAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khH//JITT/ySFM/8khZf/J
+IYD/ySGa/8khs//JIcv/ySHg/8kh8v/JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8khH//JITT/ySFM/8khZf/JIYD/ySGa/8khs//J
+Icv/ySHg/8kh8v/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIcv/ySHg/8kh8v/J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8khy//JIeD/ySHy/8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIR//ySE0/8khTP/J
+IWX/ySGA/8khmv/JIbP/ySHL/8kh4P/JIfL/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khH//JITT/ySFM/8khZf/J
+IYD/ySGa/8khs//JIcv/ySHg/8kh8v/JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/ySEf/8khNP/JIUz/ySFl/8khgP/J
+IZr/ySGz/8khy//JIeD/ySHyAAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8khDf/JIR//ySE0/8khTAAAAAAAAAAA/8khs//J
+Icv/ySHg/8kh8v/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP/JIQ3/ySEf/8khNv/JIU3/ySFm/8khgP/JIZr/ySGz/8khy//J
+IeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA/8khDf/JIR//ySE0/8khTf/JIWb/ySGA/8khmv/JIbP/ySHL/8kh4P/J
+IfL/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySEN/8khH//JITT/ySFM/8khZv/JIYD/ySGa/8khs//JIcv/ySHg/8kh8v/J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/J
+IQ3/ySEf/8khNP/JIUz/ySFm/8khgP/JIZr/ySGz/8khy//JIeD/ySHyAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA////////////////////////////////////////wAf//////+AAB///
+///wAAAH////+AAAAAf///4YAAAAB///gBgAAAAH/8AAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAf/////////////////////4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AAABgAAAAH4AAAGAAAAAfgAAAYAAAAB+AA
+ABgAAAAH/8AAGAAAAAf//4AYAAAAB////hgAAAAH////+AAAAAf/////8AAAB///
+////4AAH////////wAf///////////////////////////////8oAAAAMAAAAGAA
+AAABACAAAAAAAIAlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDf/JIR//ySE0/8khTP/J
+IWX/ySGA/8khmv/JIbP/ySHLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySEN/8khH//JITT/ySFM/8khZf/JIYD/ySGa/8khs//JIcv/ySHg/8kh8v/J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/JIUz/ySFl/8khgP/J
+IZr/ySGz/8khy//JIeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDf/J
+IR//ySE0/8khTP/JIWUAAAAAAAAAAP/JIbP/ySHL/8kh4P/JIfL/ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAD/ySEN/8khH//JITT/ySFM/8khZf/JIYD/ySGa/8khs//J
+Icv/ySHg/8kh8v/JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khNP/J
+IUz/ySFl/8khgP/JIZr/ySGz/8khy//JIeD/ySHy/8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khy//J
+IeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khy//J
+IeD/ySHy/8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khH//J
+ITT/ySFM/8khZf/JIYD/ySGa/8khs//JIcv/ySHg/8kh8v/JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8khDf/JIR//ySE0/8khTP/JIWX/ySGA/8khmv/J
+IbP/ySHL/8kh4P/JIfIAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/J
+IQ3/ySEf/8khNP/JIUwAAAAAAAAAAP/JIZr/ySGz/8khy//JIeD/ySHy/8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/ySEN/8khH//JITT/ySFM/8khZf/J
+IYD/ySGa/8khs//JIcv/ySHg/8kh8v/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA/8khDf/JIR//ySE0/8khTP/JIWX/ySGA/8khmv/JIbP/ySHL/8kh4P/J
+IfL/ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/J
+IUz/ySFl/8khgP/JIZr/ySGzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////AAD///////8AAP//
+/////wAA//////AHAAD////4AAcAAP///AAABwAA//4MAAAHAAD/AAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAP///////wAA////////AADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAADgAAwAAAcAAOAADAAABwAA4AAMAAAHAADgAAwAAAcAAOAA
+DAAABwAA4AAMAAAHAAD/gAwAAAcAAP//DAAABwAA///+AAAHAAD////8AAcAAP//
+///4BwAA////////AAD///////8AAP///////wAAKAAAACAAAABAAAAAAQAgAAAA
+AACAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khAf/J
+IQT/ySEL/8khFwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/J
+IQH/ySEE/8khC//JIRf/ySEo/8khQP/JIV3/ySF+/8khov/JIcX/ySHmAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySEB/8khBP/JIQv/ySEX/8khKP/JIUD/ySFd/8khfv/JIaL/ySHF/8kh5v/J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA/8khAf/JIQT/ySEL/8khF//JISj/ySFA/8khXf/JIX7/ySGi/8khxQAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIV3/ySF+/8khov/J
+IcX/ySHm/8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIfAAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh8AAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIV3/ySF+/8khov/J
+IcX/ySHm/8kh///JIf//ySH//8kh///JIf//ySHwAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQH/ySEE/8khC//JIRf/ySEo/8khQP/J
+IV3/ySF+/8khov/JIcUAAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH//8kh///JIf//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIQH/ySEE/8khC//J
+IRf/ySEo/8khQP/JIV3/ySF+/8khov/JIcX/ySHm/8kh///JIf//ySH//8kh///J
+If//ySH//8kh/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/J
+IQH/ySEE/8khC//JIRf/ySEo/8khQP/JIV3/ySF+/8khov/JIcX/ySHmAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP/JIQH/ySEE/8khC//JIRcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////////////
+/4f//8AH/+AAB/ACAAfgAgAH4AIAB+ACAAfgAgAH4AIAB+ACAAfgAgAH4AIAB+AC
+AAf/////4AIAB+ACAAfgAgAH4AIAB+ACAAfgAgAH4AIAB+ACAAfgAgAH8AIAB//g
+AAf//8AH////h////////////////ygAAAAYAAAAMAAAAAEAIAAAAAAAYAkAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/JIU3/ySFm/8khgP/JIZr/ySGz/8khy//J
+IeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDf/JIR//ySE0/8khTf/J
+IWb/ySGAAAAAAP/JIbP/ySHL/8kh4P/JIfL/ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIYD/ySGa/8khs//JIcv/ySHg/8kh8v/J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAP/JIYD/ySGa/8khs//JIcv/ySHg/8kh8v/J
+If//ySH/AAAAAP/JIf//ySH//8kh///JIf//ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDf/JIR//ySE0/8khTf/J
+IWb/ySGAAAAAAP/JIbP/ySHL/8kh4P/JIfL/ySH//8kh///JIf//ySH//8kh///J
+If8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAP/JIQ3/ySEf/8khNP/JIU3/ySFm/8khgP/JIZr/ySGz/8khy//J
+IeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAD///8A////AP/gBwDwIAcAwCAHAMAgBwDAIAcAwCAHAMAg
+BwDAIAcAwCAHAP///wDAIAcAwCAHAMAgBwDAIAcAwCAHAMAgBwDAIAcA8CAHAP/g
+BwD///8A////AP///wAoAAAAEAAAACAAAAABACAAAAAAAEAEAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDQAA
+AAD/ySE0/8khTP/JIWX/ySGA/8khmv/JIbv/ySHQAAAAAAAAAAAAAAAA/8khTP/J
+IWn/ySGF/8khr//JIc0AAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAA
+AAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH/AAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh/wAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf8AAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAA
+AAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH/AAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf8AAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAA
+AAAAAAAAAAAAAP/JIf//ySH//8kh///JIf//ySH/AAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAAAAAAD/ySH//8kh///JIf//ySH//8kh/wAA
+AAD/ySH//8kh///JIf//ySH//8kh///JIf//ySH/AAAAAAAAAAAAAAAA/8kh///J
+If//ySH//8kh///JIf8AAAAA/8kh///JIf//ySH//8kh///JIf//ySH//8kh/wAA
+AAAAAAAAAAAAAP/JIUz/ySFp/8khhf/JIa//ySHNAAAAAP/JIf//ySH//8kh///J
+If//ySH//8kh///JIf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/8khDQAA
+AAD/ySE0/8khTP/JIWX/ySGA/8khmv/JIbv/ySHQAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD6AwAAggMAAIIDAACCAwAAggMAAIID
+AAD//wAAggMAAIIDAACCAwAAggMAAIIDAAD6AwAA//8AAP//AAA=
+
+------------vVbMQVlozJoK0hWJw2nnNA
+Content-Disposition: inline; filename=Windows_logo.png
+Content-Type: image/png; name=Windows_logo.png
+Content-Location: http://i.msdn.microsoft.com/Areas/Epx/Themes/Windows/Content/Windows_logo.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAJ4AAAAgCAYAAADjRcF+AAAAGXRFWHRTb2Z0d2Fy
+ZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAA
+AAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5U
+Y3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6
+eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8w
+Mi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRw
+Oi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpE
+ZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRv
+YmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNv
+bS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20v
+eGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRv
+YmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAu
+aWlkOkQzMzRCNDFFNUMzOTExRTJCMkFFRDM2NkM2NjVCRENBIiB4bXBNTTpEb2N1
+bWVudElEPSJ4bXAuZGlkOkQzMzRCNDFGNUMzOTExRTJCMkFFRDM2NkM2NjVCRENB
+Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6
+RDMzNEI0MUM1QzM5MTFFMkIyQUVEMzY2QzY2NUJEQ0EiIHN0UmVmOmRvY3VtZW50
+SUQ9InhtcC5kaWQ6RDMzNEI0MUQ1QzM5MTFFMkIyQUVEMzY2QzY2NUJEQ0EiLz4g
+PC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBh
+Y2tldCBlbmQ9InIiPz7uKvDWAAAFnElEQVR42uxc3W3jRhCmD34NolQQXgXmAXm6
+F9EVkK7AUgXWVSCpAssVWFeBqQpMv+QpgHkVHFNBFKSAy67xrfx5MkuKhCxH1g5A
+0KR2Oavdb775WVon0R7lt9//ScxpYA53Hv7x+afzKMhRydXV5MfpjoEVmxMfZwJo
+QYI8yWkPcCWGpSpznpnLXwXQggTpDzwDqpSY6mecGVwn5piG6QvSG3hgLucS0zAl
+QfbFeIG5/sv4AxNOrPes84c9G70nIcb7/wDBMvE9LudmcWZNoDGnv3C5NG3HDW1z
+c7rDpW1XQE9iPluYvl+CGb6OfDiEQRoAlObkGGjY0jz3/K0JP6tELJvgehTgceTA
+I2BYScFq24BpgNqhT1xMWxlw1wC40xPY7thdLWRFDJbCLbYxnmtbKW42JnYriV1D
+QTsw3gspPKzGYOJCdY1z1sJ2DtRBAuOpcd7aAKsCS+UeV+jYrgKYppG/RDQUMWSn
+rBcxYCbAu/Rlw+gzMcdl9FwPtcbx1RyLLXTaPlfE0lvp3XGSl2AMMes3uhfvFng0
+yU/FbLsQNi4Tn2fkOksA7ykrVsCVKkzqLWu4+0Y+IvONleddmnbnEgQA3b0Cmhhj
+zFoW/Bqg9TH31LQZG70F2t/CMNbm3i8eAD26bN60WSog/47LC/tcc88+79ajvzPw
+PhwY8AqPq3SL6xb2QWTCmTKxDjgPHcdwi752sm08eEExYuIByL2IJ8foO8cYky1B
+V4PpnV4HGPvd7yiRWlFypTH+pWKsahgC0MUEugq6efzvOrmIsEe8xkRnNPEvkgpn
++VjkXHG3qQfM24jt+8mOhZ9hxvUIANlFnRFwRgQsWVcszeeudjhQQJcS6Kw+yaZW
+7w2x1zXaFDRPKSdPSgKmATMTc8PteQx2/ItewOtbKX/DCnsBN5J6YrZCyYQTsRvh
+2taKu26TpQCdkxtiQ5Yr0jX2GNMXjxtjZrrQ4jj0n7t41r3EQUaXCUNwbF8BmDH1
+kWBcEaN6Y+9ewKPYpRPo+vTbEYBXAN5ATFiuuM5STKa04KLHkL967teehCIhYEbb
+9pVxaIuBFNHz1mdCyZVmdDl9jzPMZe5KTvSCCM8Pg/LWGkoPgz3oGE+CKVfKKAWB
+uqZJy5S2Dz301x3uc+xWNTzT95ljz29tIYjSp/C41kv6fKXEeQ7spQMrQhc28O82
+gQF7HgfwMBmlcJl5g+ssxYSmSizYRX/d5X6H7/Qa81TwPFHRvMJ4N0kR7QZlws1u
+YjsRU48AwOtjYTyeFLd9ljW4TsdqMSZ+qDDnm4on89yFPAjDTPm7CyPORWhQSCAj
+Rv0oADjpA75DBZ50t4nPdQpWy5XA+TWl9rhdKYOW/mcdgFspGbvbs86UOHVFrLgp
+wDcxOwD4icY3OgrgIaapRdbYxGIFtR3si/GweGtlnJEn8/UZWN7ysoOL25jBZIyb
+46hFTFjS58NtjRLPmLdlve+N8RhMiQyGm9wtxYLVnsZ5Q67+VmGrSeTf1pvT33ca
++NDfMc6NMgeO3aYeF+qMmN9ALxQ9s4bkp3OMenrAwLNgmiguo8017zu+WxDTjuAW
+7cL+DdeXYOEGGmParbDouT74iILzN0oEEnKxC4+BXitGKOdjBB0+o7Tbcpdo+yfc
+v3PNy6NhPCUjLbd0zfuK7zi7PCf9MQxmSqC7aOhvF3VMrJKj75RAZ9ucewrMNele
+ezL5leJJfOWdEXRvQNfnTe2TAywgH6xg+2yIBVyDfYptSjHIOPPo5c7Ietv+Oxh7
+DP3MzEWfkGXn/9AdpNXIln3cEjHn8g3HXkc93kJpivHm8NdxS8ofJMjO5FT+xxZt
+Im9+3yQKvxQQZNfAawhGS8XP8z6nZcrwExZBdgO8Fj9f0d+zBmDakoH20xdBgnQH
+Xgdglp6sSLrw8AtSRyr/CjAAbyF5gam5QW0AAAAASUVORK5CYII=
+
+------------vVbMQVlozJoK0hWJw2nnNA
+Content-Disposition: inline; filename=IC392119.jpg
+Content-Type: image/jpeg; name=IC392119.jpg
+Content-Location: http://i.msdn.microsoft.com/dynimg/IC392119.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkS
+Ew8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJ
+CQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy
+MjIyMjIyMjIyMjIyMjL/wAARCAEUAWEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEA
+AAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIh
+MUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6
+Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZ
+mqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx
+8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREA
+AgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
+YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hp
+anN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPE
+xcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2
+rXNch0S2jJjae6mJW3tkIDSMOvJ6KOpY9PckA8Zdf2pqzF9U1SdUPS1sZGt4l9sq
+Q7e+Wwf7o6ULdHV9Z1DVnOUMrWtsOyxRsVyP95wzZ7jb6CrNAGS3hnRnOZLCOVv7
+0pLn8ySaP+EX0P8A6Bdt/wB8VrUUAZP/AAi+h/8AQLtv++KP+EX0P/oF23/fFa1F
+AGT/AMIvof8A0C7b/vij/hF9D/6Bdt/3xWtRQBk/8Ivof/QLtv8Avij/AIRfQ/8A
+oF23/fFa1FAGT/wi+h/9Au2/74o/4RfQ/wDoF23/AHxWtRQBk/8ACL6H/wBAu2/7
+4o/4RfQ/+gXbf98VrVzfizzHl0q3W4uIo5bhw/kTvEWAjcgbkIOMgd6AL3/CL6H/
+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
+AH//2Q==
+
+------------vVbMQVlozJoK0hWJw2nnNA
+Content-Disposition: inline; filename=clear.gif
+Content-Type: image/gif; name=clear.gif
+Content-Location: http://i.msdn.microsoft.com/areas/global/content/clear.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhAQABAPMAAAAAAP///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACH5BAEAAAIALAAAAAABAAEAAAQCUEQAOw==
+
+------------vVbMQVlozJoK0hWJw2nnNA--

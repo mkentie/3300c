@@ -1,0 +1,203 @@
+Content-Type: multipart/related; start=<op.mhtml.1374610691718.cb7a6c10340536b9@192.168.220.1>; boundary=----------b86iHYcvT9wI1QX4yMletf
+Content-Location: http://bertrik.sikken.nl/hp3300c/devel.html
+Subject: =?utf-8?Q?HP3300C=20SANE=20backend=20development?=
+MIME-Version: 1.0
+
+------------b86iHYcvT9wI1QX4yMletf
+Content-Disposition: inline; filename=devel.html
+Content-Type: text/html; name=devel.html
+Content-ID: <op.mhtml.1374610691718.cb7a6c10340536b9@192.168.220.1>
+Content-Location: http://bertrik.sikken.nl/hp3300c/devel.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+	<TITLE>HP3300C SANE backend development</TITLE>
+	<LINK REL="stylesheet" HREF="stylesheet.css" STYLE="text/css">
+</HEAD>
+
+<BODY>
+(<A HREF="index.html">main page</A>)
+<I>Last update Saturday, November 17, 2001 <A HREF="mailto:bertrik@sikken.nl">Bertrik Sikken</A></I>
+
+<H1>Contents</H1>
+<UL>
+<li><a href="#arch">Architecture</a>
+<li><a href="#struct">Data structures</a>
+<li><a href="#calib">Calibration</a>
+</UL>
+
+<A NAME="arch"></A>
+<H1>Architecture</H1>
+The SANE backend consists of three layers:<br>
+<ul>
+<li>SANE API layer, interfaces between the SANE API and the core layer.
+<li>Core layer, contains knowledge about how to write which register to control the scanner.
+<li>Transfer layer, provides a way to read/write registers and scanner data.
+	The exact transfer mode (USB or parallel) is hidden from the core layer.
+</ul>
+
+<h2>SANE API layer</h2>
+under construction
+
+<h2>Core layer</h2>
+This layer contains the following functions:
+<ul>
+<li>Calibration parameter calculation
+<li>Lamp control
+<li>The "data pipe".
+</ul>
+
+<h3>Data pipe</h3>
+The data pipe passes the actual image data from the scanner to the SANE API layer.<br>
+<br>
+It consists of several stages: a transfer buffer, a circular buffer and a line buffer.<br>
+The transfer buffer makes sure that data is always transferred in relatively large
+blocks to prevent unnecessary overhead in the data transfers between PC and scanner.<br>
+The circular buffer is used to re-align the color components of the scanned image.
+At a resolution of 150 dpi, the blue component of the first line should be combined
+with the green component of the second line and the red component of the third line
+for example.<br>
+The line buffer is used to make it possible for the SANE frontend to use a transfer
+buffer of arbitrary length. More specifically it makes sure that the backend passes
+the 'scanimage -T' test.
+
+
+<h2>Transfer layer</h2>
+The transfer layer provides a simple means of communication with the scanner.
+The HP3300c contains a scanner chip that directly talks IEEE1284 (parallel port protocol)
+and a USB-IEEE1284 bridge that converts USB packets into parallel port commands.<br>
+The transfer layer software therefore needs to wrap up parallel port commands in
+USB control packets.
+Currently the transfer layer can use both libusb and the usbscanner kernel module.<br>
+<br>
+The HP3400 and HP4300 also have a parallel port connection.
+It is very likely that the parallel port directly connects to the scanner chip,
+so the USB wrapper can be skipped and the commands can be sent directly to the
+parallel port (using libieee1284 for example).
+
+
+<A NAME="struct"></A>
+<H1>Data structures</H1>
+All data is contained in a single structure, consisting of several smaller structures.
+A pointer to this structure is also the handle given back to the SANE interface.<br>
+<br>
+There are substructures for the data pipe, the current scan parameters and
+the hardware properties.
+
+
+<A NAME="calib"></A>
+<H1>Calibration</H1>
+I will add some examples of scans of the calibration strip of several scanners here.
+
+<h2>Calibration for the analog frontend</h2>
+under construction
+
+<h2>Per-pixel calibration</h2>
+under construction
+
+<h1>Register contents</h1>
+<h2>HP3400c</h2>
+<blockquote>
+0000 04 04 04 49 07 04 41 00<br>
+0008 04 04 04 04 04 04 04 04<br>
+0010 04 04 04 04 04 04 04 04<br>
+0018 04 04 04 04 04 04 04 04<br>
+0020 00 04 04 04 10 80 80 22<br>
+0028 01 03 79 80 80 80 00 80<br>
+0030 80 80 80 80 80 80 80 80<br>
+0038 01 47 FF 01 01 01 00 80<br>
+</blockquote>
+
+<h2>HP4300c</h2>
+<blockquote>
+0000 00 00 00 49 07 00 01 00<br>
+0008 00 00 00 00 00 00 00 00<br>
+0010 00 00 00 00 00 00 00 00<br>
+0018 00 00 00 00 00 00 00 00<br>
+0020 00 00 00 00 02 04 04 22<br>
+0028 01 03 79 04 04 04 00 04<br>
+0030 04 04 04 04 04 04 04 04<br>
+0038 01 54 00 01 01 01 00 04<br>
+</blockquote>
+
+</BODY>
+</HTML>
+------------b86iHYcvT9wI1QX4yMletf
+Content-Disposition: inline; filename=stylesheet.css
+Content-Type: text/css; name=stylesheet.css
+Content-Location: http://bertrik.sikken.nl/hp3300c/stylesheet.css
+Content-Transfer-Encoding: 8bit
+
+P  {}
+
+H2  {
+	font-size : medium;
+	text-decoration : underline;
+}
+
+H3  {
+	font-size : small;
+	font-weight : bold;
+}
+
+BODY  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+H1  {
+	font-size : medium;
+	text-align : center;
+	background-color : #e0e0e0;
+	font-weight : bold;
+}
+
+TD.leftbar  {
+	background-color : #f0f0c0;
+	text-align : right;
+	border-style : solid;
+	font-size : x-small;
+	border-width : thin;
+	border-color : #000000;
+	vertical-align : top;
+	padding-right : 2;
+	padding-left : 2;
+}
+
+TD.topbar  {
+	background-color : #d0e0ff;
+	text-align : center;
+	font-weight : bold;
+	font-size : x-large;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+	font-family : Comic Sans MS;
+}
+
+TD.bottombar  {
+	font-size : x-small;
+	background-color : #d0e0ff;
+	text-align : center;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD.main  {
+	background-color : #FFFFFF;
+	border-width : thin;
+	border-color : #000000;
+	border-style : solid;
+}
+
+TD  {
+	font-family : Arial;
+	font-size : small;
+	color : #000000;
+}
+
+
+------------b86iHYcvT9wI1QX4yMletf--

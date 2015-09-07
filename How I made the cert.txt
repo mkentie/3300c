@@ -1,0 +1,3 @@
+makecert -r -n CN="3300C Microdriver" -sv 3300CMicro.pvk 3300CMicro.cer
+
+pvk2pfx -pvk 3300CMicro.pvk -spc 3300CMicro.cer -pfx 3300CMicro.pfx
