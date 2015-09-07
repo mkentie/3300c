@@ -34,6 +34,6 @@ The 'Misc' directory contains a file 'wiahost.reg'. This contains a registry cha
 
 There are some additional tools/drivers:
 
-* [SaneTest] This is the test tool from the SANE backend code, modified to compile under Windows. This is what I first used to get the scanner working. It supports two backends (switch by compiling different cpp/h files):
-* [niash_winusb] This is for the WinUSB driver, located in the [WinUSB Driver] directory. The device will appear as a generic USB device in the Device Manager. This driver/backend was my first attempt at establishing communications with the scanner (well, after I managed to control the lamp from another test app); WinUSB is Microsoft's generic user-mode USB driver.
-* [niash_usbscan] This is for the basic UsbScan.sys based driver, located in the [UsbScan Only Driver] directory. This installs the device as a scanner, but only enables it to be accessed by user-mode code, nothing else. The code for this backend is basically the same as that used by the microdriver.
+* [SaneTest](SaneTest), the test tool from the SANE backend code, modified to compile under Windows. This is what I first used to get the scanner working. It supports two backends (switch by compiling different cpp/h files):
+** [niash_winusb](SaneTest/SaneTest/niash_winusb.cpp) This is for the [WinUSB driver](WinUSB Driver). The device will appear as a generic USB device in the Device Manager. This driver/backend was my first attempt at establishing communications with the scanner (well, after I managed to control the lamp from another test app); WinUSB is Microsoft's generic user-mode USB driver.
+** [niash_usbscan](SaneTest/SaneTest/niash_usbscan.cpp) This is for the basic [UsbScan.sys based driver](UsbScan Only Driver). This installs the device as a scanner, but only enables it to be accessed by user-mode code, nothing else. The code for this backend is basically the same as that used by the microdriver.
