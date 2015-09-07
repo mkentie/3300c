@@ -22,9 +22,9 @@ This documentation, combined with the backend's source code (which included a ha
 The backend's source code was nicely structured:
 
 1. Application interface (e.g. talking to SANE).
-2. Scanner protocol (detection, read lines, write tables, etc.)
-3. Parallel port level protocol (the scanner uses a USB<->parallel converter chip internally)
-4. USB backend (talks to the OS)
+1. Scanner protocol (detection, read lines, write tables, etc.)
+1. Parallel port level protocol (the scanner uses a USB<->parallel converter chip internally)
+1. USB backend (talks to the OS)
 
 By basically switching out components 1 and 4 for the Windows microdriver interface and a backend that talks to the Windows UsbScan driver, the driver was made to work on Windows.
 
@@ -35,5 +35,5 @@ The 'Misc' directory contains a file 'wiahost.reg'. This contains a registry cha
 There are some additional tools/drivers:
 
 * [SaneTest](SaneTest), the test tool from the SANE backend code, modified to compile under Windows. This is what I first used to get the scanner working. It supports two backends (switch by compiling different cpp/h files):
-** [niash_winusb](SaneTest/SaneTest/niash_winusb.cpp) This is for the [WinUSB driver](WinUSB Driver). The device will appear as a generic USB device in the Device Manager. This driver/backend was my first attempt at establishing communications with the scanner (well, after I managed to control the lamp from another test app); WinUSB is Microsoft's generic user-mode USB driver.
-** [niash_usbscan](SaneTest/SaneTest/niash_usbscan.cpp) This is for the basic [UsbScan.sys based driver](UsbScan Only Driver). This installs the device as a scanner, but only enables it to be accessed by user-mode code, nothing else. The code for this backend is basically the same as that used by the microdriver.
+ * [niash_winusb](SaneTest/SaneTest/niash_winusb.cpp) This is for the [WinUSB driver](WinUSB Driver). The device will appear as a generic USB device in the Device Manager. This driver/backend was my first attempt at establishing communications with the scanner (well, after I managed to control the lamp from another test app); WinUSB is Microsoft's generic user-mode USB driver.
+ * [niash_usbscan](SaneTest/SaneTest/niash_usbscan.cpp) This is for the basic [UsbScan.sys based driver](UsbScan Only Driver). This installs the device as a scanner, but only enables it to be accessed by user-mode code, nothing else. The code for this backend is basically the same as that used by the microdriver.
