@@ -3,7 +3,7 @@ Signature="$WINDOWS NT$"
 Class=Image
 ClassGUID={6bdd1fc6-810f-11d0-bec7-08002be2092f}
 Provider=%Mfg%
-DriverVer=08/29/2015,21.21.50.181
+DriverVer=09/09/2015,21.37.43.153
 CatalogFile=3300c.cat
 
 [SourceDisksFiles.amd64]
@@ -27,7 +27,7 @@ Include=sti.inf
 Needs=STI.USBSection, STI.MICRODRIVERSection
 SubClass=StillImage
 DeviceType=1
-Capabilities=0x13
+Capabilities=0x33
 
 [WIASample.Scanner.Services]
 Include=sti.inf

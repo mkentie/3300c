@@ -24,9 +24,11 @@ Include=sti.inf
 Needs=STI.USBSection, STI.MICRODRIVERSection
 SubClass=StillImage
 DeviceType=1
+Capabilities=0x33
 Events=Events
 DeviceData=DeviceData
 CopyFiles=CopyFiles
+Addreg=AddReg
 
 [Events]
 
@@ -35,11 +37,15 @@ Include=sti.inf
 Needs=STI.USBSection.Services
 
 [DeviceData]
-MicroDriver="3300CMicro.dll"
+MicroDriver="Drivers\3300CMicro.dll"
 Resolutions="150, 300, 600"
 
 [CopyFiles]
 3300CMicro.dll
+
+[AddReg]
+; Means that this is an USB device
+HKR,,HardwareConfig,1,4
 
 [Strings]
 Mfg="Marijn Kentie"
