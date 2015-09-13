@@ -99,137 +99,135 @@ NiashXferInit (TFnReportDevice * pfnReport)
 }
 
 
-int
-NiashXferOpen (const char *pszName, EScannerModel * peModel)
+BOOL
+NiashXferOpen (HANDLE Handle, EScannerModel * peModel)
 {
-  int iHandle;
 
-  NIASHDBG (DBG_MSG, "NiashXferOpen '%s'\n", pszName);
+  NIASHDBG (DBG_MSG, "NiashXferOpen\n");
 
   /* try each method */
-  NIASHDBG (DBG_MSG, "probing %s\n", pszName);
+  NIASHDBG (DBG_MSG, "probing\n");
   *peModel = eUnknownModel;
-  iHandle = NiashLibUsbOpen(pszName, peModel);
-  return iHandle;
+  return NiashLibUsbOpen(Handle, peModel);
 }
 
 
 void
-NiashXferClose (int iHandle)
+NiashXferClose (HANDLE Handle)
 {
 
-  if (iHandle <= 0)
+  if (Handle <= 0)
     {
       return;
     }
 
   /* deinit the driver */
-  if (iHandle >= 0)
+  if (Handle >= 0)
     {
-      NiashLibUsbExit (iHandle);
+      NiashLibUsbExit (Handle);
     }
 }
 
 
 void
-NiashWriteReg (int iHandle, SANE_Byte bReg, SANE_Byte bData)
+NiashWriteReg (HANDLE Handle, SANE_Byte bReg, SANE_Byte bData)
 {
-  if (iHandle <= 0)
-    {
-      return;
-    }
-
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, EPP_ADDR, bReg);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, EPP_DATA_WRITE, bData);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-}
-
-
-void
-NiashReadReg (int iHandle, SANE_Byte bReg, SANE_Byte * pbData)
-{
-  if (iHandle <= 0)
+  if (Handle <= 0)
     {
       return;
     }
 
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, EPP_ADDR, bReg);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x34);
-  NiashLibUsbReadReg (iHandle, EPP_DATA_READ, pbData);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, EPP_ADDR, bReg);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, EPP_DATA_WRITE, bData);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
 }
 
 
 void
-NiashWriteBulk (int iHandle, SANE_Byte * pabBuf, int iSize)
+NiashReadReg (HANDLE Handle, SANE_Byte bReg, SANE_Byte * pbData)
+{
+  if (Handle <= 0)
+    {
+      return;
+    }
+
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, EPP_ADDR, bReg);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x34);
+  NiashLibUsbReadReg (Handle, EPP_DATA_READ, pbData);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+}
+
+
+void
+NiashWriteBulk (HANDLE Handle, SANE_Byte * pabBuf, int iSize)
 {
 
-  if (iHandle <= 0)
+  if (Handle == INVALID_HANDLE_VALUE)
     {
       return;
     }
   /* select scanner register 0x24 */
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, EPP_ADDR, 0x24);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, EPP_ADDR, 0x24);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
   /* do the bulk write */
-  NiashLibUsbWriteBulk (iHandle, pabBuf, iSize);
+  NiashLibUsbWriteBulk (Handle, pabBuf, iSize);
 }
 
 
 DWORD
-NiashReadBulk (int iHandle, SANE_Byte * pabBuf, int iSize)
+NiashReadBulk (HANDLE Handle, SANE_Byte * pabBuf, int iSize)
 {
-  if (iHandle <= 0)
+    if (Handle == INVALID_HANDLE_VALUE)
     {
       return 0;
     }
 
   /* select scanner register 0x24 */
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, EPP_ADDR, 0x24);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, EPP_ADDR, 0x24);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
   /* do the bulk read */
-  return NiashLibUsbReadBulk (iHandle, pabBuf, iSize);
+  return NiashLibUsbReadBulk (Handle, pabBuf, iSize);
 }
 
 
 void
-NiashWakeup (int iHandle)
+NiashWakeup (HANDLE Handle)
 {
   SANE_Byte abMagic[] = { 0xA0, 0xA8, 0x50, 0x58, 0x90, 0x98, 0xC0, 0xC8,
     0x90, 0x98, 0xE0, 0xE8
   };
   int i;
 
-  if (iHandle <= 0)
+    if (Handle == INVALID_HANDLE_VALUE)
     {
       return;
     }
 
   /* write magic startup sequence */
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
   for (i = 0; i < (int) sizeof (abMagic); i++)
     {
-      NiashLibUsbWriteReg (iHandle, SPP_DATA, abMagic[i]);
+      NiashLibUsbWriteReg (Handle, SPP_DATA, abMagic[i]);
     }
 
   /* write 0x04 to scanner register 0x00 the hard way */
-  NiashLibUsbWriteReg (iHandle, SPP_DATA, 0x00);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x15);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x1D);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x15);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_DATA, 0x00);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x15);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x1D);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x15);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
 
-  NiashLibUsbWriteReg (iHandle, SPP_DATA, 0x04);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x15);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x17);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x15);
-  NiashLibUsbWriteReg (iHandle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_DATA, 0x04);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x15);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x17);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x15);
+  NiashLibUsbWriteReg (Handle, SPP_CONTROL, 0x14);
 }
 

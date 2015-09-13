@@ -1,92 +1,105 @@
+/*
+Copyright (C) 2015 Marijn Kentie
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
 #include "stdafx.h"
 #include "Main.h"
 #include "niash_win.h"
-
-static HANDLE s_hDevice = INVALID_HANDLE_VALUE; //!< File handle to device
 
 void NiashLibUsbInit(TFnReportDevice* const /*pfnReportDevice*/)
 {
     //No need to enumerate as we're attached to a specific device
 }
 
-int NiashLibUsbOpen(char const * const /*pszName*/, EScannerModel* const peModel)
+BOOL NiashLibUsbOpen(const HANDLE Handle, EScannerModel* const peModel)
 {
-    assert(s_hDevice != INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
-    //Get device descriptor so we van get vid & pid
+    //Get device descriptor so we can get vid & pid
     DEVICE_DESCRIPTOR dd;
     DWORD dwBytesReturned;
-    if(!DeviceIoControl(s_hDevice, static_cast<DWORD>(IOCTL_GET_DEVICE_DESCRIPTOR), nullptr, 0, &dd, sizeof(dd), &dwBytesReturned, nullptr))
+    if(!DeviceIoControl(Handle, static_cast<DWORD>(IOCTL_GET_DEVICE_DESCRIPTOR), nullptr, 0, &dd, sizeof(dd), &dwBytesReturned, nullptr))
     {
         DBGMSG(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());
-        return -1;
+        return FALSE;
     }
 
     //Report device to niash
     TScannerModel* pModel;
     if(MatchUsbDevice(dd.usVendorId, dd.usProductId, &pModel) != SANE_TRUE)
     {
-        return -1;
+        return FALSE;
     }
     *peModel = pModel->eModel;
 
-    return 1;
+    return TRUE;
 }
 
-void NiashLibUsbExit (const int iHandle)
+BOOL NiashLibUsbExit (const HANDLE Handle)
 {
-    assert(iHandle == 1);
+    assert(Handle != INVALID_HANDLE_VALUE);
+    return TRUE;
 }
 
-void NiashLibUsbWriteReg(const int iHandle, const SANE_Byte bReg, SANE_Byte bData)
+BOOL NiashLibUsbWriteReg(const HANDLE Handle, const SANE_Byte bReg, SANE_Byte bData)
 {
     //Reverse-engineered behavior from Linux driver exactly matches IOCTL_WRITE_REGISTERS
-    assert(iHandle == 1);
-    assert(s_hDevice != INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
     IO_BLOCK IoBlock;
     IoBlock.uOffset = bReg;
     IoBlock.uLength = 0x01;
     IoBlock.pbyData = &bData;
 
-    if (!DeviceIoControl(s_hDevice, static_cast<DWORD>(IOCTL_WRITE_REGISTERS), &IoBlock, sizeof(IoBlock), nullptr, 0, nullptr, nullptr) && GetLastError() != ERROR_IO_PENDING)
+    DWORD dwBytesReturned; //Required for Win7
+
+    if (!DeviceIoControl(Handle, static_cast<DWORD>(IOCTL_WRITE_REGISTERS), &IoBlock, sizeof(IoBlock), nullptr, 0, &dwBytesReturned, nullptr) && GetLastError() != ERROR_IO_PENDING)
     {
         DBGMSG(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());
-        return;
+        return FALSE;
     }
 
-    if (bReg == EPP_ADDR)
-    {
-        DBGMSG(L"Select register %x\n", bData);
-    }
-    if (bReg == EPP_DATA_WRITE)
-    {
-        DBGMSG(L"Write value %x\n", bData);
-    }
+    return TRUE;
 }
 
-void NiashLibUsbReadReg(const int iHandle, const SANE_Byte bReg, SANE_Byte* const pbData)
+BOOL NiashLibUsbReadReg(const HANDLE Handle, const SANE_Byte bReg, SANE_Byte* const pbData)
 {
     //Reverse-engineered behavior exactly matches IOCTL_READ_REGISTERS
-    assert(iHandle == 1);
-    assert(s_hDevice != INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
     IO_BLOCK IoBlock;
     IoBlock.uOffset = bReg;
     IoBlock.uLength = 0x01;
     IoBlock.pbyData = nullptr;
 
-    if (!DeviceIoControl(s_hDevice, static_cast<DWORD>(IOCTL_READ_REGISTERS), &IoBlock, sizeof(IoBlock), pbData, 1, nullptr, nullptr) && GetLastError() != ERROR_IO_PENDING)
+    DWORD dwBytesReturned; //Required for Win7
+
+    if (!DeviceIoControl(Handle, static_cast<DWORD>(IOCTL_READ_REGISTERS), &IoBlock, sizeof(IoBlock), pbData, 1, &dwBytesReturned, nullptr) && GetLastError() != ERROR_IO_PENDING)
     {
         DBGMSG(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());
-        return;
+        return FALSE;
     }
 
+    return TRUE;
 }
 
-static bool SetupBulkTransfer(bool bWrite, const int iSize)
+static bool SetupBulkTransfer(const HANDLE Handle, bool bWrite, const int iSize)
 {
-    assert(s_hDevice != INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
     //Send setup packet
     BYTE abSetup[8] = { static_cast<BYTE>(bWrite ? 0x01 : 0x00), static_cast<BYTE>(bWrite ? 0x01 : 0x00), 0x00, 0x00, static_cast<BYTE>(iSize & 0xFF), static_cast<BYTE>((iSize >> 8) & 0xFF), 0x00, 0x00 };
@@ -96,7 +109,9 @@ static bool SetupBulkTransfer(bool bWrite, const int iSize)
     IoBlock.uLength = sizeof(abSetup);
     IoBlock.pbyData = abSetup;
 
-    if (!DeviceIoControl(s_hDevice, static_cast<DWORD>(IOCTL_WRITE_REGISTERS), &IoBlock, sizeof(IoBlock), nullptr, 0, nullptr, nullptr) && GetLastError() != ERROR_IO_PENDING)
+    DWORD dwBytesReturned; //Required for Win7
+
+    if (!DeviceIoControl(Handle, static_cast<DWORD>(IOCTL_WRITE_REGISTERS), &IoBlock, sizeof(IoBlock), nullptr, 0, &dwBytesReturned, nullptr) && GetLastError() != ERROR_IO_PENDING)
     {
         DBGMSG(L"DeviceIoControl: %s\n", _com_error(GetLastError()).ErrorMessage());
         return false;
@@ -105,36 +120,36 @@ static bool SetupBulkTransfer(bool bWrite, const int iSize)
     return true;
 }
 
-void NiashLibUsbWriteBulk(const int iHandle, SANE_Byte* const pabData, const int iSize)
+BOOL NiashLibUsbWriteBulk(const HANDLE Handle, SANE_Byte* const pabData, const int iSize)
 {
-    assert(iHandle == 1);
-    assert(s_hDevice != INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
-    if (!SetupBulkTransfer(true, iSize))
+    if (!SetupBulkTransfer(Handle, true, iSize))
     {
-        return;
+        return FALSE;
     }
 
     DWORD dwBytesWritten;
-    if (!WriteFile(s_hDevice,pabData,iSize,&dwBytesWritten,nullptr))
+    if (!WriteFile(Handle,pabData,iSize,&dwBytesWritten,nullptr))
     {
         DBGMSG(L"WriteFile: %s\n", _com_error(GetLastError()).ErrorMessage());
-        return;
+        return FALSE;
     }
+
+    return TRUE;
 }
 
-DWORD NiashLibUsbReadBulk(const int iHandle, SANE_Byte* const pabData, const int iSize)
+DWORD NiashLibUsbReadBulk(const HANDLE Handle, SANE_Byte* const pabData, const int iSize)
 {
-    assert(iHandle==1);
-    assert(s_hDevice!=INVALID_HANDLE_VALUE);
+    assert(Handle != INVALID_HANDLE_VALUE);
 
-    if (!SetupBulkTransfer(false, iSize))
+    if (!SetupBulkTransfer(Handle, false, iSize))
     {
         return 0;
     }
 
     DWORD dwBytesRead;
-    if (!ReadFile(s_hDevice, pabData,iSize,&dwBytesRead,nullptr))
+    if (!ReadFile(Handle, pabData,iSize,&dwBytesRead,nullptr))
     {
         DBGMSG(L"ReadFile: %s\n", _com_error(GetLastError()).ErrorMessage());
         return 0;
@@ -142,9 +157,3 @@ DWORD NiashLibUsbReadBulk(const int iHandle, SANE_Byte* const pabData, const int
 
     return dwBytesRead;
 }
-
-void NiashLibUsbSetDeviceHandle(const HANDLE DeviceHandle)
-{
-    s_hDevice = DeviceHandle;
-}
-

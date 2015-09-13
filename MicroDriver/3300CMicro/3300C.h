@@ -1,3 +1,21 @@
+/*
+Copyright (C) 2015 Marijn Kentie
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
 #pragma once
 #include "IScanner.h"
 #include "niash_core.h"
@@ -6,26 +24,17 @@ class C3300C: public IScanner
 {
 public:
     explicit C3300C();
+    virtual ~C3300C();
 
 private:
     typedef std::array<unsigned char, HW_PIXELS * 3 * 2> CalibTable_t;
-    static const size_t GAMMA_TABLE_SIZE = 4096;
-    typedef std::array<unsigned char, GAMMA_TABLE_SIZE> GammaTable_t;
+    static const size_t scm_iGammaTableSize = 4096;
+    typedef std::array<unsigned char, scm_iGammaTableSize> GammaTable_t;
 
     /**
     Performs lamp warm-up and fills calibration table.
     */
     bool WarmupLamp(CalibTable_t& CalibTable);
-
-    /**
-    Generates a unity gamma table.
-    */
-    void BuildUnityGammaTable(GammaTable_t& GammaTable);
-
-    /**
-    Generates a gamma table.
-    */
-    void BuildGammaTable(GammaTable_t& GammaTable, const float fGamma);
 
     enum EScannerButtonBits //Note: button status is reset by scanner after being queried
     {
@@ -51,10 +60,10 @@ private:
         constexpr static size_t size() { return sizeof(BGR); }
     };
 
-    BGR m_PrevWhiteCalib = {};
+    BGR m_PrevWhiteCalib = {}; //Save calibration value so it can be reused
 
     std::vector<BYTE> m_BackBuffer; //Backbuffer for scanned data, which we need to descramble
-    size_t m_iLinesSkipped = 0;
+    size_t m_iLinesLeftToSkip = 0; //Need to throw away garbage lines that always get returned
 
 
 //From IScanner
@@ -63,9 +72,8 @@ public:
     virtual void FillSCANINFO(SCANINFO& ScanInfo) const override;
     virtual void GetStatus(VAL& Value) override;
     virtual void Reset(VAL& Value) override;
-    virtual void Initialize(VAL& Value) override;
-    virtual void Uninitialize() override;
-    virtual void ScanStart(const SCANINFO& ScanInfo) override;
-    virtual void ScanContinue(const SCANINFO& ScanInfo, BYTE* const pBuffer, const long lLength, long* const pReceived) override;
-    virtual void ScanFinish(const SCANINFO& ScanInfo) override;
+    virtual bool Initialize(VAL& Value) override;
+    virtual bool ScanStart(const SCANINFO& ScanInfo) override;
+    virtual bool ScanContinue(const SCANINFO& ScanInfo, BYTE* const pBuffer, const long lLength, long* const pReceived) override;
+    virtual bool ScanFinish(const SCANINFO& ScanInfo) override;
 };

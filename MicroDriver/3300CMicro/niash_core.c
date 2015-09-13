@@ -123,18 +123,18 @@ static SANE_Bool
 _ProbeRegisters (THWParams * pHWParams)
 {
   unsigned char bData1, bData2;
-  int iHandle;
+  HANDLE Handle;
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
   NIASHDBG (DBG_MSG, "Probing scanner...\n");
 
   /* check register 0x04 */
-  NiashWriteReg (iHandle, 0x04, 0x55);
-  NiashReadReg (iHandle, 0x04, &bData1);
-  NiashWriteReg (iHandle, 0x04, 0xAA);
-  NiashReadReg (iHandle, 0x04, &bData2);
-  NiashWriteReg (iHandle, 0x04, 0x07);
+  NiashWriteReg (Handle, 0x04, 0x55);
+  NiashReadReg (Handle, 0x04, &bData1);
+  NiashWriteReg (Handle, 0x04, 0xAA);
+  NiashReadReg (Handle, 0x04, &bData2);
+  NiashWriteReg (Handle, 0x04, 0x07);
   if ((bData1 != 0x55) || (bData2 != 0xAA))
     {
       NIASHDBG (DBG_ERR, "  No NIASH chipset found!\n");
@@ -142,19 +142,19 @@ _ProbeRegisters (THWParams * pHWParams)
     }
 
   /* check writeability of register 3 bit 1 */
-  NiashReadReg (iHandle, 0x03, &bData1);
-  NiashWriteReg (iHandle, 0x03, bData1 | 0x02);
-  NiashReadReg (iHandle, 0x03, &bData2);
-  NiashWriteReg (iHandle, 0x03, bData1);
+  NiashReadReg (Handle, 0x03, &bData1);
+  NiashWriteReg (Handle, 0x03, bData1 | 0x02);
+  NiashReadReg (Handle, 0x03, &bData2);
+  NiashWriteReg (Handle, 0x03, bData1);
   pHWParams->fGamma16 = ((bData2 & 0x02) != 0);
   NIASHDBG (DBG_MSG, "  Gamma table entries are %d bit\n",
        pHWParams->fGamma16 ? 16 : 8);
 
   /* check register 0x07 */
-  NiashReadReg (iHandle, 0x07, &bData1);
-  NiashWriteReg (iHandle, 0x07, 0x1C);
-  NiashReadReg (iHandle, 0x07, &bData2);
-  NiashWriteReg (iHandle, 0x07, bData1);
+  NiashReadReg (Handle, 0x07, &bData1);
+  NiashWriteReg (Handle, 0x07, 0x1C);
+  NiashReadReg (Handle, 0x07, &bData2);
+  NiashWriteReg (Handle, 0x07, bData1);
   pHWParams->fReg07 = (bData2 == 0x1C);
 
   if (!pHWParams->fGamma16)
@@ -187,18 +187,15 @@ _ProbeRegisters (THWParams * pHWParams)
 STATIC int
 NiashOpen (THWParams * pHWParams, const char *pszName)
 {
-  int iXferHandle;
 
-  iXferHandle = NiashXferOpen (pszName, &pHWParams->eModel);
-  if (iXferHandle < 0)
-    {
+  if (!NiashXferOpen(pHWParams->XferHandle, &pHWParams->eModel))
+  {
       NIASHDBG (DBG_ERR, "NiashXferOpen failed for '%s'\n", pszName);
       return -1;
-    }
+  }
 
-  pHWParams->iXferHandle = iXferHandle;
 
-  NiashWakeup (pHWParams->iXferHandle);
+  NiashWakeup (pHWParams->XferHandle);
 
   /* default HW params */
   pHWParams->iSensorSkew = 8;
@@ -257,16 +254,16 @@ NiashOpen (THWParams * pHWParams, const char *pszName)
 STATIC void
 NiashClose (THWParams * pHWPar)
 {
-  NiashXferClose (pHWPar->iXferHandle);
-  pHWPar->iXferHandle = 0;
+  NiashXferClose (pHWPar->XferHandle);
+  pHWPar->XferHandle = INVALID_HANDLE_VALUE;
 }
 
 
 static void
-WriteRegWord (int iHandle, unsigned char bReg, SANE_Word wData)
+WriteRegWord (HANDLE Handle, unsigned char bReg, SANE_Word wData)
 {
-  NiashWriteReg (iHandle, bReg, wData & 0xFF);
-  NiashWriteReg (iHandle, bReg + 1, (wData >> 8) & 0xFF);
+  NiashWriteReg (Handle, bReg, wData & 0xFF);
+  NiashWriteReg (Handle, bReg + 1, (wData >> 8) & 0xFF);
 }
 
 
@@ -296,13 +293,13 @@ CalcGamma (unsigned char *pabTable, double Gamma)
       iAddr     Scanner address to write to
 */
 static void
-Hp3400cWriteFW (int iXferHandle, unsigned char *pabData, int iLen, int iAddr)
+Hp3400cWriteFW (HANDLE XferHandle, unsigned char *pabData, int iLen, int iAddr)
 {
   iAddr--;
-  NiashWriteReg (iXferHandle, 0x21, iAddr & 0xFF);
-  NiashWriteReg (iXferHandle, 0x22, (iAddr >> 8) & 0xFF);
-  NiashWriteReg (iXferHandle, 0x23, (iAddr >> 16) & 0xFF);
-  NiashWriteBulk (iXferHandle, pabData, iLen);
+  NiashWriteReg (XferHandle, 0x21, iAddr & 0xFF);
+  NiashWriteReg (XferHandle, 0x22, (iAddr >> 8) & 0xFF);
+  NiashWriteReg (XferHandle, 0x23, (iAddr >> 16) & 0xFF);
+  NiashWriteBulk (XferHandle, pabData, iLen);
 }
 
 
@@ -316,9 +313,9 @@ WriteGammaCalibTable (unsigned char *pabGammaR, unsigned char *pabGammaG,
   int i, j, k;
   static unsigned char abGamma[60000];
   int iData;
-  int iHandle;
+  HANDLE Handle;
 
-  iHandle = pHWPar->iXferHandle;
+  Handle = pHWPar->XferHandle;
 
   j = 0;
   /* fill gamma table for red component */
@@ -368,71 +365,63 @@ WriteGammaCalibTable (unsigned char *pabGammaR, unsigned char *pabGammaG,
       j += HW_PIXELS * 6;
     }
 
-  NiashWriteReg (iHandle, 0x02, 0x80);
-  NiashWriteReg (iHandle, 0x03, 0x01);
-  NiashWriteReg (iHandle, 0x03, 0x11);
-  NiashWriteReg (iHandle, 0x02, 0x84);
+  NiashWriteReg (Handle, 0x02, 0x80);
+  NiashWriteReg (Handle, 0x03, 0x01);
+  NiashWriteReg (Handle, 0x03, 0x11);
+  NiashWriteReg (Handle, 0x02, 0x84);
 
   if (pHWPar->fReg07)
     {
-      Hp3400cWriteFW (iHandle, abGamma, j, 0x2000);
+      Hp3400cWriteFW (Handle, abGamma, j, 0x2000);
     }
   else
     {
-      NiashWriteBulk (iHandle, abGamma, j);
+      NiashWriteBulk (Handle, abGamma, j);
     }
 
-  NiashWriteReg (iHandle, 0x02, 0x80);
+  NiashWriteReg (Handle, 0x02, 0x80);
 }
 
 
 static void
-WriteAFEReg (int iHandle, int iReg, int iData)
+WriteAFEReg (HANDLE Handle, int iReg, int iData)
 {
-  NiashWriteReg (iHandle, 0x25, (unsigned char) iReg);
-  NiashWriteReg (iHandle, 0x26, (unsigned char) iData);
+  NiashWriteReg (Handle, 0x25, (unsigned char) iReg);
+  NiashWriteReg (Handle, 0x26, (unsigned char) iData);
 }
 
 
 /* setup the analog front-end -> coarse calibration */
 static void
-WriteAFE (int iHandle)
+WriteAFE (HANDLE Handle)
 {
   /* see WM8143 datasheet */
 
-  WriteAFEReg (iHandle, 0x04, 0x00);
-  WriteAFEReg (iHandle, 0x03, 0x12);
-  WriteAFEReg (iHandle, 0x02, 0x04);
-  WriteAFEReg (iHandle, 0x05, 0x10);
-  WriteAFEReg (iHandle, 0x01, 0x03);
+  WriteAFEReg (Handle, 0x04, 0x00);
+  WriteAFEReg (Handle, 0x03, 0x12);
+  WriteAFEReg (Handle, 0x02, 0x04);
+  WriteAFEReg (Handle, 0x05, 0x10);
+  WriteAFEReg (Handle, 0x01, 0x03);
 
-  WriteAFEReg (iHandle, 0x20, 0xc0);	/*c8 *//* red offset */
-  WriteAFEReg (iHandle, 0x21, 0xc0);	/*c8 *//* green offset */
-  WriteAFEReg (iHandle, 0x22, 0xc0);	/*d0 *//* blue offset */
+  WriteAFEReg (Handle, 0x20, 0xc0);	/*c8 *//* red offset */
+  WriteAFEReg (Handle, 0x21, 0xc0);	/*c8 *//* green offset */
+  WriteAFEReg (Handle, 0x22, 0xc0);	/*d0 *//* blue offset */
 
-  WriteAFEReg (iHandle, 0x28, 0x05);	/*5 *//* red gain */
-  WriteAFEReg (iHandle, 0x29, 0x03);	/*3 *//* green gain */
-  WriteAFEReg (iHandle, 0x2A, 0x04);	/*4 *//* blue gain */
-
-//   WriteAFEReg(iHandle, 0x20, 0xc6);	/*c8 *//* red offset */
-//   WriteAFEReg(iHandle, 0x21, 0xc6);	/*c8 *//* green offset */
-//   WriteAFEReg(iHandle, 0x22, 0xc5);	/*d0 *//* blue offset */
-// 
-//   WriteAFEReg(iHandle, 0x28, 0x04);	/*5 *//* red gain */
-//   WriteAFEReg(iHandle, 0x29, 0x02);	/*3 *//* green gain */
-//   WriteAFEReg(iHandle, 0x2A, 0x04);	/*4 *//* blue gain */
+  WriteAFEReg (Handle, 0x28, 0x05);	/*5 *//* red gain */
+  WriteAFEReg (Handle, 0x29, 0x03);	/*3 *//* green gain */
+  WriteAFEReg (Handle, 0x2A, 0x04);	/*4 *//* blue gain */
 }
 
 
 /* wait for the carriage to return */
 static void
-WaitReadyBit (int iHandle)
+WaitReadyBit (HANDLE Handle)
 {
   unsigned char bData;
 
   do
     {
-      NiashReadReg (iHandle, 0x03, &bData);
+      NiashReadReg (Handle, 0x03, &bData);
     }
   while ((bData & 8) == 0);
 }
@@ -444,19 +433,20 @@ WaitReadyBit (int iHandle)
 static void
 InitNiash00014 (TScanParams * pParams, THWParams * pHWParams)
 {
-  int iHandle, iLpiCode;
+  HANDLE Handle;
+  int iLpiCode;
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
   /* exposure time (in units 24/Fcrystal)? */
-  WriteRegWord (iHandle, 0x08, pHWParams->iExpTime - 1);
+  WriteRegWord (Handle, 0x08, pHWParams->iExpTime - 1);
 
   /* width in pixels */
-  WriteRegWord (iHandle, 0x12, pParams->iWidth - 1);
+  WriteRegWord (Handle, 0x12, pParams->iWidth - 1);
 
   /* top */
-  WriteRegWord (iHandle, 0x17, pParams->iTop);
-  WriteRegWord (iHandle, 0x19, pParams->iTop);
+  WriteRegWord (Handle, 0x17, pParams->iTop);
+  WriteRegWord (Handle, 0x19, pParams->iTop);
 
   /* time between stepper motor steps (in units of 24/Fcrystal)? */
   iLpiCode = pParams->iLpi * pHWParams->iExpTime / 1200L;
@@ -469,21 +459,21 @@ InitNiash00014 (TScanParams * pParams, THWParams * pHWParams)
       if (pParams->iLpi < 600)
 	{
 	  /* set halfres bit */
-	  NiashWriteReg (iHandle, 0x06, 0x01);
+	  NiashWriteReg (Handle, 0x06, 0x01);
 	  /* double lpi code because of halfres bit */
 	  iLpiCode *= 2;
 	}
       else
 	{
 	  /* clear halfres bit */
-	  NiashWriteReg (iHandle, 0x06, 0x00);
+	  NiashWriteReg (Handle, 0x06, 0x00);
 	  /* add exptime to make it scan slower */
 	  iLpiCode += pHWParams->iExpTime;
 	}
 
       /* unknown setting */
-      WriteRegWord (iHandle, 0x27, 0x7FD2);
-      WriteRegWord (iHandle, 0x29, 0x6421);
+      WriteRegWord (Handle, 0x27, 0x7FD2);
+      WriteRegWord (Handle, 0x29, 0x6421);
 
     }
   else
@@ -491,7 +481,7 @@ InitNiash00014 (TScanParams * pParams, THWParams * pHWParams)
       /* NIASH 00014 init */
 
       /* halfres bit always cleared */
-      NiashWriteReg (iHandle, 0x06, 0x00);
+      NiashWriteReg (Handle, 0x06, 0x00);
 
       /* LPI specific settings */
       if (pParams->iLpi >= 600)
@@ -501,15 +491,15 @@ InitNiash00014 (TScanParams * pParams, THWParams * pHWParams)
 	}
 
       /* unknown setting */
-      WriteRegWord (iHandle, 0x27, 0xc862);	/*c862 */
-      WriteRegWord (iHandle, 0x29, 0xb853);	/*b853 */
+      WriteRegWord (Handle, 0x27, 0xc862);	/*c862 */ //MKE: c0 fixes garbage lines
+      WriteRegWord (Handle, 0x29, 0xb853);	/*b853 */
     }
 
   /* LPI code */
-  WriteRegWord (iHandle, 0x0A, iLpiCode - 1);
+  WriteRegWord (Handle, 0x0A, iLpiCode - 1);
 
   /* backtrack reversing speed */
-  NiashWriteReg (iHandle, 0x1E, (unsigned char) ((iLpiCode - 1) / 32));
+  NiashWriteReg (Handle, 0x1E, (unsigned char) ((iLpiCode - 1) / 32));
 }
 
 
@@ -519,46 +509,47 @@ InitNiash00014 (TScanParams * pParams, THWParams * pHWParams)
 static void
 InitNiash00019 (TScanParams * pParams, THWParams * pHWParams)
 {
-  int iHandle, iLpiCode;
+  HANDLE Handle; 
+  int iLpiCode;
   static unsigned char abMotor[512];
 
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
   /* exposure time (in units 24/Fcrystal)? */
-  WriteRegWord (iHandle, 0x08, pHWParams->iExpTime);
+  WriteRegWord (Handle, 0x08, pHWParams->iExpTime);
 
   /* width in pixels */
-  WriteRegWord (iHandle, 0x12, pParams->iWidth);
+  WriteRegWord (Handle, 0x12, pParams->iWidth);
 
   /* ? */
-  WriteRegWord (iHandle, 0x27, 0xc862);	/*c862 */
-  WriteRegWord (iHandle, 0x29, 0xb853);	/*b853 */
+  WriteRegWord (Handle, 0x27, 0xc862);	/*c862 */
+  WriteRegWord (Handle, 0x29, 0xb853);	/*b853 */
 
   /* specific handling of 150 dpi resolution */
   if (pParams->iLpi == 150)
     {
       /* use 300 LPI but skip every other line */
       pParams->iLpi = 300;
-      NiashWriteReg (iHandle, 0x06, 0x01);
+      NiashWriteReg (Handle, 0x06, 0x01);
     }
   else
     {
-      NiashWriteReg (iHandle, 0x06, 0x00);
+      NiashWriteReg (Handle, 0x06, 0x00);
     }
 
   /* DPI and position table */
-  NiashWriteReg (iHandle, 0x07, 0x02);
+  NiashWriteReg (Handle, 0x07, 0x02);
   _ConvertMotorTable (abData0000, abMotor, sizeof (abData0000),
 		      pParams->iLpi);
-  Hp3400cWriteFW (iHandle, abMotor, sizeof (abData0000), 0x000);
+  Hp3400cWriteFW (Handle, abMotor, sizeof (abData0000), 0x000);
   _ConvertMotorTable (abData0400, abMotor, sizeof (abData0400),
 		      pParams->iLpi);
-  Hp3400cWriteFW (iHandle, abMotor, sizeof (abData0400), 0x400);
+  Hp3400cWriteFW (Handle, abMotor, sizeof (abData0400), 0x400);
 
   /* backtrack reversing speed */
   iLpiCode = pParams->iLpi * pHWParams->iExpTime / 1200L;
-  NiashWriteReg (iHandle, 0x1E, (unsigned char) ((iLpiCode - 1) / 32));
+  NiashWriteReg (Handle, 0x1E, (unsigned char) ((iLpiCode - 1) / 32));
 }
 
 
@@ -568,18 +559,19 @@ InitNiash00019 (TScanParams * pParams, THWParams * pHWParams)
 static void
 InitNiashCommon (TScanParams * pParams, THWParams * pHWParams)
 {
-  int iWidthHW, iHandle, iMaxLevel;
+  int iWidthHW, iMaxLevel;
+  HANDLE Handle;
 
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
-  NiashWriteReg (iHandle, 0x02, 0x80);
-  NiashWriteReg (iHandle, 0x03, 0x11);
-  NiashWriteReg (iHandle, 0x01, 0x8B);
-  NiashWriteReg (iHandle, 0x05, 0x01);
+  NiashWriteReg (Handle, 0x02, 0x80);
+  NiashWriteReg (Handle, 0x03, 0x11);
+  NiashWriteReg (Handle, 0x01, 0x8B);
+  NiashWriteReg (Handle, 0x05, 0x01);
 
   /* dpi */
-  WriteRegWord (iHandle, 0x0C, pParams->iDpi);
+  WriteRegWord (Handle, 0x0C, pParams->iDpi);
 
   /* calculate width in units of HW resolution */
   iWidthHW = pParams->iWidth * (HW_DPI / pParams->iDpi);
@@ -589,59 +581,59 @@ InitNiashCommon (TScanParams * pParams, THWParams * pHWParams)
     {
       /* head is reversed */
       /* right */
-      WriteRegWord (iHandle, 0x0E,
+      WriteRegWord (Handle, 0x0E,
 		    3 * (HW_PIXELS - (pParams->iLeft + iWidthHW)));
 
       /* left */
-      WriteRegWord (iHandle, 0x10, 3 * (HW_PIXELS - pParams->iLeft) - 1);
+      WriteRegWord (Handle, 0x10, 3 * (HW_PIXELS - pParams->iLeft) - 1);
     }
   else
     {
       /* head is not reversed */
       /*left  */
-      WriteRegWord (iHandle, 0x0E, 3 * pParams->iLeft);
+      WriteRegWord (Handle, 0x0E, 3 * pParams->iLeft);
 
       /* right */
-      WriteRegWord (iHandle, 0x10, 3 * (pParams->iLeft + iWidthHW) - 1);
+      WriteRegWord (Handle, 0x10, 3 * (pParams->iLeft + iWidthHW) - 1);
     }
 
   /* bottom */
-  WriteRegWord (iHandle, 0x1B, pParams->iBottom);	/* 0x393C); */
+  WriteRegWord (Handle, 0x1B, pParams->iBottom);	/* 0x393C); */
 
   /* forward jogging speed */
-  NiashWriteReg (iHandle, 0x1D, 0x60);
+  NiashWriteReg (Handle, 0x1D, 0x60);
 
   /* backtrack reversing speed? */
-  NiashWriteReg (iHandle, 0x2B, 0x15);
+  NiashWriteReg (Handle, 0x2B, 0x15);
 
   /* backtrack distance */
   if (pParams->iLpi < 600)
     {
-      NiashWriteReg (iHandle, 0x1F, 0x30);
+      NiashWriteReg (Handle, 0x1F, 0x30);
     }
   else
     {
-      NiashWriteReg (iHandle, 0x1F, 0x18);
+      NiashWriteReg (Handle, 0x1F, 0x18);
     }
 
   /* max buffer level before backtrace */
   iMaxLevel = MIN (pHWParams->iBufferSize / pParams->iWidth, 250);
-  NiashWriteReg (iHandle, 0x14, (unsigned char) (iMaxLevel - 1) );
+  NiashWriteReg (Handle, 0x14, (unsigned char) (iMaxLevel - 1) );
 
   /* lamp PWM, max = 0x1ff? */
-  WriteRegWord (iHandle, 0x2C, 0x01FF);
+  WriteRegWord (Handle, 0x2C, 0x01FF);
 
   /* not needed? */
-  NiashWriteReg (iHandle, 0x15, 0x90);	/* 90 */
-  NiashWriteReg (iHandle, 0x16, 0x70);	/* 70 */
+  NiashWriteReg (Handle, 0x15, 0x90);	/* 90 */
+  NiashWriteReg (Handle, 0x16, 0x70);	/* 70 */
 
-  WriteAFE (iHandle);
+  WriteAFE (Handle);
 
-  WaitReadyBit (iHandle);
+  WaitReadyBit (Handle);
 
-  NiashWriteReg (iHandle, 0x03, 0x05);
+  NiashWriteReg (Handle, 0x03, 0x05);
 
-  NiashWriteReg (iHandle, 0x02, pParams->fCalib ? 0x88 : 0xA8);
+  NiashWriteReg (Handle, 0x02, pParams->fCalib ? 0x88 : 0xA8);
 }
 
 
@@ -652,9 +644,9 @@ InitScan (TScanParams * pParams, THWParams * pHWParams)
   int iHeight;
   int iExpTime;
   TScanParams Params;
-  int iHandle;
+  HANDLE Handle;
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
   /* check validity of scanparameters */
   switch (pParams->iDpi)
@@ -731,7 +723,7 @@ InitScan (TScanParams * pParams, THWParams * pHWParams)
 /************************************************************************/
 
 static SANE_Bool
-XferBufferGetLine (int iHandle, TDataPipe * p, unsigned char *pabLine,
+XferBufferGetLine (HANDLE Handle, TDataPipe * p, unsigned char *pabLine,
 		   SANE_Bool fReturn)
 {
   unsigned char bData, bData2;
@@ -760,13 +752,16 @@ XferBufferGetLine (int iHandle, TDataPipe * p, unsigned char *pabLine,
 	  fJustDone = SANE_TRUE;
 	}
       /* reading old buffer level */
-      NiashReadReg (iHandle, 0x20, &bData);
-      NiashReadBulk (iHandle, p->pabXferBuf, iLines * p->iBytesPerLine);
+      NiashReadReg (Handle, 0x20, &bData);
+      if (!NiashReadBulk(Handle, p->pabXferBuf, iLines * p->iBytesPerLine))
+      {
+          return SANE_FALSE;
+      }
       /* reding new buffer level */
-      NiashReadReg (iHandle, 0x20, &bData2);
+      NiashReadReg (Handle, 0x20, &bData2);
       if (fJustDone && fReturn)
 	{
-	  NiashWriteReg (iHandle, 0x02, 0x80);
+	  NiashWriteReg (Handle, 0x02, 0x80);
 	  NIASHDBG (DBG_MSG, "returning scanner head\n");
 	}
       NIASHDBG (DBG_MSG,
@@ -791,7 +786,7 @@ XferBufferGetLine (int iHandle, TDataPipe * p, unsigned char *pabLine,
 
 
 static void
-XferBufferInit (int iHandle, TDataPipe * p)
+XferBufferInit (HANDLE Handle, TDataPipe * p)
 {
   int i;
 
@@ -801,27 +796,27 @@ XferBufferInit (int iHandle, TDataPipe * p)
   /* skip garbage lines */
   for (i = 0; i < p->iSkipLines; i++)
     {
-      XferBufferGetLine (iHandle, p, NULL, SANE_FALSE);
+      XferBufferGetLine (Handle, p, NULL, SANE_FALSE);
     }
 }
 
 /* static procedure that fills the circular buffer in advance to any
    circular buffer data retrieval */
 static void
-CircBufferFill (int iHandle, TDataPipe * p, SANE_Bool iReversedHead)
+CircBufferFill (HANDLE Handle, TDataPipe * p, SANE_Bool iReversedHead)
 {
   int i;
   for (i = 0; i < p->iLinesPerCircBuf; i++)
     {
       if (iReversedHead)
 	{
-	  XferBufferGetLine (iHandle, p,
+	  XferBufferGetLine (Handle, p,
 			     &p->pabCircBuf[p->iRedLine * p->iBytesPerLine],
 			     SANE_FALSE);
 	}
       else
 	{
-	  XferBufferGetLine (iHandle, p,
+	  XferBufferGetLine (Handle, p,
 			     &p->pabCircBuf[p->iBluLine * p->iBytesPerLine],
 			     SANE_FALSE);
 	}
@@ -935,7 +930,7 @@ _UnscrambleLine (unsigned char *pabLine,
 /* gets an unscrambled line from the circular buffer. the first couple of lines contain garbage,
    if fReturn==SANE_TRUE, the head will return automatically on an end of scan */
 STATIC SANE_Bool
-CircBufferGetLineEx (int iHandle, TDataPipe * p, unsigned char *pabLine,
+CircBufferGetLineEx (HANDLE Handle, TDataPipe * p, unsigned char *pabLine,
 		     SANE_Bool iReversedHead, SANE_Bool fReturn)
 {
   int iLineCount;
@@ -943,14 +938,14 @@ CircBufferGetLineEx (int iHandle, TDataPipe * p, unsigned char *pabLine,
     {
       if (iReversedHead)
 	{
-	  if (!XferBufferGetLine (iHandle, p,
+	  if (!XferBufferGetLine (Handle, p,
 				  &p->pabCircBuf[p->iRedLine *
 						 p->iBytesPerLine], fReturn))
 	    return SANE_FALSE;
 	}
       else
 	{
-	  if (!XferBufferGetLine (iHandle, p,
+	  if (!XferBufferGetLine (Handle, p,
 				  &p->pabCircBuf[p->iBluLine *
 						 p->iBytesPerLine], fReturn))
 	    return SANE_FALSE;
@@ -976,10 +971,10 @@ CircBufferGetLineEx (int iHandle, TDataPipe * p, unsigned char *pabLine,
 
 /* gets an unscrambled line from the circular buffer. the first couple of lines contain garbage */
 STATIC SANE_Bool
-CircBufferGetLine (int iHandle, TDataPipe * p, unsigned char *pabLine,
+CircBufferGetLine (HANDLE Handle, TDataPipe * p, unsigned char *pabLine,
 		   SANE_Bool iReversedHead)
 {
-  return CircBufferGetLineEx (iHandle, p, pabLine, iReversedHead, SANE_FALSE);
+  return CircBufferGetLineEx (Handle, p, pabLine, iReversedHead, SANE_FALSE);
 }
 
 
@@ -998,7 +993,7 @@ _OptimizeXferSize (int iLines, int iLinesPerXfer)
 }
 
 STATIC void
-CircBufferInit (int iHandle, TDataPipe * p,
+CircBufferInit (HANDLE Handle, TDataPipe * p,
 		int iWidth, int iHeight,
 		int iMisAlignment, SANE_Bool iReversedHead,
 		int iScaleDownDpi, int iScaleDownLpi)
@@ -1083,10 +1078,10 @@ CircBufferInit (int iHandle, TDataPipe * p,
   NIASHDBG (DBG_MSG, "_iLinesPerXferBuf = %d\n", p->iLinesPerXferBuf);
 
   /* init transfer buffer */
-  XferBufferInit (iHandle, p);
+  XferBufferInit (Handle, p);
 
   /* fill circular buffer */
-  CircBufferFill (iHandle, p, iReversedHead);
+  CircBufferFill (Handle, p, iReversedHead);
 }
 
 
@@ -1187,7 +1182,7 @@ GetLamp (THWParams * pHWParams, SANE_Bool * pfLampIsOn)
 {
   unsigned char bData;
 
-  NiashReadReg (pHWParams->iXferHandle, 0x03, &bData);
+  NiashReadReg (pHWParams->XferHandle, 0x03, &bData);
   *pfLampIsOn = ((bData & 0x01) != 0);
   return SANE_TRUE;
 }
@@ -1197,18 +1192,18 @@ STATIC SANE_Bool
 SetLamp (THWParams * pHWParams, SANE_Bool fLampOn)
 {
   unsigned char bData;
-  int iHandle;
+  HANDLE Handle;
 
-  iHandle = pHWParams->iXferHandle;
+  Handle = pHWParams->XferHandle;
 
-  NiashReadReg (iHandle, 0x03, &bData);
+  NiashReadReg (Handle, 0x03, &bData);
   if (fLampOn)
     {
-      NiashWriteReg (iHandle, 0x03, bData | 0x01);
+      NiashWriteReg (Handle, 0x03, bData | 0x01);
     }
   else
     {
-      NiashWriteReg (iHandle, 0x03, bData & ~0x01);
+      NiashWriteReg (Handle, 0x03, bData & ~0x01);
     }
   return SANE_TRUE;
 }
@@ -1231,13 +1226,13 @@ SimpleCalibExt (THWParams * pHWPar, unsigned char *pabCalibTable,
   static unsigned char abWhite[HW_PIXELS * 3];
   unsigned char *pabWhite;
   int iWhiteR, iWhiteG, iWhiteB;
-  int iHandle;
+  HANDLE Handle;
   SANE_Bool iReversedHead;
   int startWhiteY, endWhiteY;
   int startBlackY, endBlackY;
   int startBlackX, endBlackX;
 
-  iHandle = pHWPar->iXferHandle;
+  Handle = pHWPar->XferHandle;
   iReversedHead = pHWPar->iReversedHead;
 
   DataPipe.iSkipLines = pHWPar->iSkipLines;
@@ -1285,19 +1280,25 @@ SimpleCalibExt (THWParams * pHWPar, unsigned char *pabCalibTable,
       endBlackX = 3374;
     }
 
-  CircBufferInit (iHandle, &DataPipe, HW_PIXELS, -1, Params.iLpi / 150,
+  CircBufferInit (Handle, &DataPipe, HW_PIXELS, -1, Params.iLpi / 150,
 		  iReversedHead, 1, 1);
   /* white level */
   /* skip some lines */
   for (i = 0; i < startWhiteY; i++)
     {
-      CircBufferGetLine (iHandle, &DataPipe, abLine, iReversedHead);
+      if (!CircBufferGetLine (Handle, &DataPipe, abLine, iReversedHead))
+      {
+          return SANE_FALSE;
+      }
     }
   /* Get white lines */
   for (i = 0; i < endWhiteY - startWhiteY + 1; i++)
     {
-      CircBufferGetLine (iHandle, &DataPipe, &abBuf[i * HW_PIXELS * 3],
-			 iReversedHead);
+      if (!CircBufferGetLine (Handle, &DataPipe, &abBuf[i * HW_PIXELS * 3],
+			 iReversedHead))
+      {
+          return SANE_FALSE;
+      }
     }
   /* black level */
   bMinR = 255;
@@ -1306,11 +1307,17 @@ SimpleCalibExt (THWParams * pHWPar, unsigned char *pabCalibTable,
   /* Skip some lines */
   for (i = 0; i < startBlackY; i++)
     {
-      CircBufferGetLine (iHandle, &DataPipe, abLine, iReversedHead);
+        if (!CircBufferGetLine(Handle, &DataPipe, abLine, iReversedHead))
+        {
+            return SANE_FALSE;
+        }
     }
   for (i = 0; i < endBlackY - startBlackY + 1; i++)
     {
-      CircBufferGetLine (iHandle, &DataPipe, abLine, iReversedHead);
+      if (!CircBufferGetLine (Handle, &DataPipe, abLine, iReversedHead))
+      {
+          return SANE_FALSE;
+      }
       for (j = 0; j < endBlackX; j++)
 	{
 	  bMinR = MIN (abLine[j * 3 + 0], bMinR);
@@ -1365,5 +1372,5 @@ SimpleCalibExt (THWParams * pHWPar, unsigned char *pabCalibTable,
 STATIC void
 FinishScan (THWParams * pHWParams)
 {
-  NiashWriteReg (pHWParams->iXferHandle, 0x02, 0x80);
+  NiashWriteReg (pHWParams->XferHandle, 0x02, 0x80);
 }

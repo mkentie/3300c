@@ -1,10 +1,27 @@
+/*
+Copyright (C) 2015 Marijn Kentie
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
 #include "stdafx.h"
 #include "3300C.h"
 #include "Main.h"
 #include "niash_win.h"
 #include "niash_ext.h"
 #include "hpgt33tk.h"
-
 
 std::array<GUID,2> C3300C::sm_ButtonGUIDs = {WIA_EVENT_SCAN_IMAGE,WIA_EVENT_SCAN_PRINT_IMAGE};
 std::array<wchar_t*,2> C3300C::sm_pszButtonNames = {L"Scan", L"Print"};
@@ -14,18 +31,59 @@ C3300C::C3300C()
     DBGMSG();
 }
 
+C3300C::~C3300C()
+{
+    SetLamp(&m_HWParams, 0);
+    NiashClose(&m_HWParams);
+}
 
 void C3300C::FillSCANINFO(SCANINFO& ScanInfo) const 
 {
+    /* From XP driver:
+        ADF	0	long
+        TPA	0	long
+        Endorser	0	long
+        OpticalXResolution	600	long
+        OpticalYResolution	600	long
+        BedWidth	8500	long
+        BedHeight	11700	long
+        IntensityRange	{lMin=0 lMax=1 lStep=1 }	_RANGEVALUE
+        ContrastRange	{lMin=0 lMax=1 lStep=1 }	_RANGEVALUE
+        SupportedCompressionType	0	long
+        SupportedDataTypes	7	long
+        WidthPixels	0	long
+        WidthBytes	0	long
+        Lines	0	long
+        DataType	3	long
+        PixelBits	24	long
+        Intensity	0	long
+        Contrast	0	long
+        Xresolution	75	long
+        Yresolution	75	long
+        Window	{xPos=0 yPos=0 xExtent=0 ...}	_SCANWINDOW
+        DitherPattern	0	long
+        Negative	0	long
+        Mirror	0	long
+        AutoBack	1	long
+        ColorDitherPattern	0	long
+        ToneMap	0	long
+        Compression	0	long
+        RawDataFormat	0	long
+        RawPixelOrder	1	long
+        bNeedDataAlignment	1	long
+        DelayBetweenRead	0	long
+
+    */
+
     //MSDN suggests all members should be initialized and the MicroDriver sample does so too
     ScanInfo.ADF = 0;
     ScanInfo.TPA = 0;
     ScanInfo.Endorser = 0;
     ScanInfo.OpticalXResolution = HW_DPI;
     ScanInfo.OpticalYResolution = HW_DPI;
-    ScanInfo.BedWidth = 5100*1000/600; //1000th inch, based on size of Windows XP scan
-    ScanInfo.BedHeight = 7020*1000/600; //1000th inch, based on size of Windows XP scan
-    ScanInfo.IntensityRange.lMin = 0;//These don't actually grey out the user interface or change the slider ranges...
+    ScanInfo.BedWidth = 8500; //From XP driver; trying to go wider just leads to corrupt lines
+    ScanInfo.BedHeight = 11700; // 11700; //From XP driver
+    ScanInfo.IntensityRange.lMin = 0; //These don't actually grey out the user interface or change the slider ranges...
     ScanInfo.IntensityRange.lMax = 0;
     ScanInfo.IntensityRange.lStep = 0;
     ScanInfo.ContrastRange.lMin = 0;
@@ -34,25 +92,26 @@ void C3300C::FillSCANINFO(SCANINFO& ScanInfo) const
     ScanInfo.SupportedCompressionType = 0;
     ScanInfo.SupportedDataTypes = SUPPORT_COLOR;
 
+    //XP driver uses 0 for all of these
     ScanInfo.Intensity = 0;
     ScanInfo.Contrast = 0;
-    ScanInfo.Xresolution = 300;
-    ScanInfo.Yresolution = 300;
+    ScanInfo.Xresolution = 0;
+    ScanInfo.Yresolution = 0;
     ScanInfo.Window.xPos = 0;
     ScanInfo.Window.yPos = 0;
-    ScanInfo.Window.xExtent = (ScanInfo.Xresolution * ScanInfo.BedWidth) / 1000;
-    ScanInfo.Window.yExtent = (ScanInfo.Yresolution * ScanInfo.BedHeight) / 1000;
+    ScanInfo.Window.xExtent = 0;
+    ScanInfo.Window.yExtent = 0;
+    ScanInfo.WidthPixels = 0;
+    ScanInfo.Lines = 0;
+    ScanInfo.WidthBytes = 0;
 
-    ScanInfo.WidthPixels = ScanInfo.Window.xExtent - ScanInfo.Window.xPos;
-    ScanInfo.Lines = ScanInfo.Window.yExtent;
     ScanInfo.DataType = WIA_DATA_COLOR;
     ScanInfo.PixelBits = 24;
-    ScanInfo.WidthBytes = ScanInfo.Window.xExtent * ScanInfo.PixelBits / 8;
 
     ScanInfo.DitherPattern = 0;
     ScanInfo.Negative = 0;
     ScanInfo.Mirror = 0;
-    ScanInfo.AutoBack = 0;
+    ScanInfo.AutoBack = 1; //From XP driver
     ScanInfo.ColorDitherPattern = 0;
     ScanInfo.ToneMap = 0;
     ScanInfo.Compression = 0;
@@ -73,8 +132,9 @@ void C3300C::GetCapabilities(VAL& Value) const
 void C3300C::GetStatus(VAL& Value) 
 {
     Value.lVal = m_bStatusOk ? MCRO_STATUS_OK : MCRO_ERROR_GENERAL_ERROR;
-    //const unsigned char ButtonState = GetButtonState(&m_HWParams);
-    //Value.pGuid = (ButtonState & EScannerButtonBits::ButtonScan) ? &sm_ButtonGUIDs[0] : (ButtonState & EScannerButtonBits::ButtonPrint) ? &sm_ButtonGUIDs[1] : nullptr;
+    const unsigned char ButtonState = GetButtonState(&m_HWParams);
+
+    Value.pGuid = (ButtonState & EScannerButtonBits::ButtonScan) ? &sm_ButtonGUIDs[0] : (ButtonState & EScannerButtonBits::ButtonPrint) ? &sm_ButtonGUIDs[1] : reinterpret_cast<GUID*>(const_cast<IID*>(&GUID_NULL));
 }
 
 void C3300C::Reset(VAL& /*Value*/)
@@ -82,65 +142,73 @@ void C3300C::Reset(VAL& /*Value*/)
     m_bStatusOk = true;
 }
 
-void C3300C::Initialize(VAL& Value)
+bool C3300C::Initialize(VAL& Value)
 {
     DBGMSG();
 
-    assert(Value.pScanInfo);	
+    assert(Value.pScanInfo);
     const SCANINFO& ScanInfo = *Value.pScanInfo;
-    NiashLibUsbSetDeviceHandle(ScanInfo.DeviceIOHandles[0]);
+    m_HWParams.XferHandle = ScanInfo.DeviceIOHandles[0];
     if (NiashOpen(&m_HWParams, Value.szVal) < 0)
     {
         m_bStatusOk = false;
-        return;
+        return false;
     }
 
     //Already turn on lamp for quicker calibration once user starts to scan; auto turns off after 15 minutes
     SetLamp(&m_HWParams, 1);
+
+    return true;
 }
 
-void C3300C::Uninitialize()
-{
-    SetLamp(&m_HWParams, 0);
-    NiashClose(&m_HWParams);
-}
-
-void C3300C::ScanStart(const SCANINFO& ScanInfo)
+bool C3300C::ScanStart(const SCANINFO& ScanInfo)
 {
     DBGMSG();
 
     CalibTable_t CalibTable;
-//     if (!WarmupLamp(CalibTable))
-//     {
-//         m_bStatusOk = false;
-//         DBGMSG(L"WarmupLamp() failure.");
-//         return;
-//     }
+
+    if (!WarmupLamp(CalibTable))
+    {
+        m_bStatusOk = false;
+        DBGMSG(L"WarmupLamp() failure.");
+        return false;
+    }
 
     WriteGammaCalibTable(hpgt33tk::GammaTableR.data(), hpgt33tk::GammaTableG.data(), hpgt33tk::GammaTableB.data(), CalibTable.data(), 0, 0, &m_HWParams);
 
     TScanParams ScanParams;
     ScanParams.iDpi = ScanInfo.Xresolution;
     ScanParams.iLpi = ScanInfo.Yresolution;
-    ScanParams.iTop = 480 + HW_DPI * ScanInfo.Window.yPos / ScanInfo.Yresolution;
-    ScanParams.iLeft = 80 + HW_LPI * ScanInfo.Window.xPos / ScanInfo.Xresolution;
+
+    /*
+    150 dpi: 66 pixels above start of document scanned, value written is 466 to my logs, 452 according to SANE driver docs, and in practice I needed 490 to pixel match XP driver.
+    300 dpi: 132 pixels
+    600 dpi: 264 pixels
+    Always 14 pixel lines of garbage, so need to start that much before document
+    ScanInfo.Window is in pixels
+    ScanParams iTop/iLeft is in native dots (600 dpi horz, 1200 dpi vert)
+    */
+
+    ScanParams.iTop = 602 - static_cast<int>(Helpers::PixelsToDots(m_HWParams.iSkipLines, ScanInfo.Yresolution, HW_LPI) + Helpers::PixelsToDots(ScanInfo.Window.yPos, ScanInfo.Yresolution, HW_LPI));
+    ScanParams.iLeft = 102 + static_cast<int>(Helpers::PixelsToDots(ScanInfo.Window.xPos, ScanInfo.Xresolution, HW_DPI)); //102 from XP driver log
     ScanParams.iWidth = ScanInfo.Window.xExtent;
     ScanParams.iHeight = ScanInfo.Window.yExtent;
-    ScanParams.iBottom = HP3300C_BOTTOM;
+    ScanParams.iBottom = HP3300C_BOTTOM; //Doesn't matter
     ScanParams.fCalib = SANE_FALSE;
 
-    m_iLinesSkipped = 0;
+    m_iLinesLeftToSkip = m_HWParams.iSkipLines;
 
     if (InitScan(&ScanParams, &m_HWParams) != SANE_TRUE)
     {
         DBGMSG(L"InitScan() failure.");
         m_bStatusOk = false;
-        return;
+        return false;
     }
+
+    return true;
 }
 
-
-void C3300C::ScanContinue(const SCANINFO& ScanInfo, BYTE* const pBuffer, const long lLength, long* const pReceived)
+bool C3300C::ScanContinue(const SCANINFO& ScanInfo, BYTE* const pBuffer, const long lLength, long* const pReceived)
 {
     const size_t iPixelsPerLine = ScanInfo.Window.xExtent;
     const size_t iBytesPerComponent = iPixelsPerLine;
@@ -148,46 +216,68 @@ void C3300C::ScanContinue(const SCANINFO& ScanInfo, BYTE* const pBuffer, const l
 
     m_BackBuffer.resize(lLength);
 
-    const size_t iBytesReceived = NiashReadBulk(1, m_BackBuffer.data(), lLength);
-    *pReceived = static_cast<DWORD>(iBytesReceived);
+    size_t iNewLinesToProcess = 0;
+    size_t iNewLinesToSkip = 0;
+
+    //Keep reading until we've skipped all necessary lines; it's possible that in one read action, both lines-to-be-skipped and the first good lines are returned
+    while (iNewLinesToProcess == 0)
+    {
+        const size_t iNewBytesReceived = NiashReadBulk(ScanInfo.DeviceIOHandles[0], m_BackBuffer.data(), lLength);
+
+        if (iNewBytesReceived == 0) //Our USB functions' status doesn't propagate through the SANE driver layer, thankfully this is good enough to stop scanning
+        {
+            m_bStatusOk = false;
+            return false;
+        }
+
+        assert(iNewBytesReceived % iBytesPerLine == 0);
+        const size_t iNewLinesReceived = iNewBytesReceived / iBytesPerLine;
+
+        iNewLinesToSkip = std::min(m_iLinesLeftToSkip, iNewLinesReceived);
+        iNewLinesToProcess = iNewLinesReceived - iNewLinesToSkip;
+        m_iLinesLeftToSkip -= iNewLinesToSkip;
+    }
 
     //Convert Blue line / Red line / Green line to 24bit BGR, and flip along horizontal axis as well
-    const size_t iLinesReceived = iBytesReceived / iBytesPerLine;
-    for (size_t i = 0; i < iLinesReceived; i++)
+    for (size_t iLine = 0; iLine < iNewLinesToProcess; iLine++)
     {
-        if (m_iLinesSkipped == m_HWParams.iSkipLines)
+        const BYTE* const pBackBufferStart = &m_BackBuffer[(iNewLinesToSkip + iLine)*iBytesPerLine];
+        const BYTE* const pBlue = &pBackBufferStart[0];
+        const BYTE* const pGreen = &pBackBufferStart[iBytesPerComponent];
+        const BYTE* const pRed = &pBackBufferStart[2*iBytesPerComponent];
+        BGR* const pTarget = reinterpret_cast<BGR*>(&pBuffer[iLine*iBytesPerLine]);
+        for (size_t iPixel = 0; iPixel < iPixelsPerLine; iPixel++)
         {
-            const BYTE* const pBlue = &m_BackBuffer[i*iBytesPerLine];
-            const BYTE* const pGreen = &m_BackBuffer[i*iBytesPerLine + iBytesPerComponent];
-            const BYTE* const pRed = &m_BackBuffer[i*iBytesPerLine + 2 * iBytesPerComponent];
-            BGR* const pTarget = reinterpret_cast<BGR*>(&pBuffer[i*iBytesPerLine]);
-            for (size_t j = 0; j < iPixelsPerLine; j++)
-            {
-                BGR& Target = pTarget[ScanInfo.Window.xExtent - j - 1];
-                Target.components.b = pBlue[j];
-                Target.components.g = pGreen[j];
-                Target.components.r = pRed[j];
-            }
-        }
-        else
-        {
-            m_iLinesSkipped++;
+            BGR& Target = pTarget[ScanInfo.Window.xExtent - iPixel - 1];
+
+            Target.components.b = pBlue[iPixel];
+            Target.components.g = pGreen[iPixel];
+            Target.components.r = pRed[iPixel];
         }
     }
 
+    *pReceived = static_cast<DWORD>(iNewLinesToProcess * iBytesPerLine);
+
     //DBGMSG(L"req: %d read: %d", lLength, *pReceived);
+
+    return true;
 }
 
-void C3300C::ScanFinish(const SCANINFO& /*ScanInfo*/)
+bool C3300C::ScanFinish(const SCANINFO& /*ScanInfo*/)
 {
+    m_BackBuffer.clear();
     m_BackBuffer.shrink_to_fit();
     FinishScan(&m_HWParams);
+
     DBGMSG(L"Finished.");
+
+    return true;
 }
 
 bool C3300C::WarmupLamp(CalibTable_t& CalibTable)
 {
     static const size_t MAX_ATTEMPTS = 9;
+
     static const size_t WAIT_TIME = 10;
     static const unsigned int MAX_DEVIATION = 15; //15% comes from Linux driver
 
@@ -206,6 +296,7 @@ bool C3300C::WarmupLamp(CalibTable_t& CalibTable)
         }
     }
 
+//#ifndef _DEBUG
     for (size_t i = 0; i < MAX_ATTEMPTS; i++)
     {
         if (i > 0 || !bUsePrevValues)
@@ -237,22 +328,7 @@ bool C3300C::WarmupLamp(CalibTable_t& CalibTable)
             break;
         }
     }
+//#endif
 
     return true;
-}
-
-void C3300C::BuildUnityGammaTable(GammaTable_t& GammaTable)
-{
-    for (size_t i = 0; i<GammaTable.size(); i++)
-    {
-        GammaTable[i] = static_cast<GammaTable_t::value_type>((std::numeric_limits<GammaTable_t::value_type>::max() + 1)*i / GammaTable.size());
-    }
-}
-
-void C3300C::BuildGammaTable(GammaTable_t& GammaTable, const float fGamma)
-{
-    for (size_t i = 0; i < GammaTable.size(); i++)
-    {
-        GammaTable[i] = static_cast<GammaTable_t::value_type>((std::numeric_limits<GammaTable_t::value_type>::max() + 1) * pow(static_cast<float>(i) / GammaTable.size(), 1.0f / fGamma));
-    }
 }

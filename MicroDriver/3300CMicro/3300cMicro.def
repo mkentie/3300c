@@ -1,4 +1,6 @@
-LIBRARY 3300cMicro
+;Need a .def file to avoid stdcall name mangling
+
+LIBRARY 3300CMicro
 
 EXPORTS
         MicroEntry

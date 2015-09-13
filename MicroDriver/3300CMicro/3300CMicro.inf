@@ -12,10 +12,14 @@ CatalogFile=3300CMicro.cat
 [SourceDisksNames]
 1=%Location%
 
+[DestinationDirs]
+;By default, files will be copied to \windows\system32\drivers, we want system32 as we're not a .sys file (also seems to avoid requiring a restart?).
+DefaultDestDir=11
+
 [Manufacturer]
 %Mfg%=Models,NT$ARCH$
 
-; This is the models section for the amd64 driver
+;This is the models section for the amd64 driver
 [Models.NT$ARCH$]
 %3300CMicro.DeviceDesc% = 3300CMicro.Scanner, USB\VID_03F0&PID_0205
 
@@ -24,6 +28,7 @@ Include=sti.inf
 Needs=STI.USBSection, STI.MICRODRIVERSection
 SubClass=StillImage
 DeviceType=1
+;WIA device that uses polling
 Capabilities=0x33
 Events=Events
 DeviceData=DeviceData
@@ -37,14 +42,14 @@ Include=sti.inf
 Needs=STI.USBSection.Services
 
 [DeviceData]
-MicroDriver="Drivers\3300CMicro.dll"
+MicroDriver="3300CMicro.dll"
 Resolutions="150, 300, 600"
 
 [CopyFiles]
 3300CMicro.dll
 
 [AddReg]
-; Means that this is an USB device
+;Means that this is an USB device
 HKR,,HardwareConfig,1,4
 
 [Strings]

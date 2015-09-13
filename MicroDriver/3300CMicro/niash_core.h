@@ -42,7 +42,7 @@
 
 typedef struct
 {
-  int iXferHandle;		/* handle used for data transfer to HW */
+  HANDLE XferHandle;		/* handle used for data transfer to HW */
   int iTopLeftX;		/* in mm */
   int iTopLeftY;		/* in mm */
   int iSensorSkew;		/* in units of 1/1200 inch */
@@ -118,13 +118,13 @@ STATIC void WriteGammaCalibTable (unsigned char *pabGammaR,
 /* set -1 for iHeight to disable all checks on buffer transfers */
 /* iWidth is in pixels of SANE */
 /* iHeight is lines in scanner resolution */
-STATIC void CircBufferInit (int iHandle, TDataPipe * p,
+STATIC void CircBufferInit (HANDLE Handle, TDataPipe * p,
 			    int iWidth, int iHeight,
 			    int iMisAlignment, SANE_Bool iReversedHead,
 			    int iScaleDownDpi, int iScaleDownLpi);
 
 /* returns false, when trying to read after end of buffer */
-STATIC SANE_Bool CircBufferGetLine (int iHandle, TDataPipe * p,
+STATIC SANE_Bool CircBufferGetLine (HANDLE Handle, TDataPipe * p,
 				    unsigned char *pabLine,
 				    SANE_Bool iReversedHead);
 
@@ -132,7 +132,7 @@ STATIC SANE_Bool CircBufferGetLine (int iHandle, TDataPipe * p,
    if fReturn==SANE_TRUE, the head will return automatically on an end of scan */
 
 STATIC SANE_Bool
-CircBufferGetLineEx (int iHandle, TDataPipe * p, unsigned char *pabLine,
+CircBufferGetLineEx (HANDLE Handle, TDataPipe * p, unsigned char *pabLine,
 		     SANE_Bool iReversedHead, SANE_Bool fReturn);
 
 STATIC void CircBufferExit (TDataPipe * p);

@@ -88,17 +88,17 @@ extern TScannerModel ScannerModels[];
 #endif /* NO WITH_NIASH */
 
 STATIC void NiashXferInit (TFnReportDevice * pfnReport);
-STATIC int NiashXferOpen (const char *pszName, EScannerModel * peModel);
-STATIC void NiashXferClose (int iXferHandle);
+STATIC BOOL NiashXferOpen (HANDLE Handle, EScannerModel * peModel);
+STATIC void NiashXferClose (HANDLE Handle);
 
-STATIC void NiashWriteReg (int iXferHandle, unsigned char bReg,
+STATIC void NiashWriteReg (HANDLE Handle, unsigned char bReg,
 			   unsigned char bData);
-STATIC void NiashReadReg (int iXferHandle, unsigned char bReg,
+STATIC void NiashReadReg (HANDLE Handle, unsigned char bReg,
 			  unsigned char *pbData);
-STATIC void NiashWriteBulk (int iXferHandle, unsigned char *pabBuf,
+STATIC void NiashWriteBulk (HANDLE Handle, unsigned char *pabBuf,
 			    int iSize);
-STATIC DWORD NiashReadBulk (int iXferHandle, unsigned char *pabBuf, int iSize);
-STATIC void NiashWakeup (int iXferHandle);
+STATIC DWORD NiashReadBulk (HANDLE Handle, unsigned char *pabBuf, int iSize);
+STATIC void NiashWakeup (HANDLE Handle);
 
 STATIC SANE_Bool MatchUsbDevice (int iVendor, int iProduct,
 				 TScannerModel ** ppeModel);
